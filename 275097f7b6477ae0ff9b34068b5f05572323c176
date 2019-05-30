@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2bc9d690_20564c6a",
+        "filename": "INFO.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-05-30T06:20:18Z",
+      "side": 1,
+      "message": "Should be Amdocs",
+      "revId": "275097f7b6477ae0ff9b34068b5f05572323c176",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
