@@ -19,7 +19,6 @@
 package org.onap.sdc.common.versioning.persistence.types;
 
 import java.util.Date;
-import java.util.EnumMap;
 import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,8 +30,6 @@ import org.onap.sdc.common.versioning.services.types.VersionStatus;
 @Setter
 @Getter
 public class InternalItem extends Item {
-
-    private Map<VersionStatus, Integer> versionStatusCounters = new EnumMap<>(VersionStatus.class);
 
     public void setId(String id) {
         this.id = id;
@@ -48,6 +45,10 @@ public class InternalItem extends Item {
 
     public void setStatus(ItemStatus status) {
         this.status = status;
+    }
+
+    public void setVersionStatusCounters(Map<VersionStatus, Integer> versionStatusCounters) {
+        this.versionStatusCounters = versionStatusCounters;
     }
 
     public void addVersionStatus(VersionStatus versionStatus) {

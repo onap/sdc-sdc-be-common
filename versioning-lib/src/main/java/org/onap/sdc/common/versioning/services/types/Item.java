@@ -18,7 +18,9 @@
 
 package org.onap.sdc.common.versioning.services.types;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Getter;
@@ -30,7 +32,8 @@ public class Item {
     protected String id;
     protected Date creationTime;
     protected Date modificationTime;
-    protected ItemStatus status;
+    protected ItemStatus status = ItemStatus.ACTIVE;
+    protected Map<VersionStatus, Integer> versionStatusCounters = new EnumMap<>(VersionStatus.class);
     @Setter
     private String type;
     @Setter
@@ -43,6 +46,10 @@ public class Item {
 
     public boolean isNew() {
         return id == null;
+    }
+
+    public Map<VersionStatus, Integer> getVersionStatusCounters() {
+        return Collections.unmodifiableMap(versionStatusCounters);
     }
 
     public void addProperty(String key, Object value) {

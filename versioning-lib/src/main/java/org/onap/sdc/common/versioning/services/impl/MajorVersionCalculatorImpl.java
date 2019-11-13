@@ -1,16 +1,17 @@
 package org.onap.sdc.common.versioning.services.impl;
 
-import java.util.HashSet;
-import java.util.Set;
 import org.onap.sdc.common.versioning.services.types.Version;
 import org.onap.sdc.common.versioning.services.types.VersionCreationMethod;
 import org.onap.sdc.common.versioning.services.types.VersionStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Service
 public class MajorVersionCalculatorImpl implements VersionCalculator {
 
-    private static final String INITIAL_VERSION = "1.0";
+    private static final String INITIAL_VERSION = "0.0";
     private static final String VERSION_STRING_VIOLATION_MSG =
             "Version string must be in the format of: {integer}.{integer}";
 
@@ -18,7 +19,7 @@ public class MajorVersionCalculatorImpl implements VersionCalculator {
     public String calculate(String baseVersion, VersionCreationMethod creationMethod) {
 
         if (baseVersion == null) {
-            return INITIAL_VERSION;
+            baseVersion = INITIAL_VERSION;
         }
 
         String[] versionLevels = baseVersion.split("\\.");
@@ -26,10 +27,16 @@ public class MajorVersionCalculatorImpl implements VersionCalculator {
             throw new IllegalArgumentException(VERSION_STRING_VIOLATION_MSG);
         }
 
-        int index = Integer.parseInt(versionLevels[0]);
-        index++;
+        int majorIndex = Integer.parseInt(versionLevels[0]);
+        int minorIndex = Integer.parseInt(versionLevels[1]);
+        if (creationMethod.equals(VersionCreationMethod.major)) {
+            majorIndex++;
+            minorIndex = 0;
+        } else {
+            minorIndex++;
+        }
 
-        return index + ".0";
+        return majorIndex + "." + minorIndex;
     }
 
     @Override

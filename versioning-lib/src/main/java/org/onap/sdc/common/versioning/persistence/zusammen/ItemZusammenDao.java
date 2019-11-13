@@ -4,6 +4,7 @@ import com.amdocs.zusammen.datatypes.Id;
 import com.amdocs.zusammen.datatypes.item.Info;
 import com.amdocs.zusammen.datatypes.item.Item;
 import java.util.Collection;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.onap.sdc.common.versioning.persistence.ItemDao;
@@ -62,15 +63,12 @@ public class ItemZusammenDao implements ItemDao {
         item.setId(zusammenItem.getId().getValue());
         item.setName(zusammenItem.getInfo().getName());
         item.setDescription(zusammenItem.getInfo().getDescription());
-
-        zusammenItem.getInfo().getProperties().forEach((key, value) -> addPropertyToItem(key, value, item));
-
         item.setCreationTime(zusammenItem.getCreationTime());
         item.setModificationTime(zusammenItem.getModificationTime());
 
+        zusammenItem.getInfo().getProperties().forEach((key, value) -> addPropertyToItem(key, value, item));
         if (item.getStatus() == null) {
             item.setStatus(ItemStatus.ACTIVE);
-            update(item);
         }
 
         return item;
@@ -88,10 +86,12 @@ public class ItemZusammenDao implements ItemDao {
                 item.setStatus(ItemStatus.valueOf((String) propertyValue));
                 break;
             case InfoPropertyName.ITEM_VERSIONS_STATUSES:
+                Map<VersionStatus, Integer> versionStatusCounters = new EnumMap<>(VersionStatus.class);
                 for (Map.Entry<String, Number> statusCounter : ((Map<String, Number>) propertyValue).entrySet()) {
-                    item.getVersionStatusCounters()
+                    versionStatusCounters
                             .put(VersionStatus.valueOf(statusCounter.getKey()), statusCounter.getValue().intValue());
                 }
+                item.setVersionStatusCounters(versionStatusCounters);
                 break;
             default:
                 item.addProperty(propertyKey, propertyValue);
