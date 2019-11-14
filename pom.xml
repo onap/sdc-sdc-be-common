@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright © 2019 European Support Limited
+  ~ Copyright Â© 2019 European Support Limited
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -21,8 +21,16 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.onap.sdc.common</groupId>
-    <artifactId>sdc-be-common</artifactId>
+    <parent>
+        <groupId>org.onap.oparent</groupId>
+        <artifactId>oparent</artifactId>
+        <version>2.0.0</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>org.onap.sdc.sdc-be-common</groupId>
+    <artifactId>sdc-be-common-parent</artifactId>
+    <name>sdc-be-common</name>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -33,9 +41,12 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <mockito.version>2.23.4</mockito.version>
         <junit.version>4.12</junit.version>
+        <logging-slf4j.version>1.5.0</logging-slf4j.version>
+        <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
         <snapshots.path>snapshots</snapshots.path>
         <releases.path>releases</releases.path>
         <sitePath>/content/sites/site/org/onap/sdc/sdc-be-common/${project.version}</sitePath>
+        <nexus.proxy>https://nexus.onap.org</nexus.proxy>
         <docker.username>docker</docker.username>
         <docker.password>docker</docker.password>
     </properties>
@@ -44,6 +55,7 @@
         <module>session-lib</module>
         <module>zusammen-lib</module>
         <module>versioning-lib</module>
+        <module>securityutil</module>
     </modules>
 
     <dependencyManagement>
@@ -57,8 +69,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <!--<version>2.1.5.RELEASE</version>-->
-                <version>2.0.3.RELEASE</version>
+                <version>2.1.5.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -66,6 +77,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.onap.logging-analytics</groupId>
+            <artifactId>logging-slf4j</artifactId>
+            <version>${logging-slf4j.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -86,6 +102,10 @@
 
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven-checkstyle-plugin.version}</version>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -117,12 +137,12 @@
             <url>http://repo2.maven.org/maven2/</url>
         </repository>
         <repository>
-            <id>onap-releases</id>
+            <id>ecomp-releases</id>
             <name>Release Repository</name>
             <url>${nexus.proxy}/content/repositories/releases/</url>
         </repository>
         <repository>
-            <id>onap-snapshots</id>
+            <id>ecomp-snapshots</id>
             <name>Snapshots Repository</name>
             <url>${nexus.proxy}/content/repositories/snapshots/</url>
         </repository>
@@ -130,20 +150,19 @@
 
     <distributionManagement>
         <repository>
-            <id>onap-releases</id>
+            <id>ecomp-releases</id>
             <name>Release Repository</name>
             <url>${nexus.proxy}/content/repositories/${releases.path}/</url>
         </repository>
         <snapshotRepository>
-            <id>onap-snapshots</id>
+            <id>ecomp-snapshots</id>
             <name>Snapshot Repository</name>
             <url>${nexus.proxy}/content/repositories/${snapshots.path}/</url>
         </snapshotRepository>
         <site>
-            <id>onap-site</id>
+            <id>ecomp-site</id>
             <url>dav:${nexus.proxy}${sitePath}</url>
         </site>
     </distributionManagement>
 
 </project>
-
