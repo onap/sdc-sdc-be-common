@@ -44,6 +44,7 @@
         <module>session-lib</module>
         <module>zusammen-lib</module>
         <module>versioning-lib</module>
+		<module>securityutil</module>
     </modules>
 
     <dependencyManagement>
