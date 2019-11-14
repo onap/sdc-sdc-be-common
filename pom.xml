@@ -41,6 +41,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <mockito.version>2.23.4</mockito.version>
         <junit.version>4.12</junit.version>
+        <logging-slf4j.version>1.5.0</logging-slf4j.version>
         <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
         <snapshots.path>snapshots</snapshots.path>
         <releases.path>releases</releases.path>
@@ -54,6 +55,7 @@
         <module>session-lib</module>
         <module>zusammen-lib</module>
         <module>versioning-lib</module>
+        <module>security-util-lib</module>
     </modules>
 
     <dependencyManagement>
@@ -75,6 +77,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.onap.logging-analytics</groupId>
+            <artifactId>logging-slf4j</artifactId>
+            <version>${logging-slf4j.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -159,4 +166,3 @@
     </distributionManagement>
 
 </project>
-
