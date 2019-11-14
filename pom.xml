@@ -33,6 +33,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <mockito.version>2.23.4</mockito.version>
         <junit.version>4.12</junit.version>
+        <logging-slf4j.version>1.5.0</logging-slf4j.version>
         <snapshots.path>snapshots</snapshots.path>
         <releases.path>releases</releases.path>
         <sitePath>/content/sites/site/org/onap/sdc/sdc-be-common/${project.version}</sitePath>
@@ -44,6 +45,7 @@
         <module>session-lib</module>
         <module>zusammen-lib</module>
         <module>versioning-lib</module>
+		<module>securityutil</module>
     </modules>
 
     <dependencyManagement>
@@ -66,6 +68,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.onap.logging-analytics</groupId>
+            <artifactId>logging-slf4j</artifactId>
+            <version>${logging-slf4j.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
