@@ -50,7 +50,7 @@ public class ZusammenConfig {
     @PostConstruct
     public void init() {
         System.setProperty("cassandra.nodes", provider.getCassandraAddresses());
-        System.setProperty("cassandra.ssl.port", provider.getCassandraPort());
+        System.setProperty("cassandra.port", provider.getCassandraPort());
         System.setProperty("cassandra.keyspace", KEYSPACE);
 
         System.setProperty("cassandra.authenticate", Boolean.toString(Boolean.valueOf(provider.getCassandraAuth())));

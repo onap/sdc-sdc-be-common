@@ -36,6 +36,7 @@
         <snapshots.path>snapshots</snapshots.path>
         <releases.path>releases</releases.path>
         <sitePath>/content/sites/site/org/onap/sdc/sdc-be-common/${project.version}</sitePath>
+        <nexus.proxy>https://nexus.onap.org</nexus.proxy>
         <docker.username>docker</docker.username>
         <docker.password>docker</docker.password>
     </properties>
@@ -57,8 +58,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <!--<version>2.1.5.RELEASE</version>-->
-                <version>2.0.3.RELEASE</version>
+                <version>2.1.5.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

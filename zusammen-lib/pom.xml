@@ -30,8 +30,8 @@
 
     <properties>
         <zusammen.version>1.0.1</zusammen.version>
-        <zusammen-state-store.version>1.0.1</zusammen-state-store.version>
-        <zusammen-collaboration-store.version>1.0.1</zusammen-collaboration-store.version>
+        <zusammen-state-store.version>1.0.3</zusammen-state-store.version>
+        <zusammen-collaboration-store.version>1.0.3</zusammen-collaboration-store.version>
         <zusammen-index-store.version>1.0.0</zusammen-index-store.version>
     </properties>
 
