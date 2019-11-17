@@ -21,6 +21,13 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.onap.oparent</groupId>
+        <artifactId>oparent</artifactId>
+        <version>2.0.0</version>
+        <relativePath/>
+    </parent>
+
     <groupId>org.onap.sdc.common</groupId>
     <artifactId>sdc-be-common</artifactId>
     <version>1.0.0-SNAPSHOT</version>
@@ -33,6 +40,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <mockito.version>2.23.4</mockito.version>
         <junit.version>4.12</junit.version>
+        <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
         <snapshots.path>snapshots</snapshots.path>
         <releases.path>releases</releases.path>
         <sitePath>/content/sites/site/org/onap/sdc/sdc-be-common/${project.version}</sitePath>
@@ -86,6 +94,10 @@
 
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven-checkstyle-plugin.version}</version>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
