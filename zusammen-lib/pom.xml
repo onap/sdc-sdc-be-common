@@ -22,6 +22,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zusammen-lib</artifactId>
+    <name>zusammen-lib</name>
     <parent>
         <groupId>org.onap.sdc.common</groupId>
         <artifactId>sdc-be-common</artifactId>
