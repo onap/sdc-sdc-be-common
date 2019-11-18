@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c5c2077_d40b01db",
+        "filename": "securityutil/src/main/java/org/onap/sdc/security/AuthenticationCookie.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-18T06:49:31Z",
+      "side": 1,
+      "message": "use lombok",
+      "revId": "bd70658b85c7a5918d2e17451842e4b65118c95b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
