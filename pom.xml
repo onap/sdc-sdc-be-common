@@ -129,12 +129,12 @@
             <url>http://repo2.maven.org/maven2/</url>
         </repository>
         <repository>
-            <id>onap-releases</id>
+            <id>ecomp-releases</id>
             <name>Release Repository</name>
             <url>${nexus.proxy}/content/repositories/releases/</url>
         </repository>
         <repository>
-            <id>onap-snapshots</id>
+            <id>ecomp-snapshots</id>
             <name>Snapshots Repository</name>
             <url>${nexus.proxy}/content/repositories/snapshots/</url>
         </repository>
@@ -142,17 +142,17 @@
 
     <distributionManagement>
         <repository>
-            <id>onap-releases</id>
+            <id>ecomp-releases</id>
             <name>Release Repository</name>
             <url>${nexus.proxy}/content/repositories/${releases.path}/</url>
         </repository>
         <snapshotRepository>
-            <id>onap-snapshots</id>
+            <id>ecomp-snapshots</id>
             <name>Snapshot Repository</name>
             <url>${nexus.proxy}/content/repositories/${snapshots.path}/</url>
         </snapshotRepository>
         <site>
-            <id>onap-site</id>
+            <id>ecomp-site</id>
             <url>dav:${nexus.proxy}${sitePath}</url>
         </site>
     </distributionManagement>
