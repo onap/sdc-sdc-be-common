@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6739f71a_457cff54",
+        "filename": "securityutil/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-18T06:49:31Z",
+      "side": 1,
+      "message": "parent project use spring boot in it\u0027s dependencies management.",
+      "revId": "be399c58a36c66dc9b8ac52626d9908eb1282ff4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "299eff35_e8631908",
+        "filename": "securityutil/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-18T06:49:31Z",
+      "side": 1,
+      "message": "can be added to parent pom dependency management?",
+      "revId": "be399c58a36c66dc9b8ac52626d9908eb1282ff4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "557ba6fe_d9563998",
+        "filename": "securityutil/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-18T06:49:31Z",
+      "side": 1,
+      "message": "all dependencies  versions should be properties.",
+      "revId": "be399c58a36c66dc9b8ac52626d9908eb1282ff4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46b3b60b_7370b8be",
+        "filename": "securityutil/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-18T06:49:31Z",
+      "side": 1,
+      "message": "please make sure all the plugins are required.\n\ncheckstyle belongs for oparent for example.",
+      "revId": "be399c58a36c66dc9b8ac52626d9908eb1282ff4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9dc41c4_a5b55da5",
+        "filename": "securityutil/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-18T06:49:31Z",
+      "side": 1,
+      "message": "parent pom sets \n \u003cmaven.compiler.source\u003e1.8\u003c/maven.compiler.source\u003e\n        \u003cmaven.compiler.target\u003e1.8\u003c/maven.compiler.target\u003e",
+      "revId": "be399c58a36c66dc9b8ac52626d9908eb1282ff4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf76e223_0d0db310",
+        "filename": "securityutil/src/main/java/org/onap/sdc/security/AuthenticationCookie.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-18T06:49:31Z",
+      "side": 1,
+      "message": "use lombok",
+      "revId": "be399c58a36c66dc9b8ac52626d9908eb1282ff4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "daf93de3_8b0ba8ee",
+        "filename": "securityutil/src/main/java/org/onap/sdc/security/CipherUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-18T06:49:31Z",
+      "side": 1,
+      "message": "Why not use a library to clone aff all and subarray. There are many libs out there.\nFor example https://commons.apache.org/proper/commons-lang/javadocs/api-2.6/org/apache/commons/lang/ArrayUtils.html",
+      "revId": "be399c58a36c66dc9b8ac52626d9908eb1282ff4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1169dea9_d7013ac1",
+        "filename": "securityutil/src/main/java/org/onap/sdc/security/CipherUtilException.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-18T06:49:31Z",
+      "side": 1,
+      "message": "use @SuppressWarnings(\"serial\")\n\nWe are not using java serialization with this class.",
+      "revId": "be399c58a36c66dc9b8ac52626d9908eb1282ff4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18c16b44_3a6aecb0",
+        "filename": "securityutil/src/main/java/org/onap/sdc/security/Passwords.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-18T06:49:31Z",
+      "side": 1,
+      "message": "use a library for hex decode and encode.\nFor example\nhttps://commons.apache.org/proper/commons-codec/apidocs/org/apache/commons/codec/binary/Hex.html",
+      "revId": "be399c58a36c66dc9b8ac52626d9908eb1282ff4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45d2250e_933d2cbc",
+        "filename": "securityutil/src/main/java/org/onap/sdc/security/RepresentationUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-18T06:49:31Z",
+      "side": 1,
+      "message": "license",
+      "revId": "be399c58a36c66dc9b8ac52626d9908eb1282ff4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d737f091_d5c467a2",
+        "filename": "securityutil/src/main/java/org/onap/sdc/security/SecurityUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-18T06:49:31Z",
+      "side": 1,
+      "message": "license",
+      "revId": "be399c58a36c66dc9b8ac52626d9908eb1282ff4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bb237af_99b1f412",
+        "filename": "securityutil/src/main/java/org/onap/sdc/security/filters/FilterServletOutputStream.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-18T06:49:31Z",
+      "side": 1,
+      "message": "License",
+      "revId": "be399c58a36c66dc9b8ac52626d9908eb1282ff4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "056f8bc3_be36b417",
+        "filename": "securityutil/src/main/java/org/onap/sdc/security/filters/ResponceWrapper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-18T06:49:31Z",
+      "side": 1,
+      "message": "License",
+      "revId": "be399c58a36c66dc9b8ac52626d9908eb1282ff4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
