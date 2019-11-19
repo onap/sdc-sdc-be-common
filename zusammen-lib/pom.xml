@@ -24,8 +24,8 @@
     <artifactId>zusammen-lib</artifactId>
     <name>zusammen-lib</name>
     <parent>
-        <groupId>org.onap.sdc</groupId>
-        <artifactId>sdc-be-common</artifactId>
+        <groupId>org.onap.sdc.sdc-be-common</groupId>
+        <artifactId>sdc-be-common-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
