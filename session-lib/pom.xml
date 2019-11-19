@@ -24,7 +24,7 @@
     <artifactId>session-lib</artifactId>
     <name>session-lib</name>
     <parent>
-        <groupId>org.onap.sdc.common</groupId>
+        <groupId>org.onap.sdc</groupId>
         <artifactId>sdc-be-common</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
