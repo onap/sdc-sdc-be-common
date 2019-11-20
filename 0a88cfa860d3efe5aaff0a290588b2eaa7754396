@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "522942df_6d146bb8",
+        "filename": "securityutil/pom.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2167
+      },
+      "writtenOn": "2019-11-20T15:41:56Z",
+      "side": 1,
+      "message": "ECOMP? please rename",
+      "range": {
+        "startLine": 61,
+        "startChar": 25,
+        "endLine": 61,
+        "endChar": 30
+      },
+      "revId": "0a88cfa860d3efe5aaff0a290588b2eaa7754396",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcc77112_f567efbf",
+        "filename": "securityutil/pom.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 2167
+      },
+      "writtenOn": "2019-11-20T15:41:56Z",
+      "side": 1,
+      "message": "please rename",
+      "range": {
+        "startLine": 65,
+        "startChar": 22,
+        "endLine": 65,
+        "endChar": 27
+      },
+      "revId": "0a88cfa860d3efe5aaff0a290588b2eaa7754396",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
