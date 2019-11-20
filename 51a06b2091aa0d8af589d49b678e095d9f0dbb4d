@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ccc496b6_ec0f5dde",
+        "filename": "pom.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 2167
+      },
+      "writtenOn": "2019-11-20T15:41:56Z",
+      "side": 1,
+      "message": "maybe security-util-lib to match the naming convention of the other ones?",
+      "range": {
+        "startLine": 58,
+        "startChar": 16,
+        "endLine": 58,
+        "endChar": 28
+      },
+      "revId": "51a06b2091aa0d8af589d49b678e095d9f0dbb4d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54fe8b7d_acc3dd9b",
+        "filename": "securityutil/pom.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 2167
+      },
+      "writtenOn": "2019-11-20T15:41:56Z",
+      "side": 1,
+      "message": "can it (+ directory name and artifact name) be renamed to security-util-lib to match the names of the other existing libs?",
+      "range": {
+        "startLine": 6,
+        "startChar": 16,
+        "endLine": 6,
+        "endChar": 29
+      },
+      "revId": "51a06b2091aa0d8af589d49b678e095d9f0dbb4d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9590ee91_5b3e722c",
+        "filename": "securityutil/pom.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2167
+      },
+      "writtenOn": "2019-11-20T15:41:56Z",
+      "side": 1,
+      "message": "redundant - jar is the default",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 30
+      },
+      "revId": "51a06b2091aa0d8af589d49b678e095d9f0dbb4d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5dcea18_128eed4c",
+        "filename": "securityutil/pom.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2167
+      },
+      "writtenOn": "2019-11-20T15:41:56Z",
+      "side": 1,
+      "message": "redundant as it is stated on parent pom",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 82
+      },
+      "revId": "51a06b2091aa0d8af589d49b678e095d9f0dbb4d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff57e290_bb232668",
+        "filename": "securityutil/pom.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2167
+      },
+      "writtenOn": "2019-11-20T15:41:56Z",
+      "side": 1,
+      "message": "redundant as it is stated on parent pom",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 58
+      },
+      "revId": "51a06b2091aa0d8af589d49b678e095d9f0dbb4d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb1acc58_d4476eb8",
+        "filename": "securityutil/pom.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2167
+      },
+      "writtenOn": "2019-11-20T15:41:56Z",
+      "side": 1,
+      "message": "redundant as it is stated on parent pom\nthis lib will be deployed to \nhttps://nexus.onap.org/content/repositories/snapshots/org/onap/sdc/sdc-be-common/\u003cartifactId\u003e",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 47
+      },
+      "revId": "51a06b2091aa0d8af589d49b678e095d9f0dbb4d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce2a380e_9b4f9268",
+        "filename": "securityutil/pom.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2167
+      },
+      "writtenOn": "2019-11-20T15:41:56Z",
+      "side": 1,
+      "message": "please rename",
+      "range": {
+        "startLine": 61,
+        "startChar": 25,
+        "endLine": 61,
+        "endChar": 30
+      },
+      "revId": "51a06b2091aa0d8af589d49b678e095d9f0dbb4d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "206d00a8_a5fea7f8",
+        "filename": "securityutil/pom.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 2167
+      },
+      "writtenOn": "2019-11-20T15:41:56Z",
+      "side": 1,
+      "message": "please rename",
+      "range": {
+        "startLine": 65,
+        "startChar": 22,
+        "endLine": 65,
+        "endChar": 27
+      },
+      "revId": "51a06b2091aa0d8af589d49b678e095d9f0dbb4d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f4c8102b_43e35b41",
+        "filename": "securityutil/pom.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 2167
+      },
+      "writtenOn": "2019-11-20T15:41:56Z",
+      "side": 1,
+      "message": "please check what is relevant to move to parent pom",
+      "range": {
+        "startLine": 132,
+        "startChar": 1,
+        "endLine": 183,
+        "endChar": 12
+      },
+      "revId": "51a06b2091aa0d8af589d49b678e095d9f0dbb4d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
