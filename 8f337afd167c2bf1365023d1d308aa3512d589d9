@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bfb77185_e41313dc",
+        "filename": "securityutil/src/main/java/org/onap/sdc/security/AuthenticationCookie.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-20T14:20:20Z",
+      "side": 1,
+      "message": "why not to use lombok equals , hashcode and toString?",
+      "revId": "8f337afd167c2bf1365023d1d308aa3512d589d9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db78dd4d_4885e810",
+        "filename": "securityutil/src/main/java/org/onap/sdc/security/CipherUtil.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-20T14:20:20Z",
+      "side": 1,
+      "message": "Why do we need to write a function that is already written in Apache Common?\nhttps://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/ArrayUtils.html#addAll-byte:A-byte...-\nWhy not to use the apache commons lang3 in our project?\nhttps://github.com/apache/commons-lang/blob/master/src/main/java/org/apache/commons/lang3/ArrayUtils.java",
+      "revId": "8f337afd167c2bf1365023d1d308aa3512d589d9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b3694fd_a742cd21",
+        "filename": "securityutil/src/main/java/org/onap/sdc/security/CipherUtil.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-20T14:20:20Z",
+      "side": 1,
+      "message": "why should we copy subarray function from ArrayUtils (https://github.com/apache/commons-lang/blob/master/src/main/java/org/apache/commons/lang3/ArrayUtils.java\n)\nuse common lib as a dependency.",
+      "revId": "8f337afd167c2bf1365023d1d308aa3512d589d9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63c233b4_029331cb",
+        "filename": "securityutil/src/main/java/org/onap/sdc/security/Passwords.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-20T14:20:20Z",
+      "side": 1,
+      "message": "Is there a reason to use fromHex and toHex and not commons-codec lib?\n\nhttps://commons.apache.org/proper/commons-codec/apidocs/org/apache/commons/codec/binary/Hex.html\nhttps://github.com/apache/commons-codec/blob/master/src/main/java/org/apache/commons/codec/binary/Hex.java",
+      "revId": "8f337afd167c2bf1365023d1d308aa3512d589d9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e518d63c_3a27267e",
+        "filename": "securityutil/src/main/java/org/onap/sdc/security/filters/RestrictionAccessFilter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2119
+      },
+      "writtenOn": "2019-11-20T14:20:20Z",
+      "side": 1,
+      "message": "Please use onap code style.\n* is not allowed in imports.\nhttps://wiki.onap.org/display/DW/Configure+Onap+Code+Style+for+Idea+IDE",
+      "revId": "8f337afd167c2bf1365023d1d308aa3512d589d9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
