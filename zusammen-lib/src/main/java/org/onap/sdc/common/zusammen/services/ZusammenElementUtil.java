@@ -25,6 +25,10 @@ public class ZusammenElementUtil {
 
     public static final String ELEMENT_TYPE_PROPERTY = "elementType";
 
+    private ZusammenElementUtil() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static ZusammenElement buildStructuralElement(String elementType, Action action) {
         ZusammenElement element = buildElement(null, action);
         Info info = new Info();

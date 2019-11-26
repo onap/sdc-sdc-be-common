@@ -22,11 +22,7 @@ public interface ItemConvertor<T> {
 
     String getItemType();
 
-    //Item toItem(T model);
-
     void toItem(T source, Item target);
-
-   // void fromItem(Item source, T target);
 
     T fromItem(Item item);
 

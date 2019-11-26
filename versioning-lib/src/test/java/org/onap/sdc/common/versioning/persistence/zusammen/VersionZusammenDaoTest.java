@@ -103,7 +103,7 @@ public class VersionZusammenDaoTest {
                 .listPublicVersions(eq(SESSION_CONTEXT), eq(new Id(itemId)));
 
         List<InternalVersion> versions = versionDao.list(itemId);
-        Assert.assertEquals(versions.size(), 3);
+        Assert.assertEquals(3, versions.size());
 
         int zusammenVersionIndex;
         for (InternalVersion version : versions) {
@@ -347,7 +347,7 @@ public class VersionZusammenDaoTest {
 
         List<Revision> revisions = versionDao.listRevisions(itemId, versionId);
 
-        Assert.assertEquals(revisions.size(), 4);
+        Assert.assertEquals(4, revisions.size());
         assertRevisionEquals(revisions.get(0), zusammenRevisions.get(0)); // rev4 - latest
         assertRevisionEquals(revisions.get(1), zusammenRevisions.get(2)); // rev3
         assertRevisionEquals(revisions.get(2), zusammenRevisions.get(3)); // rev2

@@ -35,7 +35,7 @@ public class MajorVersionCalculatorImplTest {
     @Test
     public void calculateInitialVersionWithNullAndMajor() {
         String expectedInitialVersion = calculator.calculate(null, VersionCreationMethod.major);
-        assertEquals(expectedInitialVersion, INITIAL_VERSION);
+        assertEquals(INITIAL_VERSION, expectedInitialVersion);
     }
 
     @Test

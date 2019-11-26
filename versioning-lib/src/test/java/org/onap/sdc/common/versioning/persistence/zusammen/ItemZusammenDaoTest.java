@@ -103,7 +103,7 @@ public class ItemZusammenDaoTest {
         doReturn(returnedItems).when(zusammenAdaptorMock).listItems(eq(SESSION_CONTEXT));
 
         Collection<InternalItem> items = itemDao.list();
-        assertEquals(items.size(), 3);
+        assertEquals(3, items.size());
 
         Iterator<InternalItem> itemIterator = items.iterator();
         assertItemEquals(itemIterator.next(), returnedItems.get(0));
@@ -135,7 +135,7 @@ public class ItemZusammenDaoTest {
 
         Assert.assertNotNull(item);
         assertItemEquals(item, toBeReturned);
-        assertEquals(item.getStatus(), ItemStatus.ACTIVE);
+        assertEquals(ItemStatus.ACTIVE, item.getStatus());
 
     }
 

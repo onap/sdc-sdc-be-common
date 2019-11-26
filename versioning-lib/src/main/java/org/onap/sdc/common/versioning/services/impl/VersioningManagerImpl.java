@@ -40,8 +40,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class VersioningManagerImpl implements VersioningManager {
 
-    //private static final Logger LOGGER = LoggerFactory.getLogger(VersioningManagerImpl.class);
-
     private final ItemDao itemDao;
     private final VersionDao versionDao;
     private final VersionCalculator versionCalculator;
@@ -158,7 +156,6 @@ public class VersioningManagerImpl implements VersioningManager {
         if (version.getStatus() == Certified
                     && version.getState().getSynchronizationState() == SynchronizationState.OutOfSync) {
             forceSync(itemId, version.getId());
-            //LOGGER.info("Item Id {}, version Id {}: Force sync is done", itemId, version.getId());
             version = versionDao.get(itemId, version.getId()).orElseThrow(() -> new IllegalStateException(
                     "Get version after a successful force sync must return the version"));
         }
@@ -167,7 +164,6 @@ public class VersioningManagerImpl implements VersioningManager {
 
     private InternalVersion getSyncedVersion(String itemId, String versionId) {
         sync(itemId, versionId);
-        //LOGGER.info("Item Id {}, version Id {}: First time sync is done", itemId, version.getId());
         return versionDao.get(itemId, versionId).orElseThrow(
                 () -> new IllegalStateException("Get version after a successful sync must return the version"));
     }

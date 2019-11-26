@@ -48,10 +48,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ZusammenConnectorImpl implements ZusammenConnector {
 
-    private static final String GET_ELEMENT_ERR_MSG =
-            "Failed to get element. Item Id: %s, version Id: %s, element Id: %s message: %s";
-    private static final String GET_ELEMENT_IN_REV_ERR_MSG =
-            "Failed to get element. Item Id: %s, version Id: %s, revision Id: %s, element Id: %s message: %s";
     private final ItemAdaptorFactory itemAdaptorFactory;
     private final ItemVersionAdaptorFactory versionAdaptorFactory;
     private final ElementAdaptorFactory elementAdaptorFactory;
