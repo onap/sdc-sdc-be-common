@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b932af1_91a8e68e",
+        "filename": "session-lib/src/test/java/org/onap/sdc/common/session/SdcSessionContextProviderTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1631
+      },
+      "writtenOn": "2019-11-27T07:19:45Z",
+      "side": 1,
+      "message": "Spelling mistake. Please update the method name to createSessionNoTenant",
+      "revId": "a91d91482184269ca871856d13f6cba65f644b8a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "14120ad9_0e68cc41",
+        "filename": "session-lib/src/test/java/org/onap/sdc/common/session/SdcSessionContextProviderTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1631
+      },
+      "writtenOn": "2019-11-27T07:19:45Z",
+      "side": 1,
+      "message": "Please update the spelling in string literals and variable names from \"tenent\" to \"tenant\"",
+      "revId": "a91d91482184269ca871856d13f6cba65f644b8a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
