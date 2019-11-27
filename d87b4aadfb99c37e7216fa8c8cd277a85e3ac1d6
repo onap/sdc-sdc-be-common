@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6bd66209_7d0dfdb9",
+        "filename": "zusammen-lib/src/test/java/org/onap/sdc/common/zusammen/persistence/ZusammenConnectorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1877
+      },
+      "writtenOn": "2019-11-27T12:42:16Z",
+      "side": 1,
+      "message": "not used",
+      "revId": "d87b4aadfb99c37e7216fa8c8cd277a85e3ac1d6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3350e040_de313495",
+        "filename": "zusammen-lib/src/test/java/org/onap/sdc/common/zusammen/persistence/ZusammenConnectorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1877
+      },
+      "writtenOn": "2019-11-27T12:42:16Z",
+      "side": 1,
+      "message": "not used",
+      "revId": "d87b4aadfb99c37e7216fa8c8cd277a85e3ac1d6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "14e9a510_e819c7fd",
+        "filename": "zusammen-lib/src/test/java/org/onap/sdc/common/zusammen/persistence/ZusammenConnectorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1877
+      },
+      "writtenOn": "2019-11-27T12:42:16Z",
+      "side": 1,
+      "message": "itemlist not used",
+      "revId": "d87b4aadfb99c37e7216fa8c8cd277a85e3ac1d6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
