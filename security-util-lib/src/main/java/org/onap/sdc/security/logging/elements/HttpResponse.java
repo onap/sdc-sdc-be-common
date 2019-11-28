@@ -20,11 +20,19 @@
 
 package org.onap.sdc.security.logging.elements;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
 import org.apache.commons.lang3.StringUtils;
 
+@ToString
+@AllArgsConstructor
 public class HttpResponse<T> {
+    @Getter
     private final T response;
+    @Getter
     private final int statusCode;
+    @Getter
     private final String description;
 
     public HttpResponse(T response, int statusCode) {
@@ -32,37 +40,5 @@ public class HttpResponse<T> {
         this.statusCode = statusCode;
         this.description = StringUtils.EMPTY;
     }
-    
-    public HttpResponse(T response, int statusCode, String description) {
-        this.response = response;
-        this.statusCode = statusCode;
-        this.description = description;
-    }
 
-    public T getResponse() {
-        return response;
-    }
-
-    public int getStatusCode() {
-        return statusCode;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("HttpResponse [response=");
-        builder.append(response);
-        builder.append(", statusCode=");
-        builder.append(statusCode);
-        builder.append(", description=");
-        builder.append(description);
-        builder.append("]");
-        return builder.toString();
-    }
-    
-    
 }
