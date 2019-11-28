@@ -38,8 +38,8 @@ public class SampleFilter extends SessionValidationFilter {
     private static class Configuration implements ISessionValidationFilterConfiguration {
 
         private String securityKey = "AGLDdG4D04BKm2IxIWEr8o==";
-        private long maxSessionTimeOut = 24*60*60*1000;
-        private long sessionIdleTimeOut = 60*60*1000;
+        private long maxSessionTimeOut = 24*60*60*1_000L;
+        private long sessionIdleTimeOut = 60*60*1_000L;
         private String redirectURL = "http://portal.api.simpledemo.onap.org:8989/ECOMPPORTAL/login.htm";
         private List<String> excludedUrls = new ArrayList<>(Arrays.asList("/config","/configmgr","/rest","/kibanaProxy","/healthcheck","/upload.*"));
         private String cookieName = "kuku";
