@@ -21,6 +21,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.amdocs.zusammen.adaptor.inbound.api.health.HealthAdaptor;
@@ -38,6 +40,7 @@ import com.amdocs.zusammen.datatypes.Space;
 import com.amdocs.zusammen.datatypes.item.Info;
 import com.amdocs.zusammen.datatypes.item.Item;
 import com.amdocs.zusammen.datatypes.item.ItemVersion;
+import com.amdocs.zusammen.datatypes.item.ItemVersionData;
 import com.amdocs.zusammen.datatypes.response.ErrorCode;
 import com.amdocs.zusammen.datatypes.response.Module;
 import com.amdocs.zusammen.datatypes.response.Response;
@@ -235,6 +238,34 @@ public class ZusammenConnectorTest {
         when(itemAdaptor.get(sessionContext, Space.PUBLIC, id, id)).thenReturn(response);
         ItemVersion itemVersion = zusammenConnector.getPublicVersion(sessionContext, id, id);
         assertEquals(myId, itemVersion.getId().getValue());
+    }
+
+    @Test
+    public void testCreateVersionVersion() {
+        ItemVersionAdaptor itemAdaptor = mock(ItemVersionAdaptor.class);
+        when(versionAdaptorFactoryMock.createInterface(sessionContext)).thenReturn(itemAdaptor);
+        ItemVersionData itemVersionData = new ItemVersionData();
+        Id id = new Id();
+        String myId = "myId";
+        id.setValue(myId);
+        Response<Id> response = new Response<>(id);
+        when(itemAdaptor.create(sessionContext, id, id, itemVersionData)).thenReturn(response);
+        Id outId = zusammenConnector.createVersion(sessionContext, id, id, itemVersionData);
+        assertEquals(myId, outId.getValue());
+    }
+
+    @Test
+    public void testUpdateVersionVersion() {
+        ItemVersionAdaptor itemAdaptor = mock(ItemVersionAdaptor.class);
+        when(versionAdaptorFactoryMock.createInterface(sessionContext)).thenReturn(itemAdaptor);
+        ItemVersionData itemVersionData = new ItemVersionData();
+        Id id = new Id();
+        Response<Void> response = new Response<>(null);
+        Response<Void> spyResponse = spy(response);
+        when(itemAdaptor.update(sessionContext, id, id, itemVersionData)).thenReturn(spyResponse);
+        zusammenConnector.updateVersion(sessionContext, id, id, itemVersionData);
+        verify(spyResponse).getValue();
+
     }
 
     private void setResponseErrorReturnCode(Response response) {
