@@ -41,6 +41,9 @@ import com.amdocs.zusammen.datatypes.item.Info;
 import com.amdocs.zusammen.datatypes.item.Item;
 import com.amdocs.zusammen.datatypes.item.ItemVersion;
 import com.amdocs.zusammen.datatypes.item.ItemVersionData;
+import com.amdocs.zusammen.datatypes.item.ItemVersionStatus;
+import com.amdocs.zusammen.datatypes.item.SynchronizationStatus;
+import com.amdocs.zusammen.datatypes.itemversion.Tag;
 import com.amdocs.zusammen.datatypes.response.ErrorCode;
 import com.amdocs.zusammen.datatypes.response.Module;
 import com.amdocs.zusammen.datatypes.response.Response;
@@ -265,6 +268,50 @@ public class ZusammenConnectorTest {
         when(itemAdaptor.update(sessionContext, id, id, itemVersionData)).thenReturn(spyResponse);
         zusammenConnector.updateVersion(sessionContext, id, id, itemVersionData);
         verify(spyResponse).getValue();
+
+    }
+
+    @Test
+    public void testGetVersion() {
+        ItemVersionAdaptor itemAdaptor = mock(ItemVersionAdaptor.class);
+        when(versionAdaptorFactoryMock.createInterface(sessionContext)).thenReturn(itemAdaptor);
+        ItemVersion itemVersion = new ItemVersion();
+        Id id = new Id();
+        String value = "myId";
+        id.setValue(value);
+        itemVersion.setId(id);
+        Response<ItemVersion> response = new Response<>(null);
+        response.setValue(itemVersion);
+        when(itemAdaptor.get(sessionContext, Space.PRIVATE, id, id)).thenReturn(response);
+        ItemVersion version = zusammenConnector.getVersion(sessionContext, id, id);
+        assertEquals(id.getValue(), itemVersion.getId().getValue());
+    }
+
+    @Test
+    public void testGetVersionStatus() {
+        ItemVersionAdaptor itemAdaptor = mock(ItemVersionAdaptor.class);
+        when(versionAdaptorFactoryMock.createInterface(sessionContext)).thenReturn(itemAdaptor);
+        ItemVersionStatus itemVersionStatus = new ItemVersionStatus(SynchronizationStatus.OUT_OF_SYNC, true);
+        Response<ItemVersionStatus> response = new Response<>(null);
+        response.setValue(itemVersionStatus);
+        Id id = new Id();
+        when(itemAdaptor.getStatus(sessionContext, id, id)).thenReturn(response);
+        ItemVersionStatus versionStatus = zusammenConnector.getVersionStatus(sessionContext, id, id);
+        assertEquals(SynchronizationStatus.OUT_OF_SYNC, versionStatus.getSynchronizationStatus());
+    }
+
+    @Test
+    public void testRagVersion() {
+        ItemVersionAdaptor itemAdaptor = mock(ItemVersionAdaptor.class);
+        when(versionAdaptorFactoryMock.createInterface(sessionContext)).thenReturn(itemAdaptor);
+        Response<Void> response = new Response<>(null);
+        Id id = new Id();
+        String name = "mame";
+        Tag tag = new Tag(name, name);
+        Tag spyTag = spy(tag);
+        when(itemAdaptor.tag(sessionContext, id, id, null, spyTag)).thenReturn(response);
+        zusammenConnector.tagVersion(sessionContext, id, id, spyTag);
+        verify(spyTag).getName();
 
     }
 
