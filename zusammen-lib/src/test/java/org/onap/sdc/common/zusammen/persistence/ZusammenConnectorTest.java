@@ -315,6 +315,33 @@ public class ZusammenConnectorTest {
 
     }
 
+
+    @Test
+    public void testResetVersionRevision() {
+        ItemVersionAdaptor itemAdaptor = mock(ItemVersionAdaptor.class);
+        ItemVersionAdaptor itemVersionAdaptor = spy(itemAdaptor);
+        Response<Void> response = new Response<>(null);
+        Id id = new Id();
+        when(versionAdaptorFactoryMock.createInterface(sessionContext)).thenReturn(itemVersionAdaptor);
+        when(itemVersionAdaptor.resetRevision(sessionContext, id, id, id)).thenReturn(response);
+        zusammenConnector.resetVersionRevision(sessionContext, id, id, id);
+        verify(itemVersionAdaptor).resetRevision(sessionContext, id, id, id);
+
+    }
+
+    @Test
+    public void testRevertVersionRevision() {
+        ItemVersionAdaptor itemAdaptor = mock(ItemVersionAdaptor.class);
+        ItemVersionAdaptor itemVersionAdaptor = spy(itemAdaptor);
+        Response<Void> response = new Response<>(null);
+        when(versionAdaptorFactoryMock.createInterface(sessionContext)).thenReturn(itemVersionAdaptor);
+        Id id = new Id();
+        when(itemVersionAdaptor.revertRevision(sessionContext, id, id, id)).thenReturn(response);
+        zusammenConnector.revertVersionRevision(sessionContext, id, id, id);
+        verify(itemVersionAdaptor).revertRevision(sessionContext, id, id, id);
+    }
+
+
     private void setResponseErrorReturnCode(Response response) {
         response.setReturnCode(new ReturnCode(ErrorCode.CL_ELEMENT_GET, Module.ZSTM, "bla bla", null));
     }
