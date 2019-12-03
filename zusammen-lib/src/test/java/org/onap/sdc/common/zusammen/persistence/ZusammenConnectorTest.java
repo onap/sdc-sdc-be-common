@@ -43,6 +43,7 @@ import com.amdocs.zusammen.datatypes.item.ItemVersion;
 import com.amdocs.zusammen.datatypes.item.ItemVersionData;
 import com.amdocs.zusammen.datatypes.item.ItemVersionStatus;
 import com.amdocs.zusammen.datatypes.item.SynchronizationStatus;
+import com.amdocs.zusammen.datatypes.itemversion.ItemVersionRevisions;
 import com.amdocs.zusammen.datatypes.itemversion.Tag;
 import com.amdocs.zusammen.datatypes.response.ErrorCode;
 import com.amdocs.zusammen.datatypes.response.Module;
@@ -314,6 +315,58 @@ public class ZusammenConnectorTest {
         verify(spyTag).getName();
 
     }
+
+
+    @Test
+    public void testResetVersionRevision() {
+        ItemVersionAdaptor itemAdaptor = mock(ItemVersionAdaptor.class);
+        ItemVersionAdaptor itemVersionAdaptor = spy(itemAdaptor);
+        Response<Void> response = new Response<>(null);
+        Id id = new Id();
+        when(versionAdaptorFactoryMock.createInterface(sessionContext)).thenReturn(itemVersionAdaptor);
+        when(itemVersionAdaptor.resetRevision(sessionContext, id, id, id)).thenReturn(response);
+        zusammenConnector.resetVersionRevision(sessionContext, id, id, id);
+        verify(itemVersionAdaptor).resetRevision(sessionContext, id, id, id);
+
+    }
+
+    @Test
+    public void testRevertVersionRevision() {
+        ItemVersionAdaptor itemAdaptor = mock(ItemVersionAdaptor.class);
+        ItemVersionAdaptor itemVersionAdaptor = spy(itemAdaptor);
+        Response<Void> response = new Response<>(null);
+        when(versionAdaptorFactoryMock.createInterface(sessionContext)).thenReturn(itemVersionAdaptor);
+        Id id = new Id();
+        when(itemVersionAdaptor.revertRevision(sessionContext, id, id, id)).thenReturn(response);
+        zusammenConnector.revertVersionRevision(sessionContext, id, id, id);
+        verify(itemVersionAdaptor).revertRevision(sessionContext, id, id, id);
+    }
+
+
+    @Test
+    public void testListVersionRevisions() {
+        ItemVersionAdaptor itemAdaptor = mock(ItemVersionAdaptor.class);
+        ItemVersionRevisions itemVersionRevisions = new ItemVersionRevisions();
+        Response<ItemVersionRevisions> response = new Response<>(itemVersionRevisions);
+        when(versionAdaptorFactoryMock.createInterface(sessionContext)).thenReturn(itemAdaptor);
+        Id id = new Id();
+        when(itemAdaptor.listRevisions(sessionContext, id, id)).thenReturn(response);
+        ItemVersionRevisions itemVersionRevisions1 = zusammenConnector.listVersionRevisions(sessionContext, id, id);
+        assertEquals(itemVersionRevisions, itemVersionRevisions1);
+    }
+
+    @Test
+    public void testPublishVersion() {
+        ItemVersionAdaptor itemVersionAdaptor = spy(ItemVersionAdaptor.class);
+        Response<Void> response = new Response<>(null);
+        when(versionAdaptorFactoryMock.createInterface(sessionContext)).thenReturn(itemVersionAdaptor);
+        Id id = new Id();
+        String blaBla = "bla bla";
+        when(itemVersionAdaptor.publish(sessionContext, id, id, blaBla)).thenReturn(response);
+        zusammenConnector.publishVersion(sessionContext, id, id, blaBla);
+        verify(itemVersionAdaptor).publish(sessionContext, id, id, blaBla);
+    }
+
 
     private void setResponseErrorReturnCode(Response response) {
         response.setReturnCode(new ReturnCode(ErrorCode.CL_ELEMENT_GET, Module.ZSTM, "bla bla", null));
