@@ -93,6 +93,30 @@
       "revId": "53eac944e2db3c01f32f39545e08f1952316b943",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2209577_a1d5670c",
+        "filename": "security-util-lib/src/main/java/org/onap/sdc/security/SecurityUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5562
+      },
+      "writtenOn": "2019-12-05T09:54:05Z",
+      "side": 1,
+      "message": "\u003e org.onap.sdc.security.logging.wrappers.Logger.warn does not have ability to log exceptions.\n\u003e I think it should be refactored. But it is a larger issue.\n\nAt least as \n@param params optional parameters of a given error description",
+      "parentUuid": "99471617_afde1eee",
+      "range": {
+        "startLine": 63,
+        "startChar": 12,
+        "endLine": 63,
+        "endChar": 101
+      },
+      "revId": "53eac944e2db3c01f32f39545e08f1952316b943",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
