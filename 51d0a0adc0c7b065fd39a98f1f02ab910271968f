@@ -46,6 +46,30 @@
       "revId": "51d0a0adc0c7b065fd39a98f1f02ab910271968f",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b8e226f_5c8367c3",
+        "filename": "versioning-lib/src/test/java/org/onap/sdc/common/versioning/services/impl/VersioningManagerImplTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5562
+      },
+      "writtenOn": "2019-12-05T09:29:32Z",
+      "side": 1,
+      "message": "my bad :)",
+      "parentUuid": "efe23f32_14f588b0",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 64
+      },
+      "revId": "51d0a0adc0c7b065fd39a98f1f02ab910271968f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
