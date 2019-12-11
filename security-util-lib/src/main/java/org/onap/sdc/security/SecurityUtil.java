@@ -45,7 +45,7 @@ public class SecurityUtil {
     public static final String ALGORITHM = "AES";
     public static final String CHARSET = UTF_8.name();
 
-    public static Key secKey = null;
+    private final static Key secKey = generateKey(KEY, ALGORITHM);
 
     /**
      * cmd commands >$PROGRAM_NAME decrypt "$ENCRYPTED_MSG"
@@ -55,17 +55,14 @@ public class SecurityUtil {
     private SecurityUtil() {
     }
 
-    static {
-        try {
-            secKey = generateKey(KEY, ALGORITHM);
-        } catch (Exception e) {
-            LOG.warn(EcompLoggerErrorCode.PERMISSION_ERROR,"cannot generate key for {}", ALGORITHM);
-        }
-    }
-
 
     public static Key generateKey(final byte[] KEY, String algorithm) {
-        return new SecretKeySpec(KEY, algorithm);
+        try {
+            return new SecretKeySpec(KEY, algorithm);
+        } catch (Exception e) {
+            LOG.warn(EcompLoggerErrorCode.PERMISSION_ERROR, "cannot generate key for {}, message : {} .", ALGORITHM, e.getMessage());
+            return null;
+        }
     }
 
     //obfuscates key prefix -> **********
