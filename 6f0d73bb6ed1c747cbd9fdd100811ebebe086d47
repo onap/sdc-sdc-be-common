@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94890752_657801a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 653
+      },
+      "writtenOn": "2020-01-29T15:03:08Z",
+      "side": 1,
+      "message": "Please align according to ONAP commit message structure: https://wiki.onap.org/display/DW/Commit+Messages",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 35
+      },
+      "revId": "6f0d73bb6ed1c747cbd9fdd100811ebebe086d47",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2748e5f_c3ad7590",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/elements/LogFieldsMdcHandlerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 653
+      },
+      "writtenOn": "2020-01-29T15:03:08Z",
+      "side": 1,
+      "message": "Wildcard import aren\u0027t allowed. Check: https://wiki.onap.org/display/DW/Java+code+style",
+      "range": {
+        "startLine": 24,
+        "startChar": 31,
+        "endLine": 24,
+        "endChar": 32
+      },
+      "revId": "6f0d73bb6ed1c747cbd9fdd100811ebebe086d47",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91951577_69b08b77",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/elements/LogFieldsMdcHandlerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 653
+      },
+      "writtenOn": "2020-01-29T15:03:08Z",
+      "side": 1,
+      "message": "Twice?",
+      "range": {
+        "startLine": 216,
+        "startChar": 8,
+        "endLine": 217,
+        "endChar": 81
+      },
+      "revId": "6f0d73bb6ed1c747cbd9fdd100811ebebe086d47",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "841f790d_033ada48",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/elements/LogFieldsMdcHandlerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 653
+      },
+      "writtenOn": "2020-01-29T15:03:08Z",
+      "side": 1,
+      "message": "Empty tests?",
+      "range": {
+        "startLine": 314,
+        "startChar": 4,
+        "endLine": 320,
+        "endChar": 5
+      },
+      "revId": "6f0d73bb6ed1c747cbd9fdd100811ebebe086d47",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54cba033_ff53c17f",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/elements/LogFieldsMdcHandlerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 653
+      },
+      "writtenOn": "2020-01-29T15:03:08Z",
+      "side": 1,
+      "message": "Empty tests ?",
+      "range": {
+        "startLine": 421,
+        "startChar": 4,
+        "endLine": 427,
+        "endChar": 5
+      },
+      "revId": "6f0d73bb6ed1c747cbd9fdd100811ebebe086d47",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d386471_ee0fe037",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/wrappers/LoggerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 653
+      },
+      "writtenOn": "2020-01-29T15:03:08Z",
+      "side": 1,
+      "message": "Same",
+      "range": {
+        "startLine": 29,
+        "startChar": 1,
+        "endLine": 30,
+        "endChar": 36
+      },
+      "revId": "6f0d73bb6ed1c747cbd9fdd100811ebebe086d47",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
