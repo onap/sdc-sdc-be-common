@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "68be2da7_da6d4028",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-01-29T17:13:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94890752_657801a5",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 35
+      },
+      "revId": "6f0d73bb6ed1c747cbd9fdd100811ebebe086d47",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2748e5f_c3ad7590",
         "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/elements/LogFieldsMdcHandlerTest.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2020-01-29T15:03:08Z",
       "side": 1,
       "message": "Wildcard import aren\u0027t allowed. Check: https://wiki.onap.org/display/DW/Java+code+style",
+      "range": {
+        "startLine": 24,
+        "startChar": 31,
+        "endLine": 24,
+        "endChar": 32
+      },
+      "revId": "6f0d73bb6ed1c747cbd9fdd100811ebebe086d47",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f3686b90_4dec58a8",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/elements/LogFieldsMdcHandlerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-01-29T17:13:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2748e5f_c3ad7590",
       "range": {
         "startLine": 24,
         "startChar": 31,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "17214a4b_0501c112",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/elements/LogFieldsMdcHandlerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-01-29T17:13:04Z",
+      "side": 1,
+      "message": "Missing test for get. Should be fixed in Patch 2",
+      "parentUuid": "91951577_69b08b77",
+      "range": {
+        "startLine": 216,
+        "startChar": 8,
+        "endLine": 217,
+        "endChar": 81
+      },
+      "revId": "6f0d73bb6ed1c747cbd9fdd100811ebebe086d47",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "841f790d_033ada48",
         "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/elements/LogFieldsMdcHandlerTest.java",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2020-01-29T15:03:08Z",
       "side": 1,
       "message": "Empty tests?",
+      "range": {
+        "startLine": 314,
+        "startChar": 4,
+        "endLine": 320,
+        "endChar": 5
+      },
+      "revId": "6f0d73bb6ed1c747cbd9fdd100811ebebe086d47",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd8fa639_12cd6dcd",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/elements/LogFieldsMdcHandlerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-01-29T17:13:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "841f790d_033ada48",
       "range": {
         "startLine": 314,
         "startChar": 4,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "363a32c6_8af67600",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/elements/LogFieldsMdcHandlerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-01-29T17:13:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54cba033_ff53c17f",
+      "range": {
+        "startLine": 421,
+        "startChar": 4,
+        "endLine": 427,
+        "endChar": 5
+      },
+      "revId": "6f0d73bb6ed1c747cbd9fdd100811ebebe086d47",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d386471_ee0fe037",
         "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/wrappers/LoggerTest.java",
         "patchSetId": 1
@@ -128,6 +248,30 @@
       "writtenOn": "2020-01-29T15:03:08Z",
       "side": 1,
       "message": "Same",
+      "range": {
+        "startLine": 29,
+        "startChar": 1,
+        "endLine": 30,
+        "endChar": 36
+      },
+      "revId": "6f0d73bb6ed1c747cbd9fdd100811ebebe086d47",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e126997c_b4441da3",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/wrappers/LoggerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-01-29T17:13:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d386471_ee0fe037",
       "range": {
         "startLine": 29,
         "startChar": 1,
