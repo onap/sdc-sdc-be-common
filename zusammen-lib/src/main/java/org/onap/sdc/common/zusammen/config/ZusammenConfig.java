@@ -16,6 +16,7 @@
 
 package org.onap.sdc.common.zusammen.config;
 
+import com.datastax.driver.core.ConsistencyLevel;
 import com.datastax.driver.core.RemoteEndpointAwareJdkSSLOptions;
 import com.datastax.driver.core.SSLOptions;
 import java.io.FileInputStream;
@@ -49,6 +50,7 @@ public class ZusammenConfig {
 
     @PostConstruct
     public void init() {
+        System.setProperty("cassandra.consistency.level", ConsistencyLevel.LOCAL_QUORUM.name());
         System.setProperty("cassandra.nodes", provider.getCassandraAddresses());
         System.setProperty("cassandra.port", provider.getCassandraPort());
         System.setProperty("cassandra.keyspace", KEYSPACE);
