@@ -16,8 +16,6 @@
 
     <properties>
 
-        <sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
-
         <!-- Nexus related properties -->
         <portal.version>2.5.0</portal.version>
         <lang3.version>3.3.2</lang3.version>
