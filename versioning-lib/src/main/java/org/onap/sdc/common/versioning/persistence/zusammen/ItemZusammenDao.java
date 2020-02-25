@@ -121,19 +121,19 @@ public class ItemZusammenDao implements ItemDao {
         info.addProperty(InfoPropertyName.ITEM_TYPE, item.getType());
         info.addProperty(InfoPropertyName.ITEM_OWNER, item.getOwner());
         if (item.getStatus() != null) {
-            info.addProperty(InfoPropertyName.ITEM_STATUS, item.getStatus());
+            info.addProperty(InfoPropertyName.ITEM_STATUS, item.getStatus().name());
         }
         info.addProperty(InfoPropertyName.ITEM_VERSIONS_STATUSES, item.getVersionStatusCounters());
         item.getProperties().forEach(info::addProperty);
         return info;
     }
 
-    private static final class InfoPropertyName {
+    static final class InfoPropertyName {
 
-        private static final String ITEM_TYPE = "item_type";
-        private static final String ITEM_VERSIONS_STATUSES = "item_versions_statuses";
-        private static final String ITEM_OWNER = "Owner";
-        private static final String ITEM_STATUS = "status";
+        static final String ITEM_TYPE = "item_type";
+        static final String ITEM_VERSIONS_STATUSES = "item_versions_statuses";
+        static final String ITEM_OWNER = "Owner";
+        static final String ITEM_STATUS = "status";
 
         private InfoPropertyName() {
             throw new IllegalStateException("Constants class");

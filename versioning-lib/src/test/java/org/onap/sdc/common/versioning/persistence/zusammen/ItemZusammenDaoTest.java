@@ -21,6 +21,10 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
+import static org.onap.sdc.common.versioning.persistence.zusammen.ItemZusammenDao.InfoPropertyName.ITEM_OWNER;
+import static org.onap.sdc.common.versioning.persistence.zusammen.ItemZusammenDao.InfoPropertyName.ITEM_STATUS;
+import static org.onap.sdc.common.versioning.persistence.zusammen.ItemZusammenDao.InfoPropertyName.ITEM_TYPE;
+import static org.onap.sdc.common.versioning.persistence.zusammen.ItemZusammenDao.InfoPropertyName.ITEM_VERSIONS_STATUSES;
 
 import com.amdocs.zusammen.datatypes.Id;
 import com.amdocs.zusammen.datatypes.SessionContext;
@@ -52,8 +56,6 @@ import org.onap.sdc.common.zusammen.services.ZusammenAdaptor;
 @RunWith(MockitoJUnitRunner.class)
 public class ItemZusammenDaoTest {
 
-    private static final String ITEM_TYPE = "item_type";
-    private static final String ITEM_VERSIONS_STATUSES = "item_versions_statuses";
     private static final String APP_PROP_1 = "app_prop1";
     private static final String APP_PROP_2 = "app_prop2";
     private static final SessionContext SESSION_CONTEXT = new SessionContext();
@@ -201,6 +203,8 @@ public class ItemZusammenDaoTest {
         info.setDescription(description);
         info.addProperty(ITEM_TYPE, type);
         info.addProperty(ITEM_VERSIONS_STATUSES, versionStatusCounters);
+        info.addProperty(ITEM_STATUS, ItemStatus.ACTIVE.name());
+        info.addProperty(ITEM_OWNER, "ownerUser");
         info.addProperty(APP_PROP_1, "app_prop1_value");
         info.addProperty(APP_PROP_2, 8);
         item.setInfo(info);
