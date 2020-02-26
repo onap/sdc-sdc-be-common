@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Vasyl Razinkov <vasyl.razinkov@est.tech>
+Code-Review+2: Oren  Kleks <oren.kleks@amdocs.com>
+Submitted-by: Oren  Kleks <oren.kleks@amdocs.com>
+Submitted-at: Wed, 26 Feb 2020 04:53:39 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/sdc/sdc-be-common/+/102328
+Project: sdc/sdc-be-common
+Branch: refs/heads/master
