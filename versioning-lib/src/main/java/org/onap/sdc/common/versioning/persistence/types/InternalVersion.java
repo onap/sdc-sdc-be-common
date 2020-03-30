@@ -23,10 +23,6 @@ import org.onap.sdc.common.versioning.services.types.VersionStatus;
 
 public class InternalVersion extends Version {
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public void setBaseId(String baseId) {
         this.baseId = baseId;
     }
@@ -52,6 +48,7 @@ public class InternalVersion extends Version {
     }
 
     public void populateExternalFields(Version version) {
+        setId(version.getId());
         setDescription(version.getDescription());
         version.getProperties().forEach(this::addProperty);
     }

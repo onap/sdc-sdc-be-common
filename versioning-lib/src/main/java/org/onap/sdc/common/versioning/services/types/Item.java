@@ -26,8 +26,8 @@ import lombok.Setter;
 
 @Getter
 public class Item {
-
-    protected String id;
+    @Setter
+    private String id;
     protected Date creationTime;
     protected Date modificationTime;
     protected ItemStatus status = ItemStatus.ACTIVE;

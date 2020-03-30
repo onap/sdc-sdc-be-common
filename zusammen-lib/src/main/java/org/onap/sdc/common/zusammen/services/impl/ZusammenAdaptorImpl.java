@@ -186,6 +186,11 @@ public class ZusammenAdaptorImpl implements ZusammenAdaptor {
     }
 
     @Override
+    public Id createItem(SessionContext context, Id itemId, Info info) {
+        return connector.createItem(context, itemId, info);
+    }
+
+    @Override
     public void deleteItem(SessionContext context, Id itemId) {
         connector.deleteItem(context, itemId);
     }
@@ -223,6 +228,11 @@ public class ZusammenAdaptorImpl implements ZusammenAdaptor {
     @Override
     public Id createVersion(SessionContext context, Id itemId, Id baseVersionId, ItemVersionData itemVersionData) {
         return connector.createVersion(context, itemId, baseVersionId, itemVersionData);
+    }
+
+    @Override
+    public Id createVersion(SessionContext context, Id itemId, Id versionId, Id baseVersionId, ItemVersionData itemVersionData) {
+        return connector.createVersion(context, itemId, versionId, baseVersionId, itemVersionData);
     }
 
     @Override

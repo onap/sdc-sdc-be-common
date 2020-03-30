@@ -29,10 +29,6 @@ import org.onap.sdc.common.versioning.services.types.VersionStatus;
 @Getter
 public class InternalItem extends Item {
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public void setCreationTime(Date creationTime) {
         this.creationTime = creationTime;
     }
@@ -67,6 +63,7 @@ public class InternalItem extends Item {
     }
 
     public void populateExternalFields(Item item) {
+        setId(item.getId());
         setType(item.getType());
         setName(item.getName());
         setOwner(item.getOwner());

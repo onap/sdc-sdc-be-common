@@ -30,8 +30,8 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 public class Version {
-
-    protected String id;
+    @Setter
+    private String id;
     protected String baseId;
     protected String name;
     protected VersionStatus status = VersionStatus.Draft;

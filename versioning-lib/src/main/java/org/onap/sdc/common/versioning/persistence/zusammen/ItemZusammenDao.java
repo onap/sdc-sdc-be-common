@@ -56,8 +56,12 @@ public class ItemZusammenDao implements ItemDao {
 
     @Override
     public InternalItem create(InternalItem item) {
-        Id itemId = zusammenAdaptor.createItem(contextCreator.create(), mapToZusammenItemInfo(item));
-        item.setId(itemId.getValue());
+        if (item.getId() == null) {
+            Id itemId = zusammenAdaptor.createItem(contextCreator.create(), mapToZusammenItemInfo(item));
+            item.setId(itemId.getValue());
+        } else {
+            zusammenAdaptor.createItem(contextCreator.create(), new Id(item.getId()), mapToZusammenItemInfo(item));
+        }
         return item;
     }
 

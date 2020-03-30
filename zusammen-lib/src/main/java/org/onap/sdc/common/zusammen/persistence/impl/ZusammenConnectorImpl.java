@@ -88,11 +88,16 @@ public class ZusammenConnectorImpl implements ZusammenConnector {
         return getResponseValue(response, String.format("get item %s", itemId));
     }
 
-
     @Override
     public Id createItem(SessionContext context, Info info) {
         Response<Id> response = itemAdaptorFactory.createInterface(context).create(context, info);
         return getResponseValue(response, "create item");
+    }
+
+    @Override
+    public Id createItem(SessionContext context, Id itemId, Info info) {
+        Response<Id> response = itemAdaptorFactory.createInterface(context).create(context, itemId, info);
+        return getResponseValue(response, String.format("create item with id %s", itemId));
     }
 
     @Override
@@ -127,6 +132,14 @@ public class ZusammenConnectorImpl implements ZusammenConnector {
                 versionAdaptorFactory.createInterface(context).create(context, itemId, baseVersionId, itemVersionData);
         return getResponseValue(response,
                 String.format("create version for item %s based on version %s", itemId, baseVersionId));
+    }
+
+    @Override
+    public Id createVersion(SessionContext context, Id itemId, Id versionId, Id baseVersionId, ItemVersionData itemVersionData) {
+        Response<Id> response =
+                versionAdaptorFactory.createInterface(context).create(context, itemId, versionId, baseVersionId, itemVersionData);
+        return getResponseValue(response,
+                String.format("create version with id %s for item %s based on version %s", versionId, itemId, baseVersionId));
     }
 
     @Override

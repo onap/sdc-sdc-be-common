@@ -16,14 +16,17 @@
 
 package org.onap.sdc.common.versioning.services.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import com.google.common.collect.ImmutableList;
 import java.util.List;
 import java.util.Optional;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.sdc.common.versioning.persistence.ItemDao;
@@ -31,8 +34,6 @@ import org.onap.sdc.common.versioning.persistence.VersionDao;
 import org.onap.sdc.common.versioning.persistence.types.InternalVersion;
 import org.onap.sdc.common.versioning.services.VersioningManager;
 import org.onap.sdc.common.versioning.services.types.Version;
-
-import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class VersioningManagerImplTest {
@@ -43,13 +44,8 @@ public class VersioningManagerImplTest {
     private VersionDao versionDao;
     @Mock
     private VersionCalculator versionCalculator;
-
-    private VersioningManager versioningManager;
-
-    @Before
-    public void initVersioningManager() {
-        versioningManager = new VersioningManagerImpl(versionDao, versionCalculator, itemDao);
-    }
+    @InjectMocks
+    private VersioningManagerImpl versioningManager;
 
     @Test
     public void testList() {
@@ -83,15 +79,20 @@ public class VersioningManagerImplTest {
 
     @Test
     public void testUpdate() {
-        String blaBla = "blaBla";
+        String itemId = "itemId";
+        String versionId = "versionId";
         InternalVersion internalVersion = new InternalVersion();
-        internalVersion.setId(blaBla);
-        when(versionDao.get(blaBla, blaBla)).thenReturn(Optional.of(internalVersion));
+        internalVersion.setId(versionId);
+
+        when(versionDao.get(itemId, versionId)).thenReturn(Optional.of(internalVersion));
+
         Version version = new Version();
-        version.setDescription(blaBla);
-        Version updatedVersion = versioningManager.update(blaBla, blaBla, version);
+        version.setId(versionId);
+        version.setDescription("version desc");
+        Version updatedVersion = versioningManager.update(itemId, versionId, version);
+
         assertNotNull(updatedVersion);
-        assertEquals(blaBla, updatedVersion.getId());
-        assertEquals(blaBla, updatedVersion.getDescription());
+        assertEquals(versionId, updatedVersion.getId());
+        assertEquals(version.getDescription(), updatedVersion.getDescription());
     }
 }

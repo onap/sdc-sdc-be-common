@@ -156,6 +156,32 @@ public class VersionZusammenDaoTest {
     }
 
     @Test
+    public void testCreateWithId() {
+        String itemId = "itemId";
+        String versionId = "versionId";
+        InternalVersion version = new InternalVersion();
+        version.setId(versionId);
+        version.setName("1.0");
+        version.setDescription("version description");
+        version.setStatus(VersionStatus.Draft);
+
+        ArgumentCaptor<ItemVersionData> capturedZusammenVersion = ArgumentCaptor.forClass(ItemVersionData.class);
+
+        doReturn(new Id(versionId)).when(zusammenAdaptorMock)
+                .createVersion(eq(SESSION_CONTEXT), eq(new Id(itemId)), eq(new Id(version.getId())), isNull(),
+                        capturedZusammenVersion.capture());
+
+        versionDao.create(itemId, version);
+
+        Assert.assertEquals(version.getId(), versionId);
+
+        Info capturedInfo = capturedZusammenVersion.getValue().getInfo();
+        Assert.assertEquals(capturedInfo.getName(), version.getName());
+        Assert.assertEquals(capturedInfo.getDescription(), version.getDescription());
+        Assert.assertEquals(VersionStatus.valueOf(capturedInfo.getProperty(STATUS_PROPERTY)), version.getStatus());
+    }
+
+    @Test
     public void testUpdate() {
         String itemId = "itemId";
         InternalVersion version = new InternalVersion();

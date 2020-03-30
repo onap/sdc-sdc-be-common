@@ -169,6 +169,37 @@ public class ItemZusammenDaoTest {
         assertEquals(item.getVersionStatusCounters(), inputItem.getVersionStatusCounters());
     }
 
+
+    @Test
+    public void testCreateWithId() {
+        String itemId = "itemId";
+
+        InternalItem inputItem = new InternalItem();
+        inputItem.setId(itemId);
+        inputItem.setName("vsp1");
+        inputItem.setDescription("VSP 1");
+        inputItem.setType("vsp");
+
+        ArgumentCaptor<Info> capturedZusammenInfo = ArgumentCaptor.forClass(Info.class);
+
+        doReturn(new Id(itemId)).when(zusammenAdaptorMock)
+                .createItem(eq(SESSION_CONTEXT), eq(new Id(inputItem.getId())),capturedZusammenInfo.capture());
+
+        InternalItem item = itemDao.create(inputItem);
+
+        Info capturedInfo = capturedZusammenInfo.getValue();
+        assertEquals(capturedInfo.getName(), inputItem.getName());
+        assertEquals(capturedInfo.getDescription(), inputItem.getDescription());
+        assertEquals(capturedInfo.getProperty(ITEM_TYPE), inputItem.getType());
+        assertEquals(capturedInfo.getProperty(ITEM_VERSIONS_STATUSES), inputItem.getVersionStatusCounters());
+
+        assertEquals(item.getId(), itemId);
+        assertEquals(item.getName(), inputItem.getName());
+        assertEquals(item.getDescription(), inputItem.getDescription());
+        assertEquals(item.getType(), inputItem.getType());
+        assertEquals(item.getVersionStatusCounters(), inputItem.getVersionStatusCounters());
+    }
+
     @Test
     public void testUpdate() {
         InternalItem item = new InternalItem();

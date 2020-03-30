@@ -46,6 +46,8 @@ public interface ZusammenAdaptor {
 
     Id createItem(SessionContext context, Info info);
 
+    Id createItem(SessionContext context, Id itemId, Info info);
+
     void updateItem(SessionContext context, Id itemId, Info info);
 
     Collection<ItemVersion> listPublicVersions(SessionContext context, Id itemId);
@@ -53,6 +55,8 @@ public interface ZusammenAdaptor {
     ItemVersion getPublicVersion(SessionContext context, Id itemId, Id versionId);
 
     Id createVersion(SessionContext context, Id itemId, Id baseVersionId, ItemVersionData itemVersionData);
+
+    Id createVersion(SessionContext context, Id itemId, Id versionId, Id baseVersionId, ItemVersionData itemVersionData);
 
     void updateVersion(SessionContext context, Id itemId, Id versionId, ItemVersionData itemVersionData);
 

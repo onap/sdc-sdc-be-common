@@ -46,6 +46,8 @@ public interface ZusammenConnector {
 
   Id createItem(SessionContext context, Info info);
 
+  Id createItem(SessionContext context, Id itemId, Info info);
+
   void deleteItem(SessionContext context, Id itemId);
 
   void updateItem(SessionContext context, Id itemId, Info info);
@@ -56,6 +58,8 @@ public interface ZusammenConnector {
   ItemVersion getPublicVersion(SessionContext context, Id itemId, Id versionId);
 
   Id createVersion(SessionContext context, Id itemId, Id baseVersionId, ItemVersionData itemVersionData);
+
+  Id createVersion(SessionContext context, Id itemId, Id versionId, Id baseVersionId, ItemVersionData itemVersionData);
 
   void updateVersion(SessionContext context, Id itemId, Id versionId, ItemVersionData itemVersionData);
 

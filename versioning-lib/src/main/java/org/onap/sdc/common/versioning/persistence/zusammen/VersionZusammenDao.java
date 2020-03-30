@@ -62,10 +62,16 @@ public class VersionZusammenDao implements VersionDao {
 
     @Override
     public InternalVersion create(String itemId, InternalVersion version) {
-        Id versionId = zusammenAdaptor.createVersion(contextCreator.create(), new Id(itemId),
-                version.getBaseId() == null ? null : new Id(version.getBaseId()), mapToZusammenVersion(version));
-
-        version.setId(versionId.getValue());
+        Id baseVersionId = version.getBaseId() == null ? null : new Id(version.getBaseId());
+        if (version.getId() == null) {
+            Id versionId = zusammenAdaptor.createVersion(contextCreator.create(), new Id(itemId), baseVersionId,
+                    mapToZusammenVersion(version));
+            version.setId(versionId.getValue());
+        } else {
+            zusammenAdaptor
+                    .createVersion(contextCreator.create(), new Id(itemId), new Id(version.getId()), baseVersionId,
+                            mapToZusammenVersion(version));
+        }
         return version;
     }
 
