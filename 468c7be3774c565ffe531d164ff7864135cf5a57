@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "401f5312_580120c6",
+        "filename": "security-util-lib/src/main/java/org/onap/sdc/security/SecurityUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5562
+      },
+      "writtenOn": "2020-04-28T10:44:58Z",
+      "side": 1,
+      "message": "avoid loosing exception",
+      "range": {
+        "startLine": 66,
+        "startChar": 10,
+        "endLine": 68,
+        "endChar": 9
+      },
+      "revId": "468c7be3774c565ffe531d164ff7864135cf5a57",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3262ef58_1d1f03e6",
+        "filename": "security-util-lib/src/main/java/org/onap/sdc/security/SecurityUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5562
+      },
+      "writtenOn": "2020-04-28T10:44:58Z",
+      "side": 1,
+      "message": "avoid loosing exception",
+      "range": {
+        "startLine": 108,
+        "startChar": 10,
+        "endLine": 128,
+        "endChar": 32
+      },
+      "revId": "468c7be3774c565ffe531d164ff7864135cf5a57",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b11edf2_2b23f63a",
+        "filename": "security-util-lib/src/main/java/org/onap/sdc/security/SecurityUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5562
+      },
+      "writtenOn": "2020-04-28T10:44:58Z",
+      "side": 1,
+      "message": "avoid loosing exception",
+      "range": {
+        "startLine": 157,
+        "startChar": 10,
+        "endLine": 175,
+        "endChar": 9
+      },
+      "revId": "468c7be3774c565ffe531d164ff7864135cf5a57",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87aae16a_0436354d",
+        "filename": "security-util-lib/src/main/java/org/onap/sdc/security/SecurityUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5562
+      },
+      "writtenOn": "2020-04-28T10:44:58Z",
+      "side": 1,
+      "message": "avoid loosing exception",
+      "range": {
+        "startLine": 182,
+        "startChar": 10,
+        "endLine": 188,
+        "endChar": 9
+      },
+      "revId": "468c7be3774c565ffe531d164ff7864135cf5a57",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
