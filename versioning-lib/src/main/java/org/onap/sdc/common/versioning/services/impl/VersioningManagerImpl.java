@@ -70,6 +70,7 @@ public class VersioningManagerImpl implements VersioningManager {
     @Override
     public Version create(String itemId, String baseVersionId, Version version, VersionCreationMethod creationMethod) {
         InternalVersion internalVersion = new InternalVersion();
+        internalVersion.setId(version.getId());
         internalVersion.setBaseId(baseVersionId);
         internalVersion.populateExternalFields(version);
 

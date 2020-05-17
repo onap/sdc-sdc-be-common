@@ -63,7 +63,6 @@ public class InternalItem extends Item {
     }
 
     public void populateExternalFields(Item item) {
-        setId(item.getId());
         setType(item.getType());
         setName(item.getName());
         setOwner(item.getOwner());

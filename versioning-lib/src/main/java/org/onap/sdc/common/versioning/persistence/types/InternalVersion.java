@@ -48,7 +48,6 @@ public class InternalVersion extends Version {
     }
 
     public void populateExternalFields(Version version) {
-        setId(version.getId());
         setDescription(version.getDescription());
         version.getProperties().forEach(this::addProperty);
     }

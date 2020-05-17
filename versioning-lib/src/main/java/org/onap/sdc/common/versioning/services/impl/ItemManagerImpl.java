@@ -52,6 +52,7 @@ public class ItemManagerImpl implements ItemManager {
     @Override
     public Item create(Item item) {
         InternalItem internalItem = new InternalItem();
+        internalItem.setId(item.getId());
         internalItem.populateExternalFields(item);
         return itemDao.create(internalItem);
     }
