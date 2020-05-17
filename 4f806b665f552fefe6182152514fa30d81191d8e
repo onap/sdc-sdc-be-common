@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad16a1e1_d55bbc47",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/enums/EcompLoggerErrorCodeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 6146
+      },
+      "writtenOn": "2020-05-17T08:04:04Z",
+      "side": 1,
+      "message": "I think it will be nice to add more assertions to check more than one value.\nWhat about 500,400,300,200,100,0?\n\nThanks.",
+      "revId": "4f806b665f552fefe6182152514fa30d81191d8e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
