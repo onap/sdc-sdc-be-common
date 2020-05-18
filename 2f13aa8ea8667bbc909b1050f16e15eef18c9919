@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Dvir Baumel <dvir.baumel@intl.att.com>
+Code-Review+2: Ofir Sonsino <ofir.sonsino@intl.att.com>
+Submitted-by: Ofir Sonsino <ofir.sonsino@intl.att.com>
+Submitted-at: Mon, 18 May 2020 05:19:32 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/sdc/sdc-be-common/+/107665
+Project: sdc/sdc-be-common
+Branch: refs/heads/master
