@@ -17,10 +17,11 @@
 package org.onap.sdc.common.session;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.onap.sdc.common.session.impl.SdcSessionContextProvider;
 import org.onap.sdc.common.session.impl.SessionException;
 
@@ -28,21 +29,27 @@ public class SdcSessionContextProviderTest {
 
     private SdcSessionContextProvider sdcSessionContextProvider;
 
-    @Before
+    @BeforeEach
     public void init() {
         sdcSessionContextProvider = new SdcSessionContextProvider();
     }
 
-    @Test(expected = SessionException.class)
+    @Test
     public void createSessionNoTenant() {
         sdcSessionContextProvider.create("user", null);
-        sdcSessionContextProvider.get();
+        assertThrows(
+            SessionException.class,
+            () -> sdcSessionContextProvider.get()
+        );
     }
 
-    @Test(expected = SessionException.class)
+    @Test
     public void createSessionNoUser() {
         sdcSessionContextProvider.create(null, "t1");
-        sdcSessionContextProvider.get();
+        assertThrows(
+            SessionException.class,
+            () -> sdcSessionContextProvider.get()
+        );
     }
 
     @Test
@@ -55,7 +62,7 @@ public class SdcSessionContextProviderTest {
         assertEquals(tenant, sessionContext.getTenant());
     }
 
-    @After
+    @AfterEach
     public void cleanup() {
         sdcSessionContextProvider.close();
     }

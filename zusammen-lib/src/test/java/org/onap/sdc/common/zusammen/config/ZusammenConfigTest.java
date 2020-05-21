@@ -16,9 +16,9 @@
 
 package org.onap.sdc.common.zusammen.config;
 
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class ZusammenConfigTest {
@@ -35,7 +35,7 @@ public class ZusammenConfigTest {
         Assert.assertEquals(a, System.getProperty("cassandra.nodes"));
     }
 
-    @After
+    @AfterEach
     public void cleanUp() {
         System.setProperty("cassandra.nodes", emptyStr);
         System.setProperty("cassandra.port", emptyStr);

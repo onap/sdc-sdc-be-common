@@ -41,19 +41,17 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.onap.sdc.common.versioning.persistence.types.InternalItem;
 import org.onap.sdc.common.versioning.services.types.ItemStatus;
 import org.onap.sdc.common.versioning.services.types.VersionStatus;
 import org.onap.sdc.common.zusammen.services.ZusammenAdaptor;
 
-@RunWith(MockitoJUnitRunner.class)
 public class ItemZusammenDaoTest {
 
     private static final String APP_PROP_1 = "app_prop1";
@@ -65,18 +63,18 @@ public class ItemZusammenDaoTest {
         SESSION_CONTEXT.setTenant("tenant");
     }
 
-    @Mock
-    private ZusammenSessionContextCreator contextCreatorMock;
-    @Mock
-    private ZusammenAdaptor zusammenAdaptorMock;
+    private final ZusammenSessionContextCreator contextCreatorMock = Mockito.mock(ZusammenSessionContextCreator.class);
+
+    private final ZusammenAdaptor zusammenAdaptorMock = Mockito.mock(ZusammenAdaptor.class);
     @InjectMocks
     private ItemZusammenDao itemDao;
 
-    @Before
+    @BeforeEach
     public void mockSessionContext() {
+        MockitoAnnotations.initMocks(this);
         doReturn(SESSION_CONTEXT).when(contextCreatorMock).create();
-    }
 
+    }
 
     @Test
     public void testListWhenNone() {
@@ -96,16 +94,15 @@ public class ItemZusammenDaoTest {
         vsp2versionStatuses.put(VersionStatus.Draft.name(), 3);
         vsp2versionStatuses.put(VersionStatus.Certified.name(), 2);
 
-
         List<Item> returnedItems =
-                Stream.of(createItem("1", "vsp1", "vsp 1", "vsp", new Date(), new Date(), new HashMap<>()),
-                        createItem("2", "vlm1", "vlm 1", "vlm", new Date(), new Date(), vlm1versionStatuses),
-                        createItem("3", "vsp2", "vsp 2", "vsp", new Date(), new Date(), vsp2versionStatuses))
-                        .collect(Collectors.toList());
+            Stream.of(createItem("1", "vsp1", "vsp 1", "vsp", new Date(), new Date(), new HashMap<>()),
+                createItem("2", "vlm1", "vlm 1", "vlm", new Date(), new Date(), vlm1versionStatuses),
+                createItem("3", "vsp2", "vsp 2", "vsp", new Date(), new Date(), vsp2versionStatuses))
+                .collect(Collectors.toList());
         doReturn(returnedItems).when(zusammenAdaptorMock).listItems(eq(SESSION_CONTEXT));
 
         Collection<InternalItem> items = itemDao.list();
-        assertEquals(items.size(), 3);
+        assertEquals(3, items.size());
 
         Iterator<InternalItem> itemIterator = items.iterator();
         assertItemEquals(itemIterator.next(), returnedItems.get(0));
@@ -129,15 +126,15 @@ public class ItemZusammenDaoTest {
         versionStatuses.put(VersionStatus.Certified.name(), 2);
 
         Item toBeReturned =
-                createItem("1", "vsp1", "vsp 1", "vsp", new Date(System.currentTimeMillis() - 100), new Date(),
-                        versionStatuses);
+            createItem("1", "vsp1", "vsp 1", "vsp", new Date(System.currentTimeMillis() - 100), new Date(),
+                versionStatuses);
         doReturn(toBeReturned).when(zusammenAdaptorMock).getItem(eq(SESSION_CONTEXT), eq(new Id(itemId)));
 
         InternalItem item = itemDao.get(itemId);
 
         Assert.assertNotNull(item);
         assertItemEquals(item, toBeReturned);
-        assertEquals(item.getStatus(), ItemStatus.ACTIVE);
+        assertEquals(ItemStatus.ACTIVE, item.getStatus());
 
     }
 
@@ -152,7 +149,7 @@ public class ItemZusammenDaoTest {
 
         String itemId = "1";
         doReturn(new Id(itemId)).when(zusammenAdaptorMock)
-                .createItem(eq(SESSION_CONTEXT), capturedZusammenInfo.capture());
+            .createItem(eq(SESSION_CONTEXT), capturedZusammenInfo.capture());
 
         InternalItem item = itemDao.create(inputItem);
 
@@ -183,7 +180,7 @@ public class ItemZusammenDaoTest {
         ArgumentCaptor<Info> capturedZusammenInfo = ArgumentCaptor.forClass(Info.class);
 
         doReturn(new Id(itemId)).when(zusammenAdaptorMock)
-                .createItem(eq(SESSION_CONTEXT), eq(new Id(inputItem.getId())),capturedZusammenInfo.capture());
+            .createItem(eq(SESSION_CONTEXT), eq(new Id(inputItem.getId())), capturedZusammenInfo.capture());
 
         InternalItem item = itemDao.create(inputItem);
 
@@ -216,7 +213,7 @@ public class ItemZusammenDaoTest {
         itemDao.update(item);
 
         verify(zusammenAdaptorMock)
-                .updateItem(eq(SESSION_CONTEXT), eq(new Id(item.getId())), capturedZusammenInfo.capture());
+            .updateItem(eq(SESSION_CONTEXT), eq(new Id(item.getId())), capturedZusammenInfo.capture());
 
         Info capturedInfo = capturedZusammenInfo.getValue();
         assertEquals(capturedInfo.getName(), item.getName());
@@ -226,7 +223,7 @@ public class ItemZusammenDaoTest {
     }
 
     private Item createItem(String id, String name, String description, String type, Date creationTime,
-            Date modificationTime, Map<String, Number> versionStatusCounters) {
+        Date modificationTime, Map<String, Number> versionStatusCounters) {
         Item item = new Item();
         item.setId(new Id(id));
         Info info = new Info();

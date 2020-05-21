@@ -40,19 +40,17 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.onap.sdc.common.versioning.persistence.types.InternalVersion;
 import org.onap.sdc.common.versioning.services.types.Revision;
 import org.onap.sdc.common.versioning.services.types.VersionStatus;
 import org.onap.sdc.common.zusammen.services.ZusammenAdaptor;
 
-@RunWith(MockitoJUnitRunner.class)
 public class VersionZusammenDaoTest {
 
     private static final String STATUS_PROPERTY = "status";
@@ -63,16 +61,16 @@ public class VersionZusammenDaoTest {
         SESSION_CONTEXT.setTenant("tenant");
     }
 
-    @Mock
-    private ZusammenSessionContextCreator contextCreatorMock;
-    @Mock
-    private ZusammenAdaptor zusammenAdaptorMock;
+    private final ZusammenSessionContextCreator contextCreatorMock = Mockito.mock(ZusammenSessionContextCreator.class);
+    private final ZusammenAdaptor zusammenAdaptorMock = Mockito.mock(ZusammenAdaptor.class);
     @InjectMocks
     private VersionZusammenDao versionDao;
 
-    @Before
+    @BeforeEach
     public void mockSessionContext() {
+        MockitoAnnotations.initMocks(this);
         doReturn(SESSION_CONTEXT).when(contextCreatorMock).create();
+
     }
 
     @Test
@@ -103,7 +101,7 @@ public class VersionZusammenDaoTest {
                 .listPublicVersions(eq(SESSION_CONTEXT), eq(new Id(itemId)));
 
         List<InternalVersion> versions = versionDao.list(itemId);
-        Assert.assertEquals(versions.size(), 3);
+        Assert.assertEquals(3, versions.size());
 
         int zusammenVersionIndex;
         for (InternalVersion version : versions) {
@@ -373,7 +371,7 @@ public class VersionZusammenDaoTest {
 
         List<Revision> revisions = versionDao.listRevisions(itemId, versionId);
 
-        Assert.assertEquals(revisions.size(), 4);
+        Assert.assertEquals(4, revisions.size());
         assertRevisionEquals(revisions.get(0), zusammenRevisions.get(0)); // rev4 - latest
         assertRevisionEquals(revisions.get(1), zusammenRevisions.get(2)); // rev3
         assertRevisionEquals(revisions.get(2), zusammenRevisions.get(3)); // rev2

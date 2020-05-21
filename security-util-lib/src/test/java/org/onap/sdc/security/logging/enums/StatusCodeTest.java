@@ -22,18 +22,18 @@
 
 package org.onap.sdc.security.logging.enums;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class StatusCodeTest {
 
     @Test
     public void testGetStatusCodeEnum() {
-        assertEquals(StatusCode.ERROR.getStatusCodeEnum(), "ERROR");
-        assertEquals(StatusCode.STARTED.getStatusCodeEnum(), "STARTED");
-        assertEquals(StatusCode.COMPLETE.getStatusCodeEnum(), "COMPLETE");
-        assertEquals(StatusCode.INPROGRESS.getStatusCodeEnum(), "INPROGRESS");
+        assertEquals("ERROR", StatusCode.ERROR.getStatusCodeEnum());
+        assertEquals("STARTED", StatusCode.STARTED.getStatusCodeEnum());
+        assertEquals("COMPLETE", StatusCode.COMPLETE.getStatusCodeEnum());
+        assertEquals("INPROGRESS", StatusCode.INPROGRESS.getStatusCodeEnum());
 
     }
 }
