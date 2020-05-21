@@ -20,14 +20,13 @@
 
 package org.onap.sdc.security;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.RandomStringUtils;
-import org.junit.Test;
-
-import java.util.Random;
-
-import static org.apache.commons.codec.binary.Base64.encodeBase64String;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
 
 public class CipherUtilTest {
 
@@ -41,36 +40,34 @@ public class CipherUtilTest {
         String encrypted = CipherUtil.encryptPKC(DATA, base64Key);
         assertNotEquals(DATA, encrypted);
         String decrypted = CipherUtil.decryptPKC(encrypted, base64Key);
-        assertEquals(decrypted, DATA);
+        assertEquals(DATA, decrypted);
     }
 
     @Test
     public void encryptInvalidKey() {
-        try {
-            CipherUtil.encryptPKC(DATA, "invalidKey");
-            fail();
-        } catch (CipherUtilException ex) {
-            assertTrue(ex.getMessage().contains("Invalid AES key length"));
-        }
+        assertThrows(
+            CipherUtilException.class,
+            () -> CipherUtil.encryptPKC(DATA, "invalidKey"),
+            "Invalid AES key length"
+        );
     }
 
     @Test
     public void decryptInvalidKey() {
-        try {
-            CipherUtil.decryptPKC(DATA, "invalidKey");
-            fail();
-        } catch (CipherUtilException ex) {
-            assertTrue(ex.getMessage().contains("length"));
-        }
+        assertThrows(
+            CipherUtilException.class,
+            () -> CipherUtil.decryptPKC(DATA, "invalidKey"),
+            "length"
+
+        );
     }
 
     @Test
-   public void decryptInvalidData() {
-        try {
-            CipherUtil.decryptPKC(DATA, KEY);
-          fail();
-       } catch (CipherUtilException ex) {
-          assertTrue(ex.getMessage().contains("Wrong IV length"));
-        }
+    public void decryptInvalidData() {
+        assertThrows(
+            CipherUtilException.class,
+            () -> CipherUtil.decryptPKC(DATA, KEY),
+            "Input too short"
+        );
     }
 }

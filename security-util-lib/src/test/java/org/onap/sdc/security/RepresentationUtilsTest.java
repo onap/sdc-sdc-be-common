@@ -20,35 +20,36 @@
 
 package org.onap.sdc.security;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
-
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Test;
 
 public class RepresentationUtilsTest {
 
-    private static AuthenticationCookie originalCookie = new AuthenticationCookie("kuku");
+    private static final AuthenticationCookie originalCookie = new AuthenticationCookie("kuku");
 
     @Test
     public void representationE2EwithRoleNull() throws IOException {
         originalCookie.setRoles(null);
         String jsonStr = RepresentationUtils.toRepresentation(originalCookie);
-        AuthenticationCookie cookieFromJson = RepresentationUtils.fromRepresentation(jsonStr, AuthenticationCookie.class);
-        assertTrue(originalCookie.equals(cookieFromJson));
+        AuthenticationCookie cookieFromJson = RepresentationUtils
+            .fromRepresentation(jsonStr, AuthenticationCookie.class);
+        assertEquals(originalCookie, cookieFromJson);
     }
 
     @Test
     public void representationE2EwithRoleNotNull() throws IOException {
-        Set<String> roles = new HashSet<String>();
+        Set<String> roles = new HashSet<>();
         roles.add("Designer");
         roles.add("Admin");
         roles.add("Tester");
         originalCookie.setRoles(roles);
         String jsonStr = RepresentationUtils.toRepresentation(originalCookie);
-        AuthenticationCookie cookieFromJson = RepresentationUtils.fromRepresentation(jsonStr, AuthenticationCookie.class);
-        assertTrue(originalCookie.equals(cookieFromJson));
+        AuthenticationCookie cookieFromJson = RepresentationUtils
+            .fromRepresentation(jsonStr, AuthenticationCookie.class);
+        assertEquals(originalCookie, cookieFromJson);
     }
 }

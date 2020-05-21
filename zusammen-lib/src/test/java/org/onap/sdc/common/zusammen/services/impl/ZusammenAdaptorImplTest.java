@@ -21,6 +21,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
@@ -37,12 +38,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.onap.sdc.common.zusammen.persistence.ZusammenConnector;
 
@@ -52,17 +53,16 @@ public class ZusammenAdaptorImplTest {
     private static final ElementContext ELEMENT_CONTEXT = new ElementContext();
     private static final Id ELEMENT_ID = new Id("elementId 0");
     private static final List<ElementInfo> ELEMENTS =
-            Arrays.asList(createElementInfo("elementId1", "element1"), createElementInfo("elementId2", "element2"),
-                    createElementInfo("elementId3", "element3"));
+        Arrays.asList(createElementInfo("elementId1", "element1"), createElementInfo("elementId2", "element2"),
+            createElementInfo("elementId3", "element3"));
 
-    @Mock
-    private ZusammenConnector connector;
+    private final ZusammenConnector connector = Mockito.mock(ZusammenConnector.class);
     @InjectMocks
     private ZusammenAdaptorImpl zusammenAdaptor;
     @Captor
     private ArgumentCaptor<Element> savedElementArg;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
@@ -72,7 +72,7 @@ public class ZusammenAdaptorImplTest {
         doReturn(ELEMENTS).when(connector).listElements(CONTEXT, ELEMENT_CONTEXT, ELEMENT_ID);
 
         Optional<Element> element =
-                zusammenAdaptor.getElementByName(CONTEXT, ELEMENT_CONTEXT, ELEMENT_ID, "nonExistingName");
+            zusammenAdaptor.getElementByName(CONTEXT, ELEMENT_CONTEXT, ELEMENT_ID, "nonExistingName");
 
         assertFalse(element.isPresent());
     }
@@ -82,7 +82,7 @@ public class ZusammenAdaptorImplTest {
         doReturn(ELEMENTS).when(connector).listElements(CONTEXT, ELEMENT_CONTEXT, ELEMENT_ID);
 
         Optional<ElementInfo> elementInfo =
-                zusammenAdaptor.getElementInfoByName(CONTEXT, ELEMENT_CONTEXT, ELEMENT_ID, "nonExistingName");
+            zusammenAdaptor.getElementInfoByName(CONTEXT, ELEMENT_CONTEXT, ELEMENT_ID, "nonExistingName");
 
         assertFalse(elementInfo.isPresent());
     }
@@ -104,7 +104,7 @@ public class ZusammenAdaptorImplTest {
         doReturn(ELEMENTS).when(connector).listElements(CONTEXT, ELEMENT_CONTEXT, ELEMENT_ID);
 
         Optional<ElementInfo> elementInfo =
-                zusammenAdaptor.getElementInfoByName(CONTEXT, ELEMENT_CONTEXT, ELEMENT_ID, "element2");
+            zusammenAdaptor.getElementInfoByName(CONTEXT, ELEMENT_CONTEXT, ELEMENT_ID, "element2");
 
         assertTrue(elementInfo.isPresent());
         assertEquals(ELEMENTS.get(1), elementInfo.get());
@@ -116,7 +116,7 @@ public class ZusammenAdaptorImplTest {
         doReturn(ELEMENTS).when(connector).listElements(CONTEXT, ELEMENT_CONTEXT, ELEMENT_ID);
 
         List<ZusammenElement> returnedElements =
-                Arrays.asList(new ZusammenElement(), new ZusammenElement(), new ZusammenElement());
+            Arrays.asList(new ZusammenElement(), new ZusammenElement(), new ZusammenElement());
         doReturn(returnedElements.get(0)).when(connector).getElement(CONTEXT, ELEMENT_CONTEXT, ELEMENTS.get(0).getId());
         doReturn(returnedElements.get(1)).when(connector).getElement(CONTEXT, ELEMENT_CONTEXT, ELEMENTS.get(1).getId());
         doReturn(returnedElements.get(2)).when(connector).getElement(CONTEXT, ELEMENT_CONTEXT, ELEMENTS.get(2).getId());
@@ -131,7 +131,7 @@ public class ZusammenAdaptorImplTest {
         doReturn(ELEMENTS).when(connector).listElements(CONTEXT, ELEMENT_CONTEXT, ELEMENT_ID);
 
         Collection<ElementInfo> elements =
-                zusammenAdaptor.listElementsByName(CONTEXT, ELEMENT_CONTEXT, ELEMENT_ID, "nonExistingName");
+            zusammenAdaptor.listElementsByName(CONTEXT, ELEMENT_CONTEXT, ELEMENT_ID, "nonExistingName");
 
         assertTrue(elements.isEmpty());
     }
@@ -144,14 +144,17 @@ public class ZusammenAdaptorImplTest {
         doReturn(returnedElements).when(connector).listElements(CONTEXT, ELEMENT_CONTEXT, ELEMENTS.get(1).getId());
 
         Collection<ElementInfo> elements =
-                zusammenAdaptor.listElementsByName(CONTEXT, ELEMENT_CONTEXT, ELEMENT_ID, "element2");
+            zusammenAdaptor.listElementsByName(CONTEXT, ELEMENT_CONTEXT, ELEMENT_ID, "element2");
 
         assertEquals(returnedElements, elements);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void failWhenSavingElementWithoutIdNameOrAction() {
-        zusammenAdaptor.saveElement(CONTEXT, ELEMENT_CONTEXT, new ZusammenElement(), "Illegal element save");
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> zusammenAdaptor.saveElement(CONTEXT, ELEMENT_CONTEXT, new ZusammenElement(), "Illegal element save")
+        );
     }
 
     @Test

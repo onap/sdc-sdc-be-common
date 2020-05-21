@@ -32,6 +32,8 @@ import java.util.Properties;
 
 public class RestUtils {
 
+    private RestUtils() {}
+
     public static void addBasicAuthHeader(Properties headers, String username, String password) {
         headers.setProperty(HttpHeaders.AUTHORIZATION, getAuthHeaderValue(username,password));
     }
@@ -49,7 +51,7 @@ public class RestUtils {
     @VisibleForTesting
     public static String decryptPassword(String password) {
         validate(password);
-        Either<String, String> passkey = SecurityUtil.INSTANCE.decrypt(password);
+        Either<String, String> passkey = SecurityUtil.decrypt(password);
         if(passkey.isLeft()) {
             return passkey.left().value();
         }

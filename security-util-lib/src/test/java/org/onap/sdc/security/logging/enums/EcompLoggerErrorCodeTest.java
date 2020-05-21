@@ -24,7 +24,7 @@
 package org.onap.sdc.security.logging.enums;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class EcompLoggerErrorCodeTest {
 
@@ -32,19 +32,19 @@ public class EcompLoggerErrorCodeTest {
     public void getByValueTest() {
 
         EcompLoggerErrorCode ecompLoggerErrorCode = EcompLoggerErrorCode.getByValue("E_0");
-        Assert.assertEquals(ecompLoggerErrorCode.getErrorCode(), 0);
+        Assert.assertEquals(0, ecompLoggerErrorCode.getErrorCode());
         ecompLoggerErrorCode = EcompLoggerErrorCode.getByValue("E_100");
-        Assert.assertEquals(ecompLoggerErrorCode.getErrorCode(), 100);
+        Assert.assertEquals(100, ecompLoggerErrorCode.getErrorCode());
         ecompLoggerErrorCode = EcompLoggerErrorCode.getByValue("E_200");
-        Assert.assertEquals(ecompLoggerErrorCode.getErrorCode(), 200);
+        Assert.assertEquals(200, ecompLoggerErrorCode.getErrorCode());
         ecompLoggerErrorCode = EcompLoggerErrorCode.getByValue("E_300");
-        Assert.assertEquals(ecompLoggerErrorCode.getErrorCode(), 300);
+        Assert.assertEquals(300, ecompLoggerErrorCode.getErrorCode());
         ecompLoggerErrorCode = EcompLoggerErrorCode.getByValue("E_400");
-        Assert.assertEquals(ecompLoggerErrorCode.getErrorCode(), 400);
+        Assert.assertEquals(400, ecompLoggerErrorCode.getErrorCode());
         ecompLoggerErrorCode = EcompLoggerErrorCode.getByValue("E_500");
-        Assert.assertEquals(ecompLoggerErrorCode.getErrorCode(), 500);
+        Assert.assertEquals(500, ecompLoggerErrorCode.getErrorCode());
         ecompLoggerErrorCode = EcompLoggerErrorCode.getByValue("none");
-        Assert.assertEquals(ecompLoggerErrorCode.getErrorCode(), 900);
+        Assert.assertEquals(900, ecompLoggerErrorCode.getErrorCode());
 
     }
 

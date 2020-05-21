@@ -14,22 +14,6 @@
  */
 package org.onap.sdc.security.logging.wrappers;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.onap.logging.ref.slf4j.ONAPLogConstants;
-import org.onap.sdc.security.logging.enums.LogLevel;
-import org.onap.sdc.security.logging.enums.Severity;
-import org.slf4j.MDC;
-import org.slf4j.Marker;
-import org.slf4j.MarkerFactory;
-
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -41,18 +25,34 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.onap.logging.ref.slf4j.ONAPLogConstants;
+import org.onap.sdc.security.logging.enums.LogLevel;
+import org.onap.sdc.security.logging.enums.Severity;
+import org.slf4j.MDC;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
+
 public class LoggerSdcAuditTest {
+
     LoggerSdcAudit spy;
     private Marker marker;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         LoggerSdcAudit audit = new LoggerSdcAudit(this.getClass());
         spy = spy(audit);
         marker = MarkerFactory.getMarker(ONAPLogConstants.Markers.ENTRY.getName());
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         MDC.clear();
     }
@@ -106,7 +106,7 @@ public class LoggerSdcAuditTest {
         spy.logExit("172.0.0.0", mockContext, mockStatus, LogLevel.INFO, Severity.WARNING, "MockMessage", marker);
         assertEquals("false", MDC.get("auditOn"));
         verify(spy, times(1)).logExit(anyString(), any(ContainerRequestContext.class), any(Response.StatusType.class)
-                , any(LogLevel.class), any(Severity.class), anyString(), any(Marker.class));
+            , any(LogLevel.class), any(Severity.class), anyString(), any(Marker.class));
     }
 
     @Test
@@ -124,7 +124,7 @@ public class LoggerSdcAuditTest {
         spy.logEntry("172.0.0.0", mockContext, LogLevel.INFO, Severity.WARNING, "MockMessage", marker);
         assertEquals("false", MDC.get("auditOn"));
         verify(spy, times(1)).logEntry(anyString(), any(ContainerRequestContext.class)
-                , any(LogLevel.class), any(Severity.class), anyString(), any(Marker.class));
+            , any(LogLevel.class), any(Severity.class), anyString(), any(Marker.class));
     }
 
     @Test
@@ -132,6 +132,6 @@ public class LoggerSdcAuditTest {
         spy.logEntry(LogLevel.INFO, Severity.WARNING, "MockMessage", marker, "RequestID");
         assertEquals("false", MDC.get("auditOn"));
         verify(spy, times(1))
-                .logEntry(any(LogLevel.class), any(Severity.class), anyString(), any(Marker.class), anyString());
+            .logEntry(any(LogLevel.class), any(Severity.class), anyString(), any(Marker.class), anyString());
     }
 }
