@@ -21,25 +21,24 @@
  */
 package org.onap.sdc.security.logging.enums;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class LoggerSupportabilityActionsTest {
 
     @Test
     public void testGetName() {
-        assertEquals(LoggerSupportabilityActions.ARCHIVE.getName(), "ARCHIVE");
-        assertEquals(LoggerSupportabilityActions.ASSOCIATE_RI_TO_RI.getName(),
-            "ASSOCIATE RI TO RI");
-        assertEquals(LoggerSupportabilityActions.CHANGELIFECYCLESTATE.getName(),
-            "CHANGE LIFECYCLE STATE");
-        assertEquals(LoggerSupportabilityActions.CREATE_ARTIFACTS.getName(), "ADD ARTIFACTS");
-        assertEquals(LoggerSupportabilityActions.CREATE_CAPABILITY_REQUIREMENTS.getName(),
-            "CREATE CAPABILITY REQUIREMENTS");
-        assertEquals(LoggerSupportabilityActions.CREATE_GROUP_POLICY.getName(), "ADD GROUP POLICY");
-        assertEquals(LoggerSupportabilityActions.CREATE_GROUPS.getName(), "ADD GROUPS");
-
+        assertEquals("ARCHIVE", LoggerSupportabilityActions.ARCHIVE.getName());
+        assertEquals("ASSOCIATE RI TO RI",
+            LoggerSupportabilityActions.ASSOCIATE_RI_TO_RI.getName());
+        assertEquals("CHANGE LIFECYCLE STATE",
+            LoggerSupportabilityActions.CHANGELIFECYCLESTATE.getName());
+        assertEquals("ADD ARTIFACTS", LoggerSupportabilityActions.CREATE_ARTIFACTS.getName());
+        assertEquals("CREATE CAPABILITY REQUIREMENTS",
+            LoggerSupportabilityActions.CREATE_CAPABILITY_REQUIREMENTS.getName());
+        assertEquals("ADD GROUP POLICY", LoggerSupportabilityActions.CREATE_GROUP_POLICY.getName());
+        assertEquals("ADD GROUPS", LoggerSupportabilityActions.CREATE_GROUPS.getName());
 
 
     }

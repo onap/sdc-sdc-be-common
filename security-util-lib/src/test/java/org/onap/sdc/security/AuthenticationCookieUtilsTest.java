@@ -20,29 +20,32 @@
 
 package org.onap.sdc.security;
 
-import org.junit.Test;
-import org.onap.sdc.security.filters.SampleFilter;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import javax.servlet.http.Cookie;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-
-import static org.junit.Assert.assertTrue;
+import javax.servlet.http.Cookie;
+import org.junit.jupiter.api.Test;
+import org.onap.sdc.security.filters.SampleFilter;
 
 public class AuthenticationCookieUtilsTest {
 
-    private SampleFilter sessionValidationFilter = new SampleFilter();
-    private ISessionValidationFilterConfiguration filterCfg = sessionValidationFilter.getFilterConfiguration();
+    private final SampleFilter sessionValidationFilter = new SampleFilter();
+    private final ISessionValidationFilterConfiguration filterCfg = sessionValidationFilter.getFilterConfiguration();
 
     @Test
-    public void validateThatCookieCurrentSessionTimeIncreased() throws IOException, CipherUtilException, InterruptedException {
+    public void validateThatCookieCurrentSessionTimeIncreased()
+        throws IOException, CipherUtilException, InterruptedException {
         // original cookie, pojo and servlet cookie
         AuthenticationCookie authenticationCookieOriginal = new AuthenticationCookie("kuku");
-        Cookie cookieWithOriginalTime = new Cookie(filterCfg.getCookieName(), AuthenticationCookieUtils.getEncryptedCookie(authenticationCookieOriginal,filterCfg ));
+        Cookie cookieWithOriginalTime = new Cookie(filterCfg.getCookieName(),
+            AuthenticationCookieUtils.getEncryptedCookie(authenticationCookieOriginal, filterCfg));
         // cookie with increased time, pojo and servlet cookie
         TimeUnit.SECONDS.sleep(1);
         Cookie cookieWithIncreasedTime = AuthenticationCookieUtils.updateSessionTime(cookieWithOriginalTime, filterCfg);
-        AuthenticationCookie authenticationCookieIncreasedTime = AuthenticationCookieUtils.getAuthenticationCookie(cookieWithIncreasedTime, filterCfg);
+        AuthenticationCookie authenticationCookieIncreasedTime = AuthenticationCookieUtils
+            .getAuthenticationCookie(cookieWithIncreasedTime, filterCfg);
         // validation
         long currentSessionTimeOriginal = authenticationCookieOriginal.getCurrentSessionTime();
         long currentSessionTimeIncreased = authenticationCookieIncreasedTime.getCurrentSessionTime();
@@ -53,23 +56,11 @@ public class AuthenticationCookieUtilsTest {
     public void validateSerializationEncriptionDeserializationDecryption() throws IOException, CipherUtilException {
         // original cookie, pojo and servlet cookie
         AuthenticationCookie authenticationCookieOriginal = new AuthenticationCookie("kuku");
-        Cookie cookieWithOriginalTime = new Cookie(filterCfg.getCookieName(), AuthenticationCookieUtils.getEncryptedCookie(authenticationCookieOriginal,filterCfg ));
+        Cookie cookieWithOriginalTime = new Cookie(filterCfg.getCookieName(),
+            AuthenticationCookieUtils.getEncryptedCookie(authenticationCookieOriginal, filterCfg));
         // cookie with increased time, pojo and servlet cookie
-        AuthenticationCookie decriptedAndDeserializedAuthenticationCookie = AuthenticationCookieUtils.getAuthenticationCookie(cookieWithOriginalTime,filterCfg);
-        assertTrue(authenticationCookieOriginal.equals(decriptedAndDeserializedAuthenticationCookie));
+        AuthenticationCookie decriptedAndDeserializedAuthenticationCookie = AuthenticationCookieUtils
+            .getAuthenticationCookie(cookieWithOriginalTime, filterCfg);
+        assertEquals(authenticationCookieOriginal, decriptedAndDeserializedAuthenticationCookie);
     }
-
-
-
-//    @Test
-//    public void getEncryptedCookie() {
-//    }
-//
-//    @Test
-//    public void getAuthenticationCookie() {
-//    }
-//
-//    @Test
-//    public void isSessionExpired() {
-//    }
 }

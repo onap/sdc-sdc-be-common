@@ -14,24 +14,12 @@
  */
 package org.onap.sdc.security.logging.wrappers;
 
-import org.apache.commons.lang3.StringUtils;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mockito;
-import org.onap.sdc.security.logging.enums.EcompLoggerErrorCode;
-
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.core.UriInfo;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Arrays;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -40,10 +28,21 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Arrays;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.core.UriInfo;
+import org.apache.commons.lang3.StringUtils;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.onap.sdc.security.logging.enums.EcompLoggerErrorCode;
+
 public class LoggerSdcUtilBaseTest {
+
     private LoggerSdcUtilBase spy;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         LoggerSdcUtilBase loggerSdcUtilBase = new LoggerSdcUtilBase();
         spy = spy(loggerSdcUtilBase);
@@ -60,7 +59,7 @@ public class LoggerSdcUtilBaseTest {
 
     @Test
     public void convertHttpCodeToErrorCode() {
-        assertEquals( EcompLoggerErrorCode.SUCCESS ,spy.convertHttpCodeToErrorCode(398));
+        assertEquals(EcompLoggerErrorCode.SUCCESS, spy.convertHttpCodeToErrorCode(398));
         assertEquals(EcompLoggerErrorCode.SCHEMA_ERROR, spy.convertHttpCodeToErrorCode(409));
         assertEquals(EcompLoggerErrorCode.UNKNOWN_ERROR, spy.convertHttpCodeToErrorCode(421));
         assertEquals(EcompLoggerErrorCode.DATA_ERROR, spy.convertHttpCodeToErrorCode(415));

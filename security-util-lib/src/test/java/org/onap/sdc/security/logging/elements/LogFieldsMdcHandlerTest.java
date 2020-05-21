@@ -14,16 +14,6 @@
  */
 package org.onap.sdc.security.logging.elements;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.onap.logging.ref.slf4j.ONAPLogConstants;
-import org.onap.sdc.security.logging.api.ILogConfiguration;
-import org.onap.sdc.security.logging.enums.EcompHeadersConstants;
-import org.onap.sdc.security.logging.enums.Severity;
-import org.slf4j.MDC;
-
-import javax.servlet.http.HttpServletRequest;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -37,12 +27,22 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import javax.servlet.http.HttpServletRequest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.onap.logging.ref.slf4j.ONAPLogConstants;
+import org.onap.sdc.security.logging.api.ILogConfiguration;
+import org.onap.sdc.security.logging.enums.EcompHeadersConstants;
+import org.onap.sdc.security.logging.enums.Severity;
+import org.slf4j.MDC;
+
 public class LogFieldsMdcHandlerTest {
+
     LogFieldsMdcHandler instanceMdcWrapper;
     LogFieldsMdcHandler spy;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() {
         LogFieldsMdcHandler.hostAddress = "TestHost";
         LogFieldsMdcHandler.fqdn = "Test";
         instanceMdcWrapper = LogFieldsMdcHandler.getInstance();
@@ -144,7 +144,7 @@ public class LogFieldsMdcHandlerTest {
         spy.setAlertSeverity(Severity.CRITICAL);
         verify(spy, times(1)).setAlertSeverity(any(Severity.class));
         assertEquals(String.valueOf(Severity.CRITICAL.getSeverityType()),
-                MDC.get(ONAPLogConstants.MDCs.RESPONSE_SEVERITY));
+            MDC.get(ONAPLogConstants.MDCs.RESPONSE_SEVERITY));
     }
 
     @Test
@@ -441,7 +441,7 @@ public class LogFieldsMdcHandlerTest {
     public void collectRequestInfoForErrorAndDebugLogging() {
         HttpServletRequest httpRequest = mock(HttpServletRequest.class);
         when(httpRequest.getHeader(EcompHeadersConstants.X_ECOMP_SERVICE_ID_HEADER)).thenReturn(
-                "MockServiceInstanceID");
+            "MockServiceInstanceID");
         when(httpRequest.getHeader(EcompHeadersConstants.USER_ID_HEADER)).thenReturn("Mock_User");
         when(httpRequest.getRemoteHost()).thenReturn("Test_Host");
         when(httpRequest.getLocalAddr()).thenReturn("172.0.0.0");
@@ -450,12 +450,12 @@ public class LogFieldsMdcHandlerTest {
 
         spy.collectRequestInfoForErrorAndDebugLogging(httpRequest);
         verify(spy, times(1)).
-                collectRequestInfoForErrorAndDebugLogging(any(HttpServletRequest.class));
+            collectRequestInfoForErrorAndDebugLogging(any(HttpServletRequest.class));
         assertEquals("Test_Service", spy.getServiceName());
         assertEquals("Test_ID", spy.getKeyRequestId());
         assertEquals("Test_Host", spy.getRemoteHost());
         assertEquals("172.0.0.0", spy.getServerIpAddress());
-        assertEquals("MockServiceInstanceID", MDC.get(ILogConfiguration.MDC_SERVICE_INSTANCE_ID) );
+        assertEquals("MockServiceInstanceID", MDC.get(ILogConfiguration.MDC_SERVICE_INSTANCE_ID));
         assertEquals("Mock_User", spy.getPartnerName());
     }
 

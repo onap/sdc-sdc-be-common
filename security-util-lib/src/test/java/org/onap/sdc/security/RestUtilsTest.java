@@ -20,12 +20,15 @@
 
 package org.onap.sdc.security;
 
-import org.apache.http.HttpHeaders;
-import org.junit.Test;
-import org.onap.sdc.security.utils.RestUtils;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Properties;
+import org.apache.http.HttpHeaders;
+import org.junit.jupiter.api.Test;
+import org.onap.sdc.security.utils.RestUtils;
 
 
 public class RestUtilsTest {
@@ -33,8 +36,8 @@ public class RestUtilsTest {
     @Test
     public void addBasicAuthHeaderTest() {
         Properties headers = new Properties();
-        String encryptedPassword = SecurityUtil.INSTANCE.encrypt("password").left().value();
-        RestUtils.addBasicAuthHeader(headers, "userName",encryptedPassword);
+        String encryptedPassword = SecurityUtil.encrypt("password").left().value();
+        RestUtils.addBasicAuthHeader(headers, "userName", encryptedPassword);
         String authHeader = headers.getProperty(HttpHeaders.AUTHORIZATION);
         assertNotNull(authHeader);
         assertTrue(authHeader.startsWith("Basic"));
@@ -43,18 +46,24 @@ public class RestUtilsTest {
     @Test
     public void decryptPasswordSuccessTest() {
         String decryptedPassword = "password";
-        String encryptedPassword = SecurityUtil.INSTANCE.encrypt(decryptedPassword).left().value();
+        String encryptedPassword = SecurityUtil.encrypt(decryptedPassword).left().value();
         String resultPassword = RestUtils.decryptPassword(encryptedPassword);
         assertEquals(decryptedPassword, resultPassword);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void decryptEmptyPasswordTest() {
-        RestUtils.decryptPassword("");
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> RestUtils.decryptPassword("")
+        );
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void decryptInvalidPasswordTest() {
-        RestUtils.decryptPassword("enc:9aS3AHtN_pR8QUGu-LPzHC7L8HO43WqOFx2s6nvrYrS");
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> RestUtils.decryptPassword("enc:9aS3AHtN_pR8QUGu-LPzHC7L8HO43WqOFx2s6nvrYrS")
+        );
     }
 }

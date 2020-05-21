@@ -19,7 +19,7 @@ package org.onap.sdc.common.zusammen.persistence;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -52,33 +52,29 @@ import com.amdocs.zusammen.datatypes.response.ReturnCode;
 import com.google.common.collect.ImmutableList;
 import java.util.Collection;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.onap.sdc.common.zusammen.persistence.impl.ZusammenConnectorImpl;
 
-@RunWith(MockitoJUnitRunner.class)
 public class ZusammenConnectorTest {
 
-    @Mock
-    private ItemAdaptorFactory itemAdaptorFactoryMock;
-    @Mock
-    private ItemVersionAdaptorFactory versionAdaptorFactoryMock;
-    @Mock
-    private ElementAdaptorFactory elementAdaptorFactoryMock;
-    @Mock
-    private HealthAdaptorFactory healthAdaptorFactoryMock;
-    private ZusammenConnector zusammenConnector;
-    @Mock
-    private SessionContext sessionContext;
+    private final ItemAdaptorFactory itemAdaptorFactoryMock = Mockito.mock(ItemAdaptorFactory.class);
 
-    @Before
+    private final ItemVersionAdaptorFactory versionAdaptorFactoryMock = Mockito.mock(ItemVersionAdaptorFactory.class);
+
+    private final ElementAdaptorFactory elementAdaptorFactoryMock = Mockito.mock(ElementAdaptorFactory.class);
+
+    private final HealthAdaptorFactory healthAdaptorFactoryMock = Mockito.mock(HealthAdaptorFactory.class);
+    private ZusammenConnector zusammenConnector;
+
+    private final SessionContext sessionContext = Mockito.mock(SessionContext.class);
+
+    @BeforeEach
     public void init() {
         zusammenConnector =
-                new ZusammenConnectorImpl(itemAdaptorFactoryMock, versionAdaptorFactoryMock, elementAdaptorFactoryMock,
-                        healthAdaptorFactoryMock);
+            new ZusammenConnectorImpl(itemAdaptorFactoryMock, versionAdaptorFactoryMock, elementAdaptorFactoryMock,
+                healthAdaptorFactoryMock);
 
     }
 
@@ -115,7 +111,7 @@ public class ZusammenConnectorTest {
         assertEquals(items.size(), itemList.size());
     }
 
-    @Test(expected = org.onap.sdc.common.zusammen.services.exceptions.ZusammenException.class)
+    @Test
     public void checkListItemFailure() {
         ItemAdaptor itemAdaptor = mock(ItemAdaptor.class);
         when(itemAdaptorFactoryMock.createInterface(sessionContext)).thenReturn(itemAdaptor);
@@ -123,8 +119,10 @@ public class ZusammenConnectorTest {
         Response<Collection<Item>> response = new Response<>(items);
         setResponseErrorReturnCode(response);
         when(itemAdaptor.list(sessionContext)).thenReturn(response);
-        zusammenConnector.listItems(sessionContext);
-        fail("Should never get here");
+        assertThrows(
+            org.onap.sdc.common.zusammen.services.exceptions.ZusammenException.class,
+            () -> zusammenConnector.listItems(sessionContext)
+        );
     }
 
     @Test
@@ -140,7 +138,7 @@ public class ZusammenConnectorTest {
         assertEquals(idStr, retId.getValue());
     }
 
-    @Test(expected = org.onap.sdc.common.zusammen.services.exceptions.ZusammenException.class)
+    @Test
     public void testCreateItemFailure() {
         ItemAdaptor itemAdaptor = mock(ItemAdaptor.class);
         when(itemAdaptorFactoryMock.createInterface(sessionContext)).thenReturn(itemAdaptor);
@@ -150,10 +148,11 @@ public class ZusammenConnectorTest {
         setResponseErrorReturnCode(response);
         Info info = new Info();
         when(itemAdaptor.create(sessionContext, info)).thenReturn(response);
-        zusammenConnector.createItem(sessionContext, info);
-
+        assertThrows(
+            org.onap.sdc.common.zusammen.services.exceptions.ZusammenException.class,
+            () -> zusammenConnector.createItem(sessionContext, info)
+        );
     }
-
 
     @Test
     public void testDeleteItem() {
@@ -284,7 +283,6 @@ public class ZusammenConnectorTest {
         Response<ItemVersion> response = new Response<>(null);
         response.setValue(itemVersion);
         when(itemAdaptor.get(sessionContext, Space.PRIVATE, id, id)).thenReturn(response);
-        ItemVersion version = zusammenConnector.getVersion(sessionContext, id, id);
         assertEquals(id.getValue(), itemVersion.getId().getValue());
     }
 

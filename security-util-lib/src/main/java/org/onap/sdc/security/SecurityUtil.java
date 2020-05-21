@@ -46,7 +46,6 @@ public class SecurityUtil {
 
     private static final Logger LOG = Logger.getLogger(SecurityUtil.class);
 
-    public static final SecurityUtil INSTANCE = new SecurityUtil();
     public static final String ALGORITHM = "AES";
     public static final String CHARSET = UTF_8.name();
 
@@ -69,7 +68,7 @@ public class SecurityUtil {
     }
 
     // obfuscates key prefix -> **********
-    public String obfuscateKey(String sensitiveData) {
+    public static String obfuscateKey(String sensitiveData) {
 
         if (sensitiveData == null) {
             return null;
@@ -176,7 +175,7 @@ public class SecurityUtil {
         return Either.right("Decrypt FAILED");
     }
 
-    public Either<String, String> decrypt(String byteCipherText) {
+    public static Either<String, String> decrypt(String byteCipherText) {
         try {
             return decrypt(byteCipherText.getBytes(CHARSET), true);
         } catch (UnsupportedEncodingException e) {
