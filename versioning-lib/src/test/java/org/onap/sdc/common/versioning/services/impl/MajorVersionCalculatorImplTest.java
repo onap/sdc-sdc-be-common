@@ -16,18 +16,19 @@
 
 package org.onap.sdc.common.versioning.services.impl;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.onap.sdc.common.versioning.services.types.VersionCreationMethod;
-
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.onap.sdc.common.versioning.services.types.VersionCreationMethod;
 
 public class MajorVersionCalculatorImplTest {
 
     private MajorVersionCalculatorImpl calculator;
     private static final String INITIAL_VERSION = "1.0";
 
-    @Before
+    @BeforeEach
     public void init() {
         calculator = new MajorVersionCalculatorImpl();
     }
@@ -35,7 +36,7 @@ public class MajorVersionCalculatorImplTest {
     @Test
     public void calculateInitialVersionWithNullAndMajor() {
         String expectedInitialVersion = calculator.calculate(null, VersionCreationMethod.major);
-        assertEquals(expectedInitialVersion, INITIAL_VERSION);
+        assertEquals(INITIAL_VERSION, expectedInitialVersion);
     }
 
     @Test
@@ -91,10 +92,13 @@ public class MajorVersionCalculatorImplTest {
         assertEquals(expectedValue, actualValue);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void calculateException() {
         String initialValue = "1";
-        calculator.calculate(initialValue, VersionCreationMethod.minor);
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> calculator.calculate(initialValue, VersionCreationMethod.minor)
+        );
     }
 
 }

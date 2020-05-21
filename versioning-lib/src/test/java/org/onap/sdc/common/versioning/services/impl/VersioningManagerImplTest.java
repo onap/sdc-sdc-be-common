@@ -19,33 +19,33 @@ package org.onap.sdc.common.versioning.services.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import com.google.common.collect.ImmutableList;
 import java.util.List;
 import java.util.Optional;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.onap.sdc.common.versioning.persistence.ItemDao;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.onap.sdc.common.versioning.persistence.VersionDao;
 import org.onap.sdc.common.versioning.persistence.types.InternalVersion;
-import org.onap.sdc.common.versioning.services.VersioningManager;
 import org.onap.sdc.common.versioning.services.types.Version;
 
-@RunWith(MockitoJUnitRunner.class)
 public class VersioningManagerImplTest {
 
-    @Mock
-    private ItemDao itemDao;
-    @Mock
-    private VersionDao versionDao;
-    @Mock
-    private VersionCalculator versionCalculator;
+    private final VersionDao versionDao = Mockito.mock(VersionDao.class);
+
+    private final VersionCalculator versionCalculator = Mockito.mock(VersionCalculator.class);
     @InjectMocks
     private VersioningManagerImpl versioningManager;
+
+    @BeforeEach
+    public void mockSessionContext() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testList() {
@@ -70,11 +70,14 @@ public class VersioningManagerImplTest {
         assertEquals(blaBla, version.getId());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testGetVersionEmpty() {
         String blaBla = "blaBla";
         when(versionDao.get(blaBla, blaBla)).thenReturn(Optional.empty());
-        Version version = versioningManager.get(blaBla, blaBla);
+        assertThrows(
+            IllegalStateException.class,
+            () -> versioningManager.get(blaBla, blaBla)
+        );
     }
 
     @Test

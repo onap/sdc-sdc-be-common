@@ -22,18 +22,18 @@
 
 package org.onap.sdc.security.logging.enums;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class SeverityTest {
 
     @Test
     public void testGetSeverityType() {
-        assertEquals(Severity.OK.getSeverityType(), 0);
-        assertEquals(Severity.WARNING.getSeverityType(), 1);
-        assertEquals(Severity.CRITICAL.getSeverityType(), 2);
-        assertEquals(Severity.DOWN.getSeverityType(), 3);
-        assertEquals(Severity.UNREACHABLE.getSeverityType(), 4);
+        assertEquals(0, Severity.OK.getSeverityType());
+        assertEquals(1, Severity.WARNING.getSeverityType());
+        assertEquals(2, Severity.CRITICAL.getSeverityType());
+        assertEquals(3, Severity.DOWN.getSeverityType());
+        assertEquals(4, Severity.UNREACHABLE.getSeverityType());
     }
 }

@@ -21,6 +21,7 @@ import static org.onap.sdc.common.versioning.services.types.VersionStatus.Certif
 import static org.onap.sdc.common.versioning.services.types.VersionStatus.Draft;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.onap.sdc.common.versioning.persistence.ItemDao;
@@ -39,8 +40,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class VersioningManagerImpl implements VersioningManager {
-
-    //private static final Logger LOGGER = LoggerFactory.getLogger(VersioningManagerImpl.class);
 
     private final ItemDao itemDao;
     private final VersionDao versionDao;
@@ -107,8 +106,8 @@ public class VersioningManagerImpl implements VersioningManager {
         VersionStatus prevStatus = version.getStatus();
         if (prevStatus == status) {
             throw new VersioningException(
-                    String.format("Item %s: update version status failed, version %s is already in status %s", itemId,
-                            version.getId(), status));
+                String.format("Item %s: update version status failed, version %s is already in status %s", itemId,
+                    version.getId(), status));
         }
 
         version.setStatus(status);
@@ -151,45 +150,43 @@ public class VersioningManagerImpl implements VersioningManager {
 
     private InternalVersion getVersion(String itemId, String versionId) {
         return versionDao.get(itemId, versionId)
-                       .map(retrievedVersion -> getUpdateRetrievedVersion(itemId, retrievedVersion))
-                       .orElseGet(() -> getSyncedVersion(itemId, versionId));
+            .map(retrievedVersion -> getUpdateRetrievedVersion(itemId, retrievedVersion))
+            .orElseGet(() -> getSyncedVersion(itemId, versionId));
     }
 
     private InternalVersion getUpdateRetrievedVersion(String itemId, InternalVersion version) {
         if (version.getStatus() == Certified
-                    && version.getState().getSynchronizationState() == SynchronizationState.OutOfSync) {
+            && version.getState().getSynchronizationState() == SynchronizationState.OutOfSync) {
             forceSync(itemId, version.getId());
-            //LOGGER.info("Item Id {}, version Id {}: Force sync is done", itemId, version.getId());
             version = versionDao.get(itemId, version.getId()).orElseThrow(() -> new IllegalStateException(
-                    "Get version after a successful force sync must return the version"));
+                "Get version after a successful force sync must return the version"));
         }
         return version;
     }
 
     private InternalVersion getSyncedVersion(String itemId, String versionId) {
         sync(itemId, versionId);
-        //LOGGER.info("Item Id {}, version Id {}: First time sync is done", itemId, version.getId());
         return versionDao.get(itemId, versionId).orElseThrow(
-                () -> new IllegalStateException("Get version after a successful sync must return the version"));
+            () -> new IllegalStateException("Get version after a successful sync must return the version"));
     }
 
     private void validateBaseVersion(String itemId, Version baseVersion) {
         if (Certified != baseVersion.getStatus()) {
             throw new VersioningException(
-                    String.format("Item %s: base version %s must be Certified", itemId, baseVersion.getId()));
+                String.format("Item %s: base version %s must be Certified", itemId, baseVersion.getId()));
         }
     }
 
     private void validateVersionName(String itemId, String versionName) {
         if (versionDao.list(itemId).stream().anyMatch(version -> versionName.equals(version.getName()))) {
             throw new VersioningException(
-                    String.format("Item %s: create version failed, a version with the name %s already exist", itemId,
-                            versionName));
+                String.format("Item %s: create version failed, a version with the name %s already exist", itemId,
+                    versionName));
         }
     }
 
     private void updateStatusOnItem(String itemId, VersionStatus addedVersionStatus,
-            VersionStatus removedVersionStatus) {
+        VersionStatus removedVersionStatus) {
         InternalItem item = itemDao.get(itemId);
         if (item == null) {
             throw new VersioningException(String.format("Item with Id %s does not exist", itemId));

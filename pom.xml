@@ -40,7 +40,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <mockito.version>2.23.4</mockito.version>
-        <junit.version>4.12</junit.version>
+        <junit.jupiter.version>5.6.2</junit.jupiter.version>
         <logging-slf4j.version>1.5.0</logging-slf4j.version>
         <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
         <snapshots.path>snapshots</snapshots.path>
@@ -102,9 +102,9 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
