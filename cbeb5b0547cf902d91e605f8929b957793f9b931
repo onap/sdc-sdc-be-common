@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30934edd_9b9e6a26",
+        "filename": "pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 6146
+      },
+      "writtenOn": "2020-05-27T11:55:21Z",
+      "side": 1,
+      "message": "Hey, currently junit jupiter version in main repo is 5.6.0.\nI think it will be better to keep versions the same.\n\nThanks.",
+      "revId": "cbeb5b0547cf902d91e605f8929b957793f9b931",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6449d5de_7afdad3d",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/filters/RestrictionAccessFilterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 6146
+      },
+      "writtenOn": "2020-05-27T11:55:21Z",
+      "side": 1,
+      "message": "I recommend you to use Junit5 feature called @DisplayName.\nYou can choose what will be the name of the test in case the name is very long, like the test methods on this class.\nIt will be nicer.\n\nExample:\n@Test\n@DsiplayName(\"Authorize User On Session Expiration When Users Different\")\n\ncheck it out 😊",
+      "revId": "cbeb5b0547cf902d91e605f8929b957793f9b931",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
