@@ -70,7 +70,7 @@ public class CipherUtilTest {
             CipherUtil.decryptPKC(DATA, KEY);
           fail();
        } catch (CipherUtilException ex) {
-          assertTrue(ex.getMessage().contains("Wrong IV length"));
+          assertTrue(ex.getMessage().contains("Input too short"));
         }
     }
 }
