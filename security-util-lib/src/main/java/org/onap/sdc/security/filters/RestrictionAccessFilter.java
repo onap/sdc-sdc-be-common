@@ -20,32 +20,40 @@
 
 package org.onap.sdc.security.filters;
 
-import com.google.common.annotations.VisibleForTesting;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.onap.sdc.security.*;
-import org.onap.sdc.security.logging.wrappers.*;
-import org.onap.sdc.security.logging.elements.*;
-import org.onap.sdc.security.logging.enums.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import static org.onap.sdc.security.utils.SecurityLogsUtils.PORTAL_TARGET_ENTITY;
+import static org.onap.sdc.security.utils.SecurityLogsUtils.fullOptionalData;
 
+import com.google.common.annotations.VisibleForTesting;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import static org.onap.sdc.security.utils.SecurityLogsUtils.PORTAL_TARGET_ENTITY;
-import static org.onap.sdc.security.utils.SecurityLogsUtils.fullOptionalData;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.onap.sdc.security.AuthenticationCookie;
+import org.onap.sdc.security.CipherUtil;
+import org.onap.sdc.security.CipherUtilException;
+import org.onap.sdc.security.ISessionValidationFilterConfiguration;
+import org.onap.sdc.security.IUsersThreadLocalHolder;
+import org.onap.sdc.security.PortalClient;
+import org.onap.sdc.security.RedirectException;
+import org.onap.sdc.security.RepresentationUtils;
+import org.onap.sdc.security.RestrictionAccessFilterException;
+import org.onap.sdc.security.logging.elements.LogFieldsMdcHandler;
+import org.onap.sdc.security.logging.enums.EcompLoggerErrorCode;
+import org.onap.sdc.security.logging.wrappers.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component("restrictionAccessFilter")
 public class RestrictionAccessFilter extends SessionValidationFilter {
@@ -63,7 +71,7 @@ public class RestrictionAccessFilter extends SessionValidationFilter {
 
     @Autowired
     public RestrictionAccessFilter(ISessionValidationFilterConfiguration configuration,
-                                   IUsersThreadLocalHolder threadLocalUtils,PortalClient portalClient) {
+        IUsersThreadLocalHolder threadLocalUtils, PortalClient portalClient) {
         this.filterConfiguration = configuration;
         this.threadLocalUtils = threadLocalUtils;
         this.portalClient = portalClient;
@@ -72,8 +80,8 @@ public class RestrictionAccessFilter extends SessionValidationFilter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
-            throws IOException, ServletException {
-        super.doFilter(servletRequest, servletResponse,filterChain);
+        throws IOException, ServletException {
+        super.doFilter(servletRequest, servletResponse, filterChain);
     }
 
     @Override
@@ -85,23 +93,27 @@ public class RestrictionAccessFilter extends SessionValidationFilter {
             authenticationCookie = getAuthenticationCookie(cookie);
             if (!CollectionUtils.isEmpty(authenticationCookie.getRoles())) {
                 log.debug("Cookie already contains a role in its set of roles authenticationCookie Roles: {}",
-                        authenticationCookie.getRoles());
+                    authenticationCookie.getRoles());
                 threadLocalUtils.setUserContext(authenticationCookie);
                 return cookie;
             }
-            String fetchedRole = portalClient.fetchUserRolesFromPortal(authenticationCookie.getUserID());
+            Optional<String> fetchedRole = portalClient.fetchUserRolesFromPortal(authenticationCookie.getUserID());
             log.debug("addRoleToCookie: Finished fetching user role from Portal. Adding it to the cookie");
-            updatedRolesSet.add(fetchedRole);
+            if (fetchedRole.isPresent()) {
+                updatedRolesSet.add(fetchedRole.get());
+            }
             authenticationCookie.setRoles(updatedRolesSet);
             String changedCookieJson = RepresentationUtils.toRepresentation(authenticationCookie);
             log.debug("addRoleToCookie: Changed cookie Json: {}", changedCookieJson);
             cookie.setValue(CipherUtil.encryptPKC(changedCookieJson, getFilterConfiguration().getSecurityKey()));
             threadLocalUtils.setUserContext(authenticationCookie);
         } catch (IOException e) {
-            log.error(EcompLoggerErrorCode.BUSINESS_PROCESS_ERROR, LogFieldsMdcHandler.getInstance().getServiceName(), fullOptionalData(PORTAL_TARGET_ENTITY, "/fetchRolesFromPortal"),"Exception: {}", e.getMessage());
+            log.error(EcompLoggerErrorCode.BUSINESS_PROCESS_ERROR, LogFieldsMdcHandler.getInstance().getServiceName(),
+                fullOptionalData(PORTAL_TARGET_ENTITY, "/fetchRolesFromPortal"), "Exception: {}", e);
             throw new RestrictionAccessFilterException(e);
         } catch (CipherUtilException e) {
-            log.error(EcompLoggerErrorCode.BUSINESS_PROCESS_ERROR, LogFieldsMdcHandler.getInstance().getServiceName(), fullOptionalData(PORTAL_TARGET_ENTITY, "/fetchRolesFromPortal"),"Exception: {}", e.getMessage());
+            log.error(EcompLoggerErrorCode.BUSINESS_PROCESS_ERROR, LogFieldsMdcHandler.getInstance().getServiceName(),
+                fullOptionalData(PORTAL_TARGET_ENTITY, "/fetchRolesFromPortal"), "Exception: {}", e);
             throw new RedirectException(e);
         }
         return cookie;
@@ -116,14 +128,14 @@ public class RestrictionAccessFilter extends SessionValidationFilter {
 
     @Override
     public void authorizeUserOnSessionExpiration(AuthenticationCookie authenticationCookie, Cookie[] cookies)
-            throws RedirectException {
-            log.debug("Portal fetch user role is enabled");
-            if (!isAuthenticatedUserSimilarToCspUser(authenticationCookie, cookies) ||
-                    areUserRolesChanged(authenticationCookie)) {
-                String msg = String.format(SESSION_IS_EXPIRED_MSG, authenticationCookie.getUserID());
-                log.debug(msg);
-                throw new RedirectException(msg);
-            }
+        throws RedirectException {
+        log.debug("Portal fetch user role is enabled");
+        if (!isAuthenticatedUserSimilarToCspUser(authenticationCookie, cookies) ||
+            areUserRolesChanged(authenticationCookie)) {
+            String msg = String.format(SESSION_IS_EXPIRED_MSG, authenticationCookie.getUserID());
+            log.debug(msg);
+            throw new RedirectException(msg);
+        }
     }
 
     @Override
@@ -134,7 +146,7 @@ public class RestrictionAccessFilter extends SessionValidationFilter {
         httpServletResponse.setContentType("application/json");
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletResponse.getWriter().write(RepresentationUtils.toRepresentation
-                ("Your session has expired. Please close the SDC tab and re-enter the SDC application."));
+            ("Your session has expired. Please close the SDC tab and re-enter the SDC application."));
     }
 
     private boolean areUserRolesChanged(AuthenticationCookie authenticationCookie) {
@@ -146,12 +158,17 @@ public class RestrictionAccessFilter extends SessionValidationFilter {
         // TODO: For future reference, when multi roles exist replace to something like:
         // TODO: authenticationCookie.getRoles().stream().forEach((role) -> areRolesEqual = areRolesEqual(user.getRole(), role));
         log.debug("Fetching roles from portal for user {}", authenticationCookie.getUserID());
-        String portalRole = portalClient.fetchUserRolesFromPortal(authenticationCookie.getUserID());
+        Optional<String> portalRole = portalClient.fetchUserRolesFromPortal(authenticationCookie.getUserID());
         log.debug("{} user role on portal is {}, in the cookie is {}", portalRole, cookieRole);
-        return StringUtils.isEmpty(cookieRole) || !cookieRole.equalsIgnoreCase(portalRole);
+        boolean isCookieRoleEmpty = StringUtils.isEmpty(cookieRole);
+        //If the cookieRole is empty or if portalRole is different than cookieRole or if cookieRole is not empty and
+        //portalRole is not empty then return true otherwise false.
+        return isCookieRoleEmpty ||
+            (portalRole.isPresent() ? !cookieRole.equalsIgnoreCase(portalRole.get()) : !isCookieRoleEmpty);
     }
 
-    private boolean isAuthenticatedUserSimilarToCspUser(AuthenticationCookie cookie, Cookie[] cookies) throws RedirectException {
+    private boolean isAuthenticatedUserSimilarToCspUser(AuthenticationCookie cookie, Cookie[] cookies)
+        throws RedirectException {
         String cspUserId = getCookieValue(cookies, CSP_USER_ID);
         if (cspUserId != null && cspUserId.equals(cookie.getUserID())) {
             log.debug("Auth and CSP user IDs are same: {}", cookie.getUserID());
@@ -164,8 +181,8 @@ public class RestrictionAccessFilter extends SessionValidationFilter {
     public String getCookieValue(Cookie[] cookies, String name) throws RedirectException {
         if (ArrayUtils.isNotEmpty(cookies)) {
             List<Cookie> foundCookies = Arrays.stream(cookies)
-                    .filter(c -> c.getName().endsWith(name))
-                    .collect(Collectors.toList());
+                .filter(c -> c.getName().endsWith(name))
+                .collect(Collectors.toList());
             if (foundCookies.size() > 0) {
                 log.debug("getCookieValue: Found {} cookies with name: {}", foundCookies.size(), name);
                 return foundCookies.get(0).getValue();
