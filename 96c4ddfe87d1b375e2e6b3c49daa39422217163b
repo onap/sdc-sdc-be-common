@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "c6a03634_08a0757d",
+        "filename": "security-util-lib/src/main/java/org/onap/sdc/security/filters/RestrictionAccessFilter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 6617
+      },
+      "writtenOn": "2020-07-06T19:43:04Z",
+      "side": 1,
+      "message": "Hi Vasyl,\nI\u0027m not following.  Can you explain what you mean?\nThanks,\nNeil",
+      "parentUuid": "edad73ed_b0f36c2d",
+      "range": {
+        "startLine": 112,
+        "startChar": 93,
+        "endLine": 112,
+        "endChar": 114
+      },
+      "revId": "96c4ddfe87d1b375e2e6b3c49daa39422217163b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8f13e93e_a0ba1e44",
         "filename": "security-util-lib/src/main/java/org/onap/sdc/security/filters/RestrictionAccessFilter.java",
         "patchSetId": 1
