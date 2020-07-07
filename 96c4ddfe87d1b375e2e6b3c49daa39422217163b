@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9e0dab37_9a23be9a",
+        "filename": "security-util-lib/src/main/java/org/onap/sdc/security/PortalClient.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5562
+      },
+      "writtenOn": "2020-07-07T08:50:48Z",
+      "side": 1,
+      "message": "\"GET USER ROLES from portal failed: \", e);",
+      "parentUuid": "3cbe4665_c6d4f5ca",
+      "range": {
+        "startLine": 96,
+        "startChar": 51,
+        "endLine": 96,
+        "endChar": 73
+      },
+      "revId": "96c4ddfe87d1b375e2e6b3c49daa39422217163b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "edad73ed_b0f36c2d",
         "filename": "security-util-lib/src/main/java/org/onap/sdc/security/filters/RestrictionAccessFilter.java",
         "patchSetId": 1
@@ -72,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "78c67b0a_52b3ae87",
+        "filename": "security-util-lib/src/main/java/org/onap/sdc/security/filters/RestrictionAccessFilter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5562
+      },
+      "writtenOn": "2020-07-07T08:50:48Z",
+      "side": 1,
+      "message": "fullOptionalData(PORTAL_TARGET_ENTITY, \"/fetchRolesFromPortal\"), \"Some meaningful message\", e);",
+      "parentUuid": "c6a03634_08a0757d",
+      "range": {
+        "startLine": 112,
+        "startChar": 93,
+        "endLine": 112,
+        "endChar": 114
+      },
+      "revId": "96c4ddfe87d1b375e2e6b3c49daa39422217163b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8f13e93e_a0ba1e44",
         "filename": "security-util-lib/src/main/java/org/onap/sdc/security/filters/RestrictionAccessFilter.java",
         "patchSetId": 1
@@ -83,6 +131,30 @@
       "writtenOn": "2020-06-29T08:28:24Z",
       "side": 1,
       "message": "avoid loosing exception, log properly",
+      "range": {
+        "startLine": 116,
+        "startChar": 92,
+        "endLine": 116,
+        "endChar": 114
+      },
+      "revId": "96c4ddfe87d1b375e2e6b3c49daa39422217163b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "117b3410_f6db984e",
+        "filename": "security-util-lib/src/main/java/org/onap/sdc/security/filters/RestrictionAccessFilter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5562
+      },
+      "writtenOn": "2020-07-07T08:50:48Z",
+      "side": 1,
+      "message": "fullOptionalData(PORTAL_TARGET_ENTITY, \"/fetchRolesFromPortal\"), \"Some meaningful message\", e);",
+      "parentUuid": "8f13e93e_a0ba1e44",
       "range": {
         "startLine": 116,
         "startChar": 92,
