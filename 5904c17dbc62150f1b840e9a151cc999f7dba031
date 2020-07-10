@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7448a75c_d4858766",
+        "filename": "security-util-lib/src/main/java/org/onap/sdc/security/PortalClient.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5562
+      },
+      "writtenOn": "2020-07-10T08:28:45Z",
+      "side": 1,
+      "message": "redundant, remove it",
+      "range": {
+        "startLine": 96,
+        "startChar": 52,
+        "endLine": 96,
+        "endChar": 54
+      },
+      "revId": "5904c17dbc62150f1b840e9a151cc999f7dba031",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2971e31e_79717000",
+        "filename": "security-util-lib/src/main/java/org/onap/sdc/security/filters/RestrictionAccessFilter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5562
+      },
+      "writtenOn": "2020-07-10T08:28:45Z",
+      "side": 1,
+      "message": "redundant, remove it",
+      "range": {
+        "startLine": 112,
+        "startChar": 93,
+        "endLine": 112,
+        "endChar": 95
+      },
+      "revId": "5904c17dbc62150f1b840e9a151cc999f7dba031",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ad5e7e0_3a25986e",
+        "filename": "security-util-lib/src/main/java/org/onap/sdc/security/filters/RestrictionAccessFilter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5562
+      },
+      "writtenOn": "2020-07-10T08:28:45Z",
+      "side": 1,
+      "message": "redundant, remove it",
+      "range": {
+        "startLine": 116,
+        "startChar": 93,
+        "endLine": 116,
+        "endChar": 95
+      },
+      "revId": "5904c17dbc62150f1b840e9a151cc999f7dba031",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
