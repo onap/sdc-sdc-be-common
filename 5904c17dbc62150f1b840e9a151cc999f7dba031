@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "e24a22fd_8105b56c",
+        "filename": "security-util-lib/src/main/java/org/onap/sdc/security/filters/RestrictionAccessFilter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 6617
+      },
+      "writtenOn": "2020-07-12T19:44:14Z",
+      "side": 1,
+      "message": "Hi Vasyl, thanks for the review.\n\nI\u0027m not clear on which is redundant, the logging or throwing the exception.  What\u0027s the expected behaviour here?",
+      "parentUuid": "2971e31e_79717000",
+      "range": {
+        "startLine": 112,
+        "startChar": 93,
+        "endLine": 112,
+        "endChar": 95
+      },
+      "revId": "5904c17dbc62150f1b840e9a151cc999f7dba031",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4ad5e7e0_3a25986e",
         "filename": "security-util-lib/src/main/java/org/onap/sdc/security/filters/RestrictionAccessFilter.java",
         "patchSetId": 2
