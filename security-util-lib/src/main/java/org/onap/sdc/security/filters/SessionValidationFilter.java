@@ -92,7 +92,7 @@ public abstract class SessionValidationFilter implements Filter {
                 filterChain.doFilter(servletRequest, httpResponse);
             }
         } catch (RedirectException e) {
-            log.error(EcompLoggerErrorCode.BUSINESS_PROCESS_ERROR, LogFieldsMdcHandler.getInstance().getServiceName(), new ErrorLogOptionalData(),"Exception is thrown while authenticating cookie: {}", e.getMessage());
+            log.error(EcompLoggerErrorCode.BUSINESS_PROCESS_ERROR, LogFieldsMdcHandler.getInstance().getServiceName(), new ErrorLogOptionalData(),"Exception is thrown while authenticating cookie: {}", e);
             handleRedirectException(httpResponse);
         }
         long durationSec = TimeUnit.NANOSECONDS.toSeconds(System.nanoTime() - starTime);

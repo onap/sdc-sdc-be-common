@@ -20,28 +20,31 @@
 
 package org.onap.sdc.security;
 
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
+import static org.onap.portalsdk.core.onboarding.util.CipherUtil.decryptPKC;
+import static org.onap.sdc.security.utils.SecurityLogsUtils.PORTAL_TARGET_ENTITY;
+import static org.onap.sdc.security.utils.SecurityLogsUtils.fullOptionalData;
+
 import com.google.common.annotations.VisibleForTesting;
+import java.io.IOException;
+import java.security.InvalidParameterException;
+import java.util.Base64;
+import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.onap.portalsdk.core.onboarding.exception.PortalAPIException;
 import org.onap.portalsdk.core.onboarding.util.PortalApiProperties;
+import org.onap.portalsdk.core.restful.domain.EcompRole;
 import org.onap.portalsdk.core.restful.domain.EcompUser;
 import org.onap.sdc.security.logging.elements.LogFieldsMdcHandler;
 import org.onap.sdc.security.logging.enums.EcompLoggerErrorCode;
 import org.onap.sdc.security.logging.wrappers.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import java.io.IOException;
-import java.security.InvalidParameterException;
-import java.util.Base64;
-import static org.onap.portalsdk.core.onboarding.util.CipherUtil.decryptPKC;
-import static org.onap.sdc.security.utils.SecurityLogsUtils.PORTAL_TARGET_ENTITY;
-import static org.onap.sdc.security.utils.SecurityLogsUtils.fullOptionalData;
 
 
 @Component/*("portalUtils")*/
@@ -78,30 +81,29 @@ public class PortalClient {
         this.httpClient = httpClient;
     }
 
-    public String fetchUserRolesFromPortal(String userId) {
-        String fetchedUserRoleFromPortal;
+    public Optional<String> fetchUserRolesFromPortal(String userId) {
         try {
             EcompUser ecompUser = extractObjectFromResponseJson(getResponseFromPortal(userId));
             log.debug("GET USER ROLES response for user {}: {}", userId, ecompUser);
             checkIfSingleRoleProvided(ecompUser);
-            fetchedUserRoleFromPortal = ecompUser.getRoles().stream().findFirst().get().getName();
+            Optional<EcompRole> firstRole = ecompUser.getRoles().stream().findFirst();
+            if (firstRole.isPresent()) {
+                return Optional.of(firstRole.get().getName());
+            }
         } catch (IOException | PortalAPIException e) {
-            log.error(EcompLoggerErrorCode.BUSINESS_PROCESS_ERROR, LogFieldsMdcHandler.getInstance().getServiceName(),
-                    fullOptionalData(PORTAL_TARGET_ENTITY, "/fetchRolesFromPortal"),"GET USER ROLES from portal failed: {}", e.getMessage());
             log.debug("Fetching user roles from Portal failed", e);
             throw new RestrictionAccessFilterException(e);
         }
-        return fetchedUserRoleFromPortal;
+        return Optional.empty();
     }
 
 
-
     public static void checkIfSingleRoleProvided(EcompUser user) throws PortalAPIException {
-        if(user.getRoles() == null) {
+        if (user.getRoles() == null) {
             log.debug(RECEIVED_NULL_ROLES, user);
             //BeEcompErrorManager.getInstance().logInvalidInputError(CHECK_ROLES, RECEIVED_NULL_ROLES, BeEcompErrorManager.ErrorSeverity.ERROR);
             throw new PortalAPIException(RECEIVED_NULL_ROLES + user);
-        }else if(user.getRoles().size() > 1) {
+        } else if (user.getRoles().size() > 1) {
             log.debug(RECEIVED_MULTIPLE_ROLES, user);
             //BeEcompErrorManager.getInstance().logInvalidInputError(CHECK_ROLES, RECEIVED_MULTIPLE_ROLES2, BeEcompErrorManager.ErrorSeverity.ERROR);
             throw new PortalAPIException(RECEIVED_MULTIPLE_ROLES2 + user);
@@ -127,9 +129,9 @@ public class PortalClient {
 
         HttpGet httpGet = new HttpGet(url);
         String encodedBasicAuthCred = Base64.getEncoder()
-                .encodeToString((portalConfiguration.getDecryptedPortalUser() + ":" +
-                        portalConfiguration.getDecryptedPortalPassword())
-                        .getBytes());
+            .encodeToString((portalConfiguration.getDecryptedPortalUser() + ":" +
+                portalConfiguration.getDecryptedPortalPassword())
+                .getBytes());
         httpGet.setHeader(UEB_KEY, portalConfiguration.getUebKey());
         httpGet.setHeader(AUTHORIZATION, "Basic " + encodedBasicAuthCred);
         httpGet.setHeader(CONTENT_TYPE_HEADER, "application/json");
@@ -137,6 +139,7 @@ public class PortalClient {
     }
 
     private static class PortalConfiguration {
+
         private static final String PROPERTY_NOT_SET = "%s property value is not set in portal.properties file";
         private String decryptedPortalUser;
         private String decryptedPortalPassword;
@@ -153,7 +156,8 @@ public class PortalClient {
 
         }
 
-        private PortalConfiguration(IPortalConfiguration portalConfiguration) throws org.onap.portalsdk.core.onboarding.exception.CipherUtilException {
+        private PortalConfiguration(IPortalConfiguration portalConfiguration)
+            throws org.onap.portalsdk.core.onboarding.exception.CipherUtilException {
             this.decryptedPortalUser = decryptPKC(portalConfiguration.getPortalUser());
             this.decryptedPortalPassword = decryptPKC(portalConfiguration.getPortalPass());
             this.decryptedPortalAppName = decryptPKC(portalConfiguration.getPortalAppName());
