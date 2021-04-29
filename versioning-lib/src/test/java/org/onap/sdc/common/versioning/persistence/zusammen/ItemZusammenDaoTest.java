@@ -17,7 +17,10 @@
 
 package org.onap.sdc.common.versioning.persistence.zusammen;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
@@ -40,7 +43,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -82,7 +84,7 @@ public class ItemZusammenDaoTest {
 
         Collection<InternalItem> items = itemDao.list();
 
-        Assert.assertTrue(items.isEmpty());
+        assertTrue(items.isEmpty());
     }
 
     @Test
@@ -113,8 +115,7 @@ public class ItemZusammenDaoTest {
     @Test
     public void testGetNonExisting() {
         InternalItem item = itemDao.get("nonExisting");
-
-        Assert.assertNull(item);
+        assertNull(item);
     }
 
     @Test
@@ -132,7 +133,7 @@ public class ItemZusammenDaoTest {
 
         InternalItem item = itemDao.get(itemId);
 
-        Assert.assertNotNull(item);
+        assertNotNull(item);
         assertItemEquals(item, toBeReturned);
         assertEquals(ItemStatus.ACTIVE, item.getStatus());
 
@@ -223,7 +224,7 @@ public class ItemZusammenDaoTest {
     }
 
     private Item createItem(String id, String name, String description, String type, Date creationTime,
-        Date modificationTime, Map<String, Number> versionStatusCounters) {
+                            Date modificationTime, Map<String, Number> versionStatusCounters) {
         Item item = new Item();
         item.setId(new Id(id));
         Info info = new Info();

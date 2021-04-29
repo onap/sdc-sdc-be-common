@@ -17,6 +17,8 @@
 
 package org.onap.sdc.common.versioning.persistence.zusammen;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.doReturn;
@@ -39,7 +41,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -78,11 +79,11 @@ public class VersionZusammenDaoTest {
         String itemId = "itemId";
 
         doReturn(new ArrayList<>()).when(zusammenAdaptorMock)
-                .listPublicVersions(eq(SESSION_CONTEXT), eq(new Id(itemId)));
+            .listPublicVersions(eq(SESSION_CONTEXT), eq(new Id(itemId)));
 
         List<InternalVersion> versions = versionDao.list(itemId);
 
-        Assert.assertTrue(versions.isEmpty());
+        assertTrue(versions.isEmpty());
     }
 
     @Test
@@ -93,20 +94,20 @@ public class VersionZusammenDaoTest {
         Id versionId3 = new Id("v3_id");
 
         List<ItemVersion> zusammenVersions =
-                Stream.of(createZusammenVersion(versionId1, null, "version desc", "1.0", VersionStatus.Certified),
-                        createZusammenVersion(versionId2, versionId1, "version desc", "2.0", VersionStatus.Certified),
-                        createZusammenVersion(versionId3, versionId2, "version desc", "3.0", VersionStatus.Draft))
-                        .collect(Collectors.toList());
+            Stream.of(createZusammenVersion(versionId1, null, "version desc", "1.0", VersionStatus.Certified),
+                createZusammenVersion(versionId2, versionId1, "version desc", "2.0", VersionStatus.Certified),
+                createZusammenVersion(versionId3, versionId2, "version desc", "3.0", VersionStatus.Draft))
+                .collect(Collectors.toList());
         doReturn(zusammenVersions).when(zusammenAdaptorMock)
-                .listPublicVersions(eq(SESSION_CONTEXT), eq(new Id(itemId)));
+            .listPublicVersions(eq(SESSION_CONTEXT), eq(new Id(itemId)));
 
         List<InternalVersion> versions = versionDao.list(itemId);
-        Assert.assertEquals(3, versions.size());
+        assertEquals(3, versions.size());
 
         int zusammenVersionIndex;
         for (InternalVersion version : versions) {
             zusammenVersionIndex = versionId1.getValue().equals(version.getId()) ? 0 :
-                                           versionId2.getValue().equals(version.getId()) ? 1 : 2;
+                versionId2.getValue().equals(version.getId()) ? 1 : 2;
             assetVersionEquals(version, zusammenVersions.get(zusammenVersionIndex), null);
         }
     }
@@ -137,20 +138,19 @@ public class VersionZusammenDaoTest {
 
         String versionId = "versionId";
         doReturn(new Id(versionId)).when(zusammenAdaptorMock)
-                .createVersion(eq(SESSION_CONTEXT), eq(new Id(itemId)), baseId == null ? isNull() : eq(new Id(baseId)),
-                        capturedZusammenVersion.capture());
-
+            .createVersion(eq(SESSION_CONTEXT), eq(new Id(itemId)), baseId == null ? isNull() : eq(new Id(baseId)),
+                capturedZusammenVersion.capture());
 
         versionDao.create(itemId, version);
 
-        Assert.assertEquals(version.getId(), versionId);
+        assertEquals(version.getId(), versionId);
 
         Info capturedInfo = capturedZusammenVersion.getValue().getInfo();
-        Assert.assertEquals(capturedInfo.getName(), version.getName());
-        Assert.assertEquals(capturedInfo.getDescription(), version.getDescription());
-        Assert.assertEquals(VersionStatus.valueOf(capturedInfo.getProperty(STATUS_PROPERTY)), version.getStatus());
+        assertEquals(capturedInfo.getName(), version.getName());
+        assertEquals(capturedInfo.getDescription(), version.getDescription());
+        assertEquals(VersionStatus.valueOf(capturedInfo.getProperty(STATUS_PROPERTY)), version.getStatus());
         String capturedInfoProperty = capturedInfo.getProperty("key");
-        Assert.assertEquals(capturedInfoProperty, version.getProperty("key"));
+        assertEquals(capturedInfoProperty, version.getProperty("key"));
     }
 
     @Test
@@ -166,17 +166,17 @@ public class VersionZusammenDaoTest {
         ArgumentCaptor<ItemVersionData> capturedZusammenVersion = ArgumentCaptor.forClass(ItemVersionData.class);
 
         doReturn(new Id(versionId)).when(zusammenAdaptorMock)
-                .createVersion(eq(SESSION_CONTEXT), eq(new Id(itemId)), eq(new Id(version.getId())), isNull(),
-                        capturedZusammenVersion.capture());
+            .createVersion(eq(SESSION_CONTEXT), eq(new Id(itemId)), eq(new Id(version.getId())), isNull(),
+                capturedZusammenVersion.capture());
 
         versionDao.create(itemId, version);
 
-        Assert.assertEquals(version.getId(), versionId);
+        assertEquals(version.getId(), versionId);
 
         Info capturedInfo = capturedZusammenVersion.getValue().getInfo();
-        Assert.assertEquals(capturedInfo.getName(), version.getName());
-        Assert.assertEquals(capturedInfo.getDescription(), version.getDescription());
-        Assert.assertEquals(VersionStatus.valueOf(capturedInfo.getProperty(STATUS_PROPERTY)), version.getStatus());
+        assertEquals(capturedInfo.getName(), version.getName());
+        assertEquals(capturedInfo.getDescription(), version.getDescription());
+        assertEquals(VersionStatus.valueOf(capturedInfo.getProperty(STATUS_PROPERTY)), version.getStatus());
     }
 
     @Test
@@ -194,19 +194,19 @@ public class VersionZusammenDaoTest {
         versionDao.update(itemId, version);
 
         verify(zusammenAdaptorMock).updateVersion(eq(SESSION_CONTEXT), eq(new Id(itemId)), eq(new Id(version.getId())),
-                capturedZusammenVersion.capture());
+            capturedZusammenVersion.capture());
 
         Info capturedInfo = capturedZusammenVersion.getValue().getInfo();
-        Assert.assertEquals(capturedInfo.getName(), version.getName());
-        Assert.assertEquals(capturedInfo.getDescription(), version.getDescription());
-        Assert.assertEquals(VersionStatus.valueOf(capturedInfo.getProperty(STATUS_PROPERTY)), version.getStatus());
+        assertEquals(capturedInfo.getName(), version.getName());
+        assertEquals(capturedInfo.getDescription(), version.getDescription());
+        assertEquals(VersionStatus.valueOf(capturedInfo.getProperty(STATUS_PROPERTY)), version.getStatus());
     }
 
     @Test
     public void testGetNonExisting() {
         Optional<InternalVersion> version = versionDao.get("itemId", "versionId");
 
-        Assert.assertEquals(version, Optional.empty());
+        assertEquals(version, Optional.empty());
     }
 
     @Test
@@ -219,18 +219,18 @@ public class VersionZusammenDaoTest {
         Id versionIdObj = new Id(versionId);
 
         ItemVersion zusammenPrivateVersion =
-                createZusammenVersion(versionIdObj, new Id("baseId"), "version desc  updated", "2.0",
-                        VersionStatus.Draft);
+            createZusammenVersion(versionIdObj, new Id("baseId"), "version desc  updated", "2.0",
+                VersionStatus.Draft);
         doReturn(zusammenPrivateVersion).when(zusammenAdaptorMock)
-                .getVersion(eq(zusammenContext), eq(itemIdObj), eq(versionIdObj));
+            .getVersion(eq(zusammenContext), eq(itemIdObj), eq(versionIdObj));
 
         ItemVersionStatus zusammenVersionStatus = new ItemVersionStatus(SynchronizationStatus.UP_TO_DATE, true);
         doReturn(zusammenVersionStatus).when(zusammenAdaptorMock)
-                .getVersionStatus(eq(zusammenContext), eq(itemIdObj), eq(versionIdObj));
+            .getVersionStatus(eq(zusammenContext), eq(itemIdObj), eq(versionIdObj));
 
         Optional<InternalVersion> version = versionDao.get(itemId, versionId);
 
-        Assert.assertTrue(version.isPresent());
+        assertTrue(version.isPresent());
         assetVersionEquals(version.get(), zusammenPrivateVersion, zusammenVersionStatus);
     }
 
@@ -244,24 +244,24 @@ public class VersionZusammenDaoTest {
         Id versionIdObj = new Id(versionId);
 
         ItemVersion zusammenPrivateVersion =
-                createZusammenVersion(versionIdObj, new Id("baseId"), "version desc updated", "2.0",
-                        VersionStatus.Draft);
+            createZusammenVersion(versionIdObj, new Id("baseId"), "version desc updated", "2.0",
+                VersionStatus.Draft);
         doReturn(zusammenPrivateVersion).when(zusammenAdaptorMock)
-                .getVersion(eq(zusammenContext), eq(itemIdObj), eq(versionIdObj));
+            .getVersion(eq(zusammenContext), eq(itemIdObj), eq(versionIdObj));
 
         ItemVersionStatus zusammenVersionStatus = new ItemVersionStatus(SynchronizationStatus.OUT_OF_SYNC, true);
         doReturn(zusammenVersionStatus).when(zusammenAdaptorMock)
-                .getVersionStatus(eq(zusammenContext), eq(itemIdObj), eq(versionIdObj));
+            .getVersionStatus(eq(zusammenContext), eq(itemIdObj), eq(versionIdObj));
 
         VersionStatus statusOnPublic = VersionStatus.Certified;
         ItemVersion zusammenPublicVersion =
-                createZusammenVersion(versionIdObj, new Id("baseId"), "version desc", "2.0", statusOnPublic);
+            createZusammenVersion(versionIdObj, new Id("baseId"), "version desc", "2.0", statusOnPublic);
         doReturn(zusammenPublicVersion).when(zusammenAdaptorMock)
-                .getPublicVersion(eq(zusammenContext), eq(itemIdObj), eq(versionIdObj));
+            .getPublicVersion(eq(zusammenContext), eq(itemIdObj), eq(versionIdObj));
 
         Optional<InternalVersion> version = versionDao.get(itemId, versionId);
 
-        Assert.assertTrue(version.isPresent());
+        assertTrue(version.isPresent());
         zusammenPrivateVersion.getData().getInfo().addProperty(STATUS_PROPERTY, statusOnPublic.name());
         assetVersionEquals(version.get(), zusammenPrivateVersion, zusammenVersionStatus);
     }
@@ -276,22 +276,22 @@ public class VersionZusammenDaoTest {
         Id versionIdObj = new Id(versionId);
 
         ItemVersion zusammenPrivateVersion =
-                createZusammenVersion(versionIdObj, new Id("baseId"), "version desc", "2.0", VersionStatus.Draft);
+            createZusammenVersion(versionIdObj, new Id("baseId"), "version desc", "2.0", VersionStatus.Draft);
         doReturn(zusammenPrivateVersion).when(zusammenAdaptorMock)
-                .getVersion(eq(zusammenContext), eq(itemIdObj), eq(versionIdObj));
+            .getVersion(eq(zusammenContext), eq(itemIdObj), eq(versionIdObj));
 
         ItemVersionStatus zusammenVersionStatus = new ItemVersionStatus(SynchronizationStatus.MERGING, true);
         doReturn(zusammenVersionStatus).when(zusammenAdaptorMock)
-                .getVersionStatus(eq(zusammenContext), eq(itemIdObj), eq(versionIdObj));
+            .getVersionStatus(eq(zusammenContext), eq(itemIdObj), eq(versionIdObj));
 
         ItemVersion zusammenPublicVersion =
-                createZusammenVersion(versionIdObj, new Id("baseId"), "version desc", "2.0", VersionStatus.Draft);
+            createZusammenVersion(versionIdObj, new Id("baseId"), "version desc", "2.0", VersionStatus.Draft);
         doReturn(zusammenPublicVersion).when(zusammenAdaptorMock)
-                .getPublicVersion(eq(zusammenContext), eq(itemIdObj), eq(versionIdObj));
+            .getPublicVersion(eq(zusammenContext), eq(itemIdObj), eq(versionIdObj));
 
         Optional<InternalVersion> version = versionDao.get(itemId, versionId);
 
-        Assert.assertTrue(version.isPresent());
+        assertTrue(version.isPresent());
         assetVersionEquals(version.get(), zusammenPrivateVersion, zusammenVersionStatus);
     }
 
@@ -304,7 +304,7 @@ public class VersionZusammenDaoTest {
         versionDao.publish(itemId, versionId, message);
 
         verify(zusammenAdaptorMock)
-                .publishVersion(eq(SESSION_CONTEXT), eq(new Id(itemId)), eq(new Id(versionId)), eq(message));
+            .publishVersion(eq(SESSION_CONTEXT), eq(new Id(itemId)), eq(new Id(versionId)), eq(message));
     }
 
     @Test
@@ -336,7 +336,7 @@ public class VersionZusammenDaoTest {
         versionDao.revert(itemId, versionId, revisionId);
 
         verify(zusammenAdaptorMock)
-                .revert(eq(SESSION_CONTEXT), eq(new Id(itemId)), eq(new Id(versionId)), eq(new Id(revisionId)));
+            .revert(eq(SESSION_CONTEXT), eq(new Id(itemId)), eq(new Id(versionId)), eq(new Id(revisionId)));
     }
 
     @Test
@@ -346,7 +346,7 @@ public class VersionZusammenDaoTest {
 
         List<Revision> revisions = versionDao.listRevisions(itemId, versionId);
 
-        Assert.assertTrue(revisions.isEmpty());
+        assertTrue(revisions.isEmpty());
     }
 
     @Test
@@ -360,18 +360,18 @@ public class VersionZusammenDaoTest {
         Date rev2time = new Date(currentTime - 2);
         Date rev1time = new Date(currentTime - 3);  // oldest
         List<com.amdocs.zusammen.datatypes.itemversion.Revision> zusammenRevisions =
-                Stream.of(createZusammenRevision("rev4", "forth rev", "user1", rev4time),
-                        createZusammenRevision("rev1", "first rev", "user2", rev1time),
-                        createZusammenRevision("rev3", "third rev", "user2", rev3time),
-                        createZusammenRevision("rev2", "second rev", "user1", rev2time)).collect(Collectors.toList());
+            Stream.of(createZusammenRevision("rev4", "forth rev", "user1", rev4time),
+                createZusammenRevision("rev1", "first rev", "user2", rev1time),
+                createZusammenRevision("rev3", "third rev", "user2", rev3time),
+                createZusammenRevision("rev2", "second rev", "user1", rev2time)).collect(Collectors.toList());
         ItemVersionRevisions toBeReturned = new ItemVersionRevisions();
         toBeReturned.setItemVersionRevisions(zusammenRevisions);
         doReturn(toBeReturned).when(zusammenAdaptorMock)
-                .listRevisions(eq(SESSION_CONTEXT), eq(new Id(itemId)), eq(new Id(versionId)));
+            .listRevisions(eq(SESSION_CONTEXT), eq(new Id(itemId)), eq(new Id(versionId)));
 
         List<Revision> revisions = versionDao.listRevisions(itemId, versionId);
 
-        Assert.assertEquals(4, revisions.size());
+        assertEquals(4, revisions.size());
         assertRevisionEquals(revisions.get(0), zusammenRevisions.get(0)); // rev4 - latest
         assertRevisionEquals(revisions.get(1), zusammenRevisions.get(2)); // rev3
         assertRevisionEquals(revisions.get(2), zusammenRevisions.get(3)); // rev2
@@ -395,28 +395,28 @@ public class VersionZusammenDaoTest {
     }
 
     private void assetVersionEquals(InternalVersion version, ItemVersion zusammenVersion,
-            ItemVersionStatus zusammenVersionStatus) {
-        Assert.assertEquals(version.getId(), zusammenVersion.getId().getValue());
-        Assert.assertEquals(version.getBaseId(),
-                zusammenVersion.getBaseId() == null ? null : zusammenVersion.getBaseId().getValue());
+                                    ItemVersionStatus zusammenVersionStatus) {
+        assertEquals(version.getId(), zusammenVersion.getId().getValue());
+        assertEquals(version.getBaseId(),
+            zusammenVersion.getBaseId() == null ? null : zusammenVersion.getBaseId().getValue());
         Info info = zusammenVersion.getData().getInfo();
-        Assert.assertEquals(version.getName(), info.getName());
-        Assert.assertEquals(version.getDescription(), info.getDescription());
-        Assert.assertEquals(version.getStatus(), VersionStatus.valueOf(info.getProperty(STATUS_PROPERTY)));
-        Assert.assertEquals(version.getCreationTime(), zusammenVersion.getCreationTime());
-        Assert.assertEquals(version.getModificationTime(), zusammenVersion.getModificationTime());
+        assertEquals(version.getName(), info.getName());
+        assertEquals(version.getDescription(), info.getDescription());
+        assertEquals(version.getStatus(), VersionStatus.valueOf(info.getProperty(STATUS_PROPERTY)));
+        assertEquals(version.getCreationTime(), zusammenVersion.getCreationTime());
+        assertEquals(version.getModificationTime(), zusammenVersion.getModificationTime());
 
         if (zusammenVersionStatus != null) {
-            Assert.assertEquals(version.getState().isDirty(), zusammenVersionStatus.isDirty());
-            Assert.assertEquals(version.getState().getSynchronizationState().toString(),
-                    zusammenVersionStatus.getSynchronizationStatus().toString());
+            assertEquals(version.getState().isDirty(), zusammenVersionStatus.isDirty());
+            assertEquals(version.getState().getSynchronizationState().toString(),
+                zusammenVersionStatus.getSynchronizationStatus().toString());
         }
     }
 
     private com.amdocs.zusammen.datatypes.itemversion.Revision createZusammenRevision(String id, String message,
-            String user, Date time) {
+                                                                                      String user, Date time) {
         com.amdocs.zusammen.datatypes.itemversion.Revision revision =
-                new com.amdocs.zusammen.datatypes.itemversion.Revision();
+            new com.amdocs.zusammen.datatypes.itemversion.Revision();
         revision.setRevisionId(new Id(id));
         revision.setMessage(message);
         revision.setUser(user);
@@ -425,10 +425,10 @@ public class VersionZusammenDaoTest {
     }
 
     private void assertRevisionEquals(Revision revision,
-            com.amdocs.zusammen.datatypes.itemversion.Revision zusammenRevision) {
-        Assert.assertEquals(revision.getId(), zusammenRevision.getRevisionId().getValue());
-        Assert.assertEquals(revision.getMessage(), zusammenRevision.getMessage());
-        Assert.assertEquals(revision.getUser(), zusammenRevision.getUser());
-        Assert.assertEquals(revision.getTime(), zusammenRevision.getTime());
+                                      com.amdocs.zusammen.datatypes.itemversion.Revision zusammenRevision) {
+        assertEquals(revision.getId(), zusammenRevision.getRevisionId().getValue());
+        assertEquals(revision.getMessage(), zusammenRevision.getMessage());
+        assertEquals(revision.getUser(), zusammenRevision.getUser());
+        assertEquals(revision.getTime(), zusammenRevision.getTime());
     }
 }
