@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d99e4fe6_cf1573bf",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/wrappers/LoggerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5565
+      },
+      "writtenOn": "2021-04-29T16:11:39Z",
+      "side": 1,
+      "message": "I would leave the failure message, instead of removing it.\nYou could use:\nassertFalse(boolean condition, String message)",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 41
+      },
+      "revId": "584d8ef6be88dbb2b6f270fc00cd105aa9543e72",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "591b78b0_aa36a00b",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/wrappers/LoggerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5565
+      },
+      "writtenOn": "2021-04-29T16:11:39Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 72,
+        "startChar": 8,
+        "endLine": 72,
+        "endChar": 19
+      },
+      "revId": "584d8ef6be88dbb2b6f270fc00cd105aa9543e72",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af3ac63b_e6235a58",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/wrappers/LoggerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5565
+      },
+      "writtenOn": "2021-04-29T16:11:39Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 77,
+        "startChar": 8,
+        "endLine": 77,
+        "endChar": 18
+      },
+      "revId": "584d8ef6be88dbb2b6f270fc00cd105aa9543e72",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "caa7b4ee_8553879d",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/wrappers/LoggerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5565
+      },
+      "writtenOn": "2021-04-29T16:11:39Z",
+      "side": 1,
+      "message": "why remove the assertion?",
+      "range": {
+        "startLine": 82,
+        "startChar": 8,
+        "endLine": 82,
+        "endChar": 28
+      },
+      "revId": "584d8ef6be88dbb2b6f270fc00cd105aa9543e72",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66c13e28_937bb0f2",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/wrappers/LoggerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5565
+      },
+      "writtenOn": "2021-04-29T16:11:39Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 88,
+        "endChar": 40
+      },
+      "revId": "584d8ef6be88dbb2b6f270fc00cd105aa9543e72",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90e6f998_4dafd35e",
+        "filename": "version.properties",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5565
+      },
+      "writtenOn": "2021-04-29T16:11:39Z",
+      "side": 1,
+      "message": "please, fix charset problem",
+      "range": {
+        "startLine": 2,
+        "startChar": 12,
+        "endLine": 2,
+        "endChar": 13
+      },
+      "revId": "584d8ef6be88dbb2b6f270fc00cd105aa9543e72",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
