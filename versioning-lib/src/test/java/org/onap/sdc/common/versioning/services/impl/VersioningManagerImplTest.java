@@ -16,15 +16,7 @@
 
 package org.onap.sdc.common.versioning.services.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
-
 import com.google.common.collect.ImmutableList;
-import java.util.List;
-import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -33,6 +25,12 @@ import org.mockito.MockitoAnnotations;
 import org.onap.sdc.common.versioning.persistence.VersionDao;
 import org.onap.sdc.common.versioning.persistence.types.InternalVersion;
 import org.onap.sdc.common.versioning.services.types.Version;
+
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 public class VersioningManagerImplTest {
 

@@ -22,11 +22,11 @@
 
 package org.onap.sdc.security.util;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.onap.sdc.security.logging.elements.ErrorLogOptionalData;
 import org.onap.sdc.security.utils.SecurityLogsUtils;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.onap.sdc.security.utils.SecurityLogsUtils.PORTAL_TARGET_ENTITY;
 
 public class SecurityLogsUtilsTest {

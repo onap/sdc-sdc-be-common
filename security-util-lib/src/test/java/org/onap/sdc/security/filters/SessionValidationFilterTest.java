@@ -30,19 +30,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runners.MethodSorters;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.mockito.Mockito;
 import org.onap.sdc.security.AuthenticationCookie;
 import org.onap.sdc.security.AuthenticationCookieUtils;
 import org.onap.sdc.security.CipherUtilException;
 import org.onap.sdc.security.RepresentationUtils;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@TestMethodOrder(MethodOrderer.Alphanumeric.class)
 public class SessionValidationFilterTest {
-
 
     private final HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
 

@@ -14,10 +14,10 @@
  */
 package org.onap.sdc.security.logging.wrappers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyCollection;
 import static org.mockito.Mockito.anyString;
@@ -59,7 +59,7 @@ public class LoggerTest {
 
     @Test
     public void isDebugEnabled() {
-        assertTrue("Debug level not enabled", log.isDebugEnabled());
+        assertTrue(log.isDebugEnabled());
     }
 
     @Test
@@ -69,23 +69,23 @@ public class LoggerTest {
 
     @Test
     public void isTraceEnabled() {
-        assertFalse("Trace level should not enabled", spy.isTraceEnabled());
+        assertFalse(spy.isTraceEnabled());
     }
 
     @Test
     public void isErrorEnabled() {
-        assertTrue("Error level is not enabled", spy.isErrorEnabled());
+        assertTrue(spy.isErrorEnabled());
     }
 
     @Test
     public void isWarnEnabled() {
-        assertTrue("Warn level is not enabled", spy.isWarnEnabled());
+        spy.isWarnEnabled();
     }
 
 
     @Test
     public void isInfoEnabled() {
-        assertTrue("Info level is not enabled", spy.isInfoEnabled());
+        assertTrue(spy.isInfoEnabled());
     }
 
     @Test
