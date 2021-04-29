@@ -16,7 +16,7 @@
 
 package org.onap.sdc.common.zusammen.config;
 
-import org.junit.Assert;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -32,7 +32,7 @@ public class ZusammenConfigTest {
         ZusammenConfig zusammenConfig = new ZusammenConfig(provider);
         zusammenConfig.init();
         Mockito.verify(provider).getCassandraAddresses();
-        Assert.assertEquals(a, System.getProperty("cassandra.nodes"));
+        assertEquals(a, System.getProperty("cassandra.nodes"));
     }
 
     @AfterEach

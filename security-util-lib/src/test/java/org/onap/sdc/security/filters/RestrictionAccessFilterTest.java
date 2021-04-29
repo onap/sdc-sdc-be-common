@@ -20,9 +20,9 @@
 
 package org.onap.sdc.security.filters;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -61,7 +61,7 @@ public class RestrictionAccessFilterTest {
     }
 
     private void mockCreateFilter(ISessionValidationFilterConfiguration sessionConfig,
-        IUsersThreadLocalHolder threadLocalUtils, PortalClient portalClient) {
+                                  IUsersThreadLocalHolder threadLocalUtils, PortalClient portalClient) {
         filter = new RestrictionAccessFilter(sessionConfig, threadLocalUtils, portalClient);
     }
 
@@ -208,6 +208,5 @@ public class RestrictionAccessFilterTest {
             () -> filter.getCookieValue(null, RestrictionAccessFilter.CSP_USER_ID)
         );
     }
-
 
 }
