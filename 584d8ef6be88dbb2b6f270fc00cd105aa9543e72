@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "47a6ab71_3dd3c6be",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/wrappers/LoggerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2021-04-30T07:02:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d99e4fe6_cf1573bf",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 41
+      },
+      "revId": "584d8ef6be88dbb2b6f270fc00cd105aa9543e72",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "591b78b0_aa36a00b",
         "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/wrappers/LoggerTest.java",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "584d8ef6be88dbb2b6f270fc00cd105aa9543e72",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26aa6808_e568ff87",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/wrappers/LoggerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2021-04-30T07:02:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "591b78b0_aa36a00b",
+      "range": {
+        "startLine": 72,
+        "startChar": 8,
+        "endLine": 72,
+        "endChar": 19
+      },
+      "revId": "584d8ef6be88dbb2b6f270fc00cd105aa9543e72",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "8ca92850_476ebfaf",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/wrappers/LoggerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2021-04-30T07:02:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af3ac63b_e6235a58",
+      "range": {
+        "startLine": 77,
+        "startChar": 8,
+        "endLine": 77,
+        "endChar": 18
+      },
+      "revId": "584d8ef6be88dbb2b6f270fc00cd105aa9543e72",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "caa7b4ee_8553879d",
         "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/wrappers/LoggerTest.java",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "584d8ef6be88dbb2b6f270fc00cd105aa9543e72",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcbcf8dd_59106b95",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/wrappers/LoggerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2021-04-30T07:02:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "caa7b4ee_8553879d",
+      "range": {
+        "startLine": 82,
+        "startChar": 8,
+        "endLine": 82,
+        "endChar": 28
+      },
+      "revId": "584d8ef6be88dbb2b6f270fc00cd105aa9543e72",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "3d4da09d_6d170087",
+        "filename": "security-util-lib/src/test/java/org/onap/sdc/security/logging/wrappers/LoggerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2021-04-30T07:02:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66c13e28_937bb0f2",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 88,
+        "endChar": 40
+      },
+      "revId": "584d8ef6be88dbb2b6f270fc00cd105aa9543e72",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90e6f998_4dafd35e",
         "filename": "version.properties",
         "patchSetId": 2
@@ -137,6 +257,30 @@
       "revId": "584d8ef6be88dbb2b6f270fc00cd105aa9543e72",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "365b7bb0_08ed0632",
+        "filename": "version.properties",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2021-04-30T07:02:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90e6f998_4dafd35e",
+      "range": {
+        "startLine": 2,
+        "startChar": 12,
+        "endLine": 2,
+        "endChar": 13
+      },
+      "revId": "584d8ef6be88dbb2b6f270fc00cd105aa9543e72",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
