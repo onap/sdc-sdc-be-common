@@ -64,7 +64,7 @@ public class LoggerTest {
 
     @Test
     public void getName() {
-        assertEquals("Logger name not as expected", "org.onap.sdc.security.logging.wrappers.LoggerTest", log.getName());
+        assertEquals("org.onap.sdc.security.logging.wrappers.LoggerTest", log.getName(), "Logger name not as expected");
     }
 
     @Test

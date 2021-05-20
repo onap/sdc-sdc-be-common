@@ -39,22 +39,24 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <mockito.version>2.23.4</mockito.version>
-        <junit.jupiter.version>5.7.1</junit.jupiter.version>
+        <mockito.version>2.26.0</mockito.version>
+        <junit-jupiter.version>5.7.2</junit-jupiter.version>
         <logging-slf4j.version>1.5.0</logging-slf4j.version>
         <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
         <snapshots.path>snapshots</snapshots.path>
         <releases.path>releases</releases.path>
         <sitePath>/content/sites/site/org/onap/sdc/sdc-be-common/${project.version}</sitePath>
         <nexus.proxy>https://nexus.onap.org</nexus.proxy>
         <docker.username>docker</docker.username>
         <docker.password>docker</docker.password>
-		
-		<!-- Sonar properties -->
-		<sonar.language>java</sonar.language>
-		<sonar.coverage.jacoco.xmlReportPaths>
-			${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml
-		</sonar.coverage.jacoco.xmlReportPaths>
+
+        <!-- Sonar properties -->
+        <sonar.language>java</sonar.language>
+        <sonar.coverage.jacoco.xmlReportPaths>
+          ${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
         <sonar.sourceEncoding>${project.build.sourceEncoding}</sonar.sourceEncoding>
         <sonar.skipDesign>true</sonar.skipDesign>
         <sonar.projectBaseDir>${project.basedir}</sonar.projectBaseDir>
@@ -80,6 +82,25 @@
                 <artifactId>lombok</artifactId>
                 <version>1.18.8</version>
                 <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <scope>test</scope>
+                <version>${junit-jupiter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -109,26 +130,24 @@
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit.jupiter.version}</version>
-            <scope>test</scope>
+            <artifactId>junit-jupiter-engine</artifactId>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-failsafe-plugin.version}</version>
+            </plugin>
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>${maven-checkstyle-plugin.version}</version>
