@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Michael Morris <michael.morris@est.tech>
+Code-Review+2: Christophe Closset <christophe.closset@intl.att.com>
+Submitted-by: Christophe Closset <christophe.closset@intl.att.com>
+Submitted-at: Wed, 26 May 2021 11:57:44 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/sdc/sdc-be-common/+/121529
+Project: sdc/sdc-be-common
+Branch: refs/heads/master
