@@ -16,59 +16,65 @@
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zusammen-lib</artifactId>
-    <name>zusammen-lib</name>
-    <parent>
-        <groupId>org.onap.sdc.sdc-be-common</groupId>
-        <artifactId>sdc-be-common-parent</artifactId>
-        <version>1.6.1-SNAPSHOT</version>
-    </parent>
+  <artifactId>zusammen-lib</artifactId>
+  <name>zusammen-lib</name>
+  <parent>
+    <groupId>org.onap.sdc.sdc-be-common</groupId>
+    <artifactId>sdc-be-common-parent</artifactId>
+    <version>1.6.1-SNAPSHOT</version>
+  </parent>
 
-    <properties>
-        <zusammen.version>1.0.2</zusammen.version>
-        <zusammen-state-store.version>1.0.3</zusammen-state-store.version>
-        <zusammen-collaboration-store.version>1.0.3</zusammen-collaboration-store.version>
-        <zusammen-index-store.version>1.0.0</zusammen-index-store.version>
-    </properties>
+  <properties>
+    <zusammen.version>1.0.2</zusammen.version>
+    <zusammen-state-store.version>1.0.3</zusammen-state-store.version>
+    <zusammen-collaboration-store.version>1.0.3</zusammen-collaboration-store.version>
+    <zusammen-index-store.version>1.0.0</zusammen-index-store.version>
+  </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-cassandra</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.amdocs.zusammen</groupId>
-            <artifactId>zusammen-datatypes</artifactId>
-            <version>${zusammen.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.amdocs.zusammen</groupId>
-            <artifactId>zusammen-adaptor-inbound-api</artifactId>
-            <version>${zusammen.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.amdocs.zusammen</groupId>
-            <artifactId>zusammen-adaptor-inbound-impl</artifactId>
-            <version>${zusammen.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.amdocs.zusammen.plugin</groupId>
-            <artifactId>zusammen-collaboration-cassandra-plugin</artifactId>
-            <version>${zusammen-collaboration-store.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.amdocs.zusammen.plugin</groupId>
-            <artifactId>zusammen-search-index-empty-plugin</artifactId>
-            <version>${zusammen-index-store.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-    </dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-cassandra</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>io.netty</groupId>
+          <artifactId>netty-codec</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.amdocs.zusammen</groupId>
+      <artifactId>zusammen-datatypes</artifactId>
+      <version>${zusammen.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.amdocs.zusammen</groupId>
+      <artifactId>zusammen-adaptor-inbound-api</artifactId>
+      <version>${zusammen.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.amdocs.zusammen</groupId>
+      <artifactId>zusammen-adaptor-inbound-impl</artifactId>
+      <version>${zusammen.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.amdocs.zusammen.plugin</groupId>
+      <artifactId>zusammen-collaboration-cassandra-plugin</artifactId>
+      <version>${zusammen-collaboration-store.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.amdocs.zusammen.plugin</groupId>
+      <artifactId>zusammen-search-index-empty-plugin</artifactId>
+      <version>${zusammen-index-store.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
 </project>
 
