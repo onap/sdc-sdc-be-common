@@ -24,50 +24,41 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import fj.data.Either;
 import java.io.UnsupportedEncodingException;
-import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Arrays;
 import java.util.Base64;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-import javax.crypto.ShortBufferException;
-import javax.crypto.spec.GCMParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.onap.sdc.security.logging.enums.EcompLoggerErrorCode;
 import org.onap.sdc.security.logging.wrappers.Logger;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SecurityUtil {
 
     private static final Logger LOG = Logger.getLogger(SecurityUtil.class);
-
+    private static final byte[] KEY =
+        new byte[]{-64, 5, -32, -117, -44, 8, -39, 1, -9, 36, -46, -81, 62, -15, -63, -75};
     public static final String ALGORITHM = "AES";
     public static final String CHARSET = UTF_8.name();
 
-    public static final int GCM_TAG_LENGTH = 16;
-    public static final int GCM_IV_LENGTH = 12;
+    private final static Key secKey = generateKey(KEY, ALGORITHM);
 
-    private static final Key secKey = generateKey(ALGORITHM);
-
-    private SecurityUtil() {
-    }
-
-    public static SecretKey generateKey(String algorithm) {
+    public static Key generateKey(final byte[] KEY, String algorithm) {
         try {
-            KeyGenerator kgen = KeyGenerator.getInstance(algorithm);
-            kgen.init(128);
-            return kgen.generateKey();
-        } catch (NoSuchAlgorithmException e) {
-            throw new IllegalStateException(e.toString());
+            return new SecretKeySpec(KEY, algorithm);
+        } catch (Exception e) {
+            LOG.warn(EcompLoggerErrorCode.PERMISSION_ERROR, "cannot generate key for {}, message : {} .", ALGORITHM, e.getMessage());
+            return null;
         }
     }
 
-    // obfuscates key prefix -> **********
+    //obfuscates key prefix -> **********
     public static String obfuscateKey(String sensitiveData) {
 
         if (sensitiveData == null) {
@@ -90,41 +81,28 @@ public class SecurityUtil {
      */
     //@formatter:on
     public static Either<String, String> encrypt(String strDataToEncrypt) {
-        try {
-            byte[] ciphertext = null;
-            Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
-            byte[] initVector = new byte[GCM_IV_LENGTH];
-            new SecureRandom().nextBytes(initVector);
-            GCMParameterSpec spec =
-                new GCMParameterSpec(GCM_TAG_LENGTH * java.lang.Byte.SIZE, initVector);
-            cipher.init(Cipher.ENCRYPT_MODE, secKey, spec);
-            byte[] encoded = strDataToEncrypt.getBytes(java.nio.charset.StandardCharsets.UTF_8);
-            ciphertext = Arrays.copyOf(initVector, initVector.length + cipher.getOutputSize(encoded.length));
-            // Perform encryption
-            cipher.doFinal(encoded, 0, encoded.length, ciphertext, initVector.length);
-            String strCipherText = new String(Base64.getMimeEncoder().encode(ciphertext), CHARSET);
-            return Either.left(strCipherText);
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException | InvalidAlgorithmParameterException e) {
-            LOG.warn(
-                EcompLoggerErrorCode.PERMISSION_ERROR,
-                "cannot encrypt data unknown algorithm or missing encoding for {}",
-                secKey.getAlgorithm());
-        } catch (InvalidKeyException e) {
-            LOG.warn(
-                EcompLoggerErrorCode.PERMISSION_ERROR,
-                "invalid key recieved - > {} | {}",
-                new String(Base64.getDecoder().decode(secKey.getEncoded())),
-                e.getMessage());
-        } catch (IllegalBlockSizeException | BadPaddingException | NoSuchPaddingException e) {
-            LOG.warn(
-                EcompLoggerErrorCode.PERMISSION_ERROR,
-                "bad algorithm definition (Illegal Block Size or padding), please review you algorithm block&padding",
-                e.getMessage());
-        } catch (ShortBufferException e) {
-            LOG.warn(
-                EcompLoggerErrorCode.PERMISSION_ERROR,
-                "the given output buffer is too small to hold the result",
-                e.getMessage());
+        if (strDataToEncrypt != null) {
+            try {
+                LOG.debug("Encrypt key -> {}", secKey);
+                Cipher aesCipherForEncryption = Cipher.getInstance(
+                    "AES");          // Must specify the mode explicitly as most JCE providers default to ECB mode!!
+                aesCipherForEncryption.init(Cipher.ENCRYPT_MODE, secKey);
+                byte[] byteDataToEncrypt = strDataToEncrypt.getBytes();
+                byte[] byteCipherText = aesCipherForEncryption.doFinal(byteDataToEncrypt);
+                String strCipherText = new String(Base64.getMimeEncoder().encode(byteCipherText), CHARSET);
+                LOG.debug("Cipher Text generated using AES is {}", strCipherText);
+                return Either.left(strCipherText);
+            } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+                LOG.warn(EcompLoggerErrorCode.PERMISSION_ERROR,
+                    "cannot encrypt data unknown algorithm or missing encoding for {}", secKey.getAlgorithm());
+            } catch (InvalidKeyException e) {
+                LOG.warn(EcompLoggerErrorCode.PERMISSION_ERROR, "invalid key recieved - > {} | {}",
+                    new String(Base64.getDecoder().decode(secKey.getEncoded())), e.getMessage());
+            } catch (IllegalBlockSizeException | BadPaddingException | NoSuchPaddingException e) {
+                LOG.warn(EcompLoggerErrorCode.PERMISSION_ERROR,
+                    "bad algorithm definition (Illegal Block Size or padding), please review you algorithm block&padding",
+                    e.getMessage());
+            }
         }
         return Either.right("Cannot encrypt " + strDataToEncrypt);
     }
@@ -140,37 +118,31 @@ public class SecurityUtil {
      */
     //@formatter:on
     public static Either<String, String> decrypt(byte[] byteCipherText, boolean isBase64Decoded) {
-        try {
-            if (isBase64Decoded) {
-                byteCipherText = Base64.getDecoder().decode(byteCipherText);
+        if (byteCipherText != null) {
+            byte[] alignedCipherText = byteCipherText;
+            try {
+                if (isBase64Decoded) {
+                    alignedCipherText = Base64.getDecoder().decode(byteCipherText);
+                }
+                LOG.debug("Decrypt key -> " + secKey.getEncoded());
+                // Must specify the mode explicitly as most JCE providers default to ECB mode!!
+                Cipher aesCipherForDecryption = Cipher.getInstance("AES");
+                aesCipherForDecryption.init(Cipher.DECRYPT_MODE, secKey);
+                byte[] byteDecryptedText = aesCipherForDecryption.doFinal(alignedCipherText);
+                String strDecryptedText = new String(byteDecryptedText);
+                LOG.debug("Decrypted Text message is: {}", obfuscateKey(strDecryptedText));
+                return Either.left(strDecryptedText);
+            } catch (NoSuchAlgorithmException e) {
+                LOG.warn(EcompLoggerErrorCode.PERMISSION_ERROR,
+                    "cannot encrypt data unknown algorithm or missing encoding for {}", secKey.getAlgorithm());
+            } catch (InvalidKeyException e) {
+                LOG.warn(EcompLoggerErrorCode.PERMISSION_ERROR, "invalid key recieved - > {} | {}",
+                    new String(Base64.getDecoder().decode(secKey.getEncoded())), e.getMessage());
+            } catch (IllegalBlockSizeException | BadPaddingException | NoSuchPaddingException e) {
+                LOG.warn(EcompLoggerErrorCode.PERMISSION_ERROR,
+                    "bad algorithm definition (Illegal Block Size or padding), please review you algorithm block&padding",
+                    e.getMessage());
             }
-            Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
-            byte[] initVector = Arrays.copyOfRange(byteCipherText, 0, GCM_IV_LENGTH);
-            GCMParameterSpec spec =
-                new GCMParameterSpec(GCM_TAG_LENGTH * java.lang.Byte.SIZE, initVector);
-            cipher.init(Cipher.DECRYPT_MODE, secKey, spec);
-            byte[] plaintext =
-                cipher.doFinal(byteCipherText, GCM_IV_LENGTH, byteCipherText.length - GCM_IV_LENGTH);
-            String strDecryptedText = new String(plaintext);
-            return Either.left(strDecryptedText);
-        } catch (NoSuchAlgorithmException | InvalidAlgorithmParameterException e) {
-            /* None of these exceptions should be possible if precond is met. */
-            LOG.warn(
-                EcompLoggerErrorCode.PERMISSION_ERROR,
-                "cannot decrypt data, unknown algorithm or missing encoding for {}",
-                secKey.getAlgorithm());
-        } catch (InvalidKeyException e) {
-            LOG.warn(
-                EcompLoggerErrorCode.PERMISSION_ERROR,
-                "invalid key recieved - > {} | {}",
-                new String(Base64.getDecoder().decode(secKey.getEncoded())),
-                e.getMessage());
-        } catch (IllegalBlockSizeException | BadPaddingException | NoSuchPaddingException e) {
-            /* these indicate corrupt or malicious ciphertext */
-            LOG.warn(
-                EcompLoggerErrorCode.PERMISSION_ERROR,
-                "bad algorithm definition (Illegal Block Size or padding), please review you algorithm block&padding",
-                e.getMessage());
         }
         return Either.right("Decrypt FAILED");
     }
@@ -179,10 +151,7 @@ public class SecurityUtil {
         try {
             return decrypt(byteCipherText.getBytes(CHARSET), true);
         } catch (UnsupportedEncodingException e) {
-            LOG.warn(
-                EcompLoggerErrorCode.PERMISSION_ERROR,
-                "Missing encoding for {} | {} ",
-                secKey.getAlgorithm(),
+            LOG.warn(EcompLoggerErrorCode.PERMISSION_ERROR, "Missing encoding for {} | {} ", secKey.getAlgorithm(),
                 e.getMessage());
         }
         return Either.right("Decrypt FAILED");
