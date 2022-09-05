@@ -8,6 +8,4 @@ target/
 logs/
 debug-logs/
 *.log
-.idea/
-*.iml
 *.orig
