@@ -24,7 +24,7 @@
         <jersey-bom.version>2.27</jersey-bom.version>
         <json-simple.version>1.1</json-simple.version>
         <functionaljava.version>4.7</functionaljava.version>
-        <jackson.version>2.13.3</jackson.version>
+        <jackson.version>2.14.2</jackson.version>
         <esapi.version>2.4.0.0</esapi.version>
 
         <!-- Sonar properties -->
