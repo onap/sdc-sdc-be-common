@@ -40,6 +40,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <mockito.version>2.26.0</mockito.version>
+        <lombok.version>1.18.26</lombok.version>
         <junit-jupiter.version>5.7.2</junit-jupiter.version>
         <logging-slf4j.version>1.5.0</logging-slf4j.version>
         <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
