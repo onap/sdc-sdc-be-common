@@ -44,6 +44,10 @@
           <groupId>io.netty</groupId>
           <artifactId>netty-codec</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -61,6 +65,12 @@
       <artifactId>zusammen-adaptor-inbound-impl</artifactId>
       <version>${zusammen.version}</version>
       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>${guava.version}</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.amdocs.zusammen.plugin</groupId>

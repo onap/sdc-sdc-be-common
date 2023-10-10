@@ -31,6 +31,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.onap.sdc.sdc-be-common</groupId>
             <artifactId>session-lib</artifactId>
             <version>${project.version}</version>
@@ -39,6 +45,12 @@
             <groupId>org.onap.sdc.sdc-be-common</groupId>
             <artifactId>zusammen-lib</artifactId>
             <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

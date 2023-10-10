@@ -41,6 +41,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <mockito.version>2.26.0</mockito.version>
         <lombok.version>1.18.26</lombok.version>
+        <guava.version>32.1.2-jre</guava.version>
         <junit-jupiter.version>5.7.2</junit-jupiter.version>
         <logging-slf4j.version>1.6.9</logging-slf4j.version>
         <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
