@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79367127_eb9e886f",
+        "filename": "security-util-lib/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5562
+      },
+      "writtenOn": "2023-10-10T13:21:22Z",
+      "side": 1,
+      "message": "need to exclude transitive dependencies\n\ndepTree | grep com.google.guava:guava | grep -iv 32.1\n[INFO] |        +- com.google.guava:guava:jar:30.0-jre:compile\n[INFO] |  |        +- com.google.guava:guava:jar:30.0-jre:compile",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 49
+      },
+      "revId": "46f5fd33f1ecdbd10e25a823e2f0f6d704768cde",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
+    }
+  ]
+}
