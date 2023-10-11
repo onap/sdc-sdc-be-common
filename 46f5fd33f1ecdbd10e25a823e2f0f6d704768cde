@@ -22,6 +22,30 @@
       },
       "revId": "46f5fd33f1ecdbd10e25a823e2f0f6d704768cde",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c3ef17d_899f1ffb",
+        "filename": "security-util-lib/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 6708
+      },
+      "writtenOn": "2023-10-11T13:57:58Z",
+      "side": 1,
+      "message": "hopefully fixed now",
+      "parentUuid": "79367127_eb9e886f",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 49
+      },
+      "revId": "46f5fd33f1ecdbd10e25a823e2f0f6d704768cde",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
     }
   ]
 }
