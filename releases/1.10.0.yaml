@@ -1,0 +1,4 @@
+distribution_type: 'maven'
+version: '1.10.0'
+project: 'sdc-be-common'
+log_dir: 'sdc-sdc-be-common-maven-stage-master/1359/'
