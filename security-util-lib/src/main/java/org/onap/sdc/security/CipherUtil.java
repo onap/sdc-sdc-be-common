@@ -23,10 +23,10 @@ package org.onap.sdc.security;
 import java.security.SecureRandom;
 
 import java.util.Arrays;
+import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.ArrayUtils;
 import org.onap.sdc.security.logging.elements.ErrorLogOptionalData;
 import org.onap.sdc.security.logging.elements.LogFieldsMdcHandler;
@@ -70,7 +70,7 @@ public class CipherUtil {
             log.error(EcompLoggerErrorCode.BUSINESS_PROCESS_ERROR, LogFieldsMdcHandler.getInstance().getServiceName(), new ErrorLogOptionalData(), "encrypt failed", ex);
             throw new CipherUtilException(ex);
         }
-        return Base64.encodeBase64String(addAll(iv, finalByte));
+        return Base64.getEncoder().encodeToString(addAll(iv, finalByte));
     }
 
     /**
@@ -85,7 +85,7 @@ public class CipherUtil {
      */
 
     public static String decryptPKC(String message, String base64key) throws CipherUtilException {
-        byte[] encryptedMessage = Base64.decodeBase64(message);
+        byte[] encryptedMessage = Base64.getDecoder().decode(message);
         Cipher cipher;
         byte[] decrypted;
         try {
@@ -105,7 +105,7 @@ public class CipherUtil {
     }
 
     private static SecretKeySpec getSecretKeySpec(String keyString) {
-        byte[] key = Base64.decodeBase64(keyString);
+        byte[] key = Base64.getDecoder().decode(keyString);
         return new SecretKeySpec(key, ALGORITHM);
     }
 

@@ -45,7 +45,6 @@ public class ZusammenConfigTest {
         System.setProperty("cassandra.user", emptyStr);
         System.setProperty("cassandra.password", emptyStr);
 
-        System.setProperty("cassandra.ssl", emptyStr);
         System.setProperty("cassandra.truststore", emptyStr);
         System.setProperty("cassandra.truststore.password", emptyStr);
     }
@@ -75,11 +74,6 @@ public class ZusammenConfigTest {
             @Override
             public String getCassandraPassword() {
                 return a;
-            }
-
-            @Override
-            public String getCassandraSSL() {
-                return Boolean.FALSE.toString();
             }
 
             @Override

@@ -28,8 +28,6 @@ public interface ZusammenConfigProvider {
 
     String getCassandraPassword();
 
-    String getCassandraSSL();
-
     String getCassandraTrustStorePath();
 
     String getCassandraTrustStorePassword();

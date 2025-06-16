@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.apache.commons.codec.binary.Base64;
+import java.util.Base64;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +36,7 @@ public class CipherUtilTest {
     @Test
     public void encryptDecryptPKC() throws CipherUtilException {
         String generatedKey = RandomStringUtils.randomAlphabetic(16);
-        String base64Key = Base64.encodeBase64String(generatedKey.getBytes());
+        String base64Key = Base64.getEncoder().encodeToString(generatedKey.getBytes());
         String encrypted = CipherUtil.encryptPKC(DATA, base64Key);
         assertNotEquals(DATA, encrypted);
         String decrypted = CipherUtil.decryptPKC(encrypted, base64Key);
