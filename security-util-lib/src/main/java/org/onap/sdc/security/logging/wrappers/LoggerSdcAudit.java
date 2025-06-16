@@ -25,7 +25,10 @@ import org.onap.logging.ref.slf4j.ONAPLogConstants;
 import org.onap.sdc.security.logging.elements.LoggerAudit;
 import org.onap.sdc.security.logging.elements.LoggerBase;
 import org.onap.sdc.security.logging.elements.LoggerFactory;
-import org.onap.sdc.security.logging.enums.*;
+import org.onap.sdc.security.logging.enums.EcompHeadersConstants;
+import org.onap.sdc.security.logging.enums.EcompLoggerErrorCode;
+import org.onap.sdc.security.logging.enums.LogLevel;
+import org.onap.sdc.security.logging.enums.Severity;
 import org.slf4j.MDC;
 import org.slf4j.Marker;
 

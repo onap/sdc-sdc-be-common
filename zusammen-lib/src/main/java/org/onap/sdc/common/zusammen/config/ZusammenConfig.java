@@ -26,7 +26,6 @@ import javax.annotation.PostConstruct;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.cassandra.ClusterBuilderCustomizer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -43,7 +42,6 @@ public class ZusammenConfig {
     private final ZusammenConfigProvider provider;
 
 
-    @Autowired
     public ZusammenConfig(ZusammenConfigProvider provider) {
         this.provider = provider;
     }

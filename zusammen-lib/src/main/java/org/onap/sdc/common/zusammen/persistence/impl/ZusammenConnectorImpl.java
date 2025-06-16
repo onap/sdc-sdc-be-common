@@ -42,7 +42,6 @@ import com.amdocs.zusammen.datatypes.response.Response;
 import java.util.Collection;
 import org.onap.sdc.common.zusammen.persistence.ZusammenConnector;
 import org.onap.sdc.common.zusammen.services.exceptions.ZusammenException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -57,7 +56,6 @@ public class ZusammenConnectorImpl implements ZusammenConnector {
     private final ElementAdaptorFactory elementAdaptorFactory;
     private final HealthAdaptorFactory healthAdaptorFactory;
 
-    @Autowired
     public ZusammenConnectorImpl(ItemAdaptorFactory itemAdaptorFactory, ItemVersionAdaptorFactory versionAdaptorFactory,
             ElementAdaptorFactory elementAdaptorFactory, HealthAdaptorFactory healthAdaptorFactory) {
         this.itemAdaptorFactory = itemAdaptorFactory;

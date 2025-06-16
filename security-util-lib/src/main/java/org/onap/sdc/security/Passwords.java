@@ -20,7 +20,6 @@
 
 package org.onap.sdc.security;
 
-import org.apache.commons.codec.DecoderException;
 import org.onap.sdc.security.logging.elements.ErrorLogOptionalData;
 import org.onap.sdc.security.logging.elements.LogFieldsMdcHandler;
 import org.onap.sdc.security.logging.enums.EcompLoggerErrorCode;
@@ -30,8 +29,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Arrays;
-
-import static org.apache.commons.codec.binary.Hex.decodeHex;
 
 public class Passwords {
 

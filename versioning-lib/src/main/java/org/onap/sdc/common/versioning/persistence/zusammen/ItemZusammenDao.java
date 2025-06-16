@@ -28,7 +28,6 @@ import org.onap.sdc.common.versioning.persistence.types.InternalItem;
 import org.onap.sdc.common.versioning.services.types.ItemStatus;
 import org.onap.sdc.common.versioning.services.types.VersionStatus;
 import org.onap.sdc.common.zusammen.services.ZusammenAdaptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -37,7 +36,6 @@ public class ItemZusammenDao implements ItemDao {
     private final ZusammenSessionContextCreator contextCreator;
     private final ZusammenAdaptor zusammenAdaptor;
 
-    @Autowired
     public ItemZusammenDao(ZusammenSessionContextCreator contextCreator, ZusammenAdaptor zusammenAdaptor) {
         this.contextCreator = contextCreator;
         this.zusammenAdaptor = zusammenAdaptor;

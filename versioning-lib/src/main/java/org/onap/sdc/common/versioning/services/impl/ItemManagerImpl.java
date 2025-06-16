@@ -25,7 +25,6 @@ import org.onap.sdc.common.versioning.services.ItemManager;
 import org.onap.sdc.common.versioning.services.exceptions.VersioningException;
 import org.onap.sdc.common.versioning.services.types.Item;
 import org.onap.sdc.common.versioning.services.types.ItemStatus;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,7 +32,6 @@ public class ItemManagerImpl implements ItemManager {
 
     private final ItemDao itemDao;
 
-    @Autowired
     public ItemManagerImpl(ItemDao itemDao) {
         this.itemDao = itemDao;
 

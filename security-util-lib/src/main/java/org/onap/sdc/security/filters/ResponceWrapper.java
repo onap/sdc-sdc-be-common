@@ -21,12 +21,9 @@
 package org.onap.sdc.security.filters;
 
 import javax.servlet.ServletOutputStream;
-import javax.servlet.WriteListener;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.ByteArrayOutputStream;
-import java.io.CharArrayWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 
 public class ResponceWrapper extends HttpServletResponseWrapper {

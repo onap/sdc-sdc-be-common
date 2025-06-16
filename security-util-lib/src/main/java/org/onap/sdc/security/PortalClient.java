@@ -21,8 +21,6 @@
 package org.onap.sdc.security;
 
 import static org.onap.portalsdk.core.onboarding.util.CipherUtil.decryptPKC;
-import static org.onap.sdc.security.utils.SecurityLogsUtils.PORTAL_TARGET_ENTITY;
-import static org.onap.sdc.security.utils.SecurityLogsUtils.fullOptionalData;
 
 import com.google.common.annotations.VisibleForTesting;
 import java.io.IOException;
@@ -40,10 +38,7 @@ import org.onap.portalsdk.core.onboarding.exception.PortalAPIException;
 import org.onap.portalsdk.core.onboarding.util.PortalApiProperties;
 import org.onap.portalsdk.core.restful.domain.EcompRole;
 import org.onap.portalsdk.core.restful.domain.EcompUser;
-import org.onap.sdc.security.logging.elements.LogFieldsMdcHandler;
-import org.onap.sdc.security.logging.enums.EcompLoggerErrorCode;
 import org.onap.sdc.security.logging.wrappers.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
@@ -71,7 +66,6 @@ public class PortalClient {
         this.httpClient = httpClient;
     }*/
 
-    @Autowired
     public PortalClient(CloseableHttpClient httpClient, IPortalConfiguration portalConfiguration) {
         try {
             this.portalConfiguration = new PortalConfiguration(portalConfiguration);

@@ -41,7 +41,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.onap.sdc.common.zusammen.persistence.ZusammenConnector;
 import org.onap.sdc.common.zusammen.services.ZusammenAdaptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -49,7 +48,6 @@ public class ZusammenAdaptorImpl implements ZusammenAdaptor {
 
     private final ZusammenConnector connector;
 
-    @Autowired
     public ZusammenAdaptorImpl(ZusammenConnector connector) {
         this.connector = connector;
     }

@@ -34,7 +34,6 @@ import org.onap.sdc.common.versioning.services.types.SynchronizationState;
 import org.onap.sdc.common.versioning.services.types.Version;
 import org.onap.sdc.common.versioning.services.types.VersionCreationMethod;
 import org.onap.sdc.common.versioning.services.types.VersionStatus;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -44,7 +43,6 @@ public class VersioningManagerImpl implements VersioningManager {
     private final VersionDao versionDao;
     private final VersionCalculator versionCalculator;
 
-    @Autowired
     public VersioningManagerImpl(VersionDao versionDao, VersionCalculator versionCalculator, ItemDao itemDao) {
         this.itemDao = itemDao;
         this.versionDao = versionDao;

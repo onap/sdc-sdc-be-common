@@ -37,7 +37,6 @@ import org.onap.sdc.common.versioning.services.types.SynchronizationState;
 import org.onap.sdc.common.versioning.services.types.VersionState;
 import org.onap.sdc.common.versioning.services.types.VersionStatus;
 import org.onap.sdc.common.zusammen.services.ZusammenAdaptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -48,7 +47,6 @@ public class VersionZusammenDao implements VersionDao {
     private final ZusammenSessionContextCreator contextCreator;
     private final ZusammenAdaptor zusammenAdaptor;
 
-    @Autowired
     public VersionZusammenDao(ZusammenSessionContextCreator contextCreator, ZusammenAdaptor zusammenAdaptor) {
         this.contextCreator = contextCreator;
         this.zusammenAdaptor = zusammenAdaptor;

@@ -20,9 +20,6 @@
 
 package org.onap.sdc.security.filters;
 
-import static org.onap.sdc.security.utils.SecurityLogsUtils.PORTAL_TARGET_ENTITY;
-import static org.onap.sdc.security.utils.SecurityLogsUtils.fullOptionalData;
-
 import com.google.common.annotations.VisibleForTesting;
 import java.io.IOException;
 import java.util.Arrays;
@@ -50,7 +47,6 @@ import org.onap.sdc.security.RedirectException;
 import org.onap.sdc.security.RepresentationUtils;
 import org.onap.sdc.security.RestrictionAccessFilterException;
 import org.onap.sdc.security.logging.wrappers.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component("restrictionAccessFilter")
@@ -67,7 +63,6 @@ public class RestrictionAccessFilter extends SessionValidationFilter {
     private PortalClient portalClient;
     private IUsersThreadLocalHolder threadLocalUtils;
 
-    @Autowired
     public RestrictionAccessFilter(ISessionValidationFilterConfiguration configuration,
         IUsersThreadLocalHolder threadLocalUtils, PortalClient portalClient) {
         this.filterConfiguration = configuration;
