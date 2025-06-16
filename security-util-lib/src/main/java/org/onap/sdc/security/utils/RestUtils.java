@@ -21,12 +21,12 @@ package org.onap.sdc.security.utils;
 
 import com.google.common.annotations.VisibleForTesting;
 import fj.data.Either;
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHeaders;
 import org.onap.sdc.security.SecurityUtil;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Map;
 import java.util.Properties;
 
@@ -39,7 +39,7 @@ public class RestUtils {
     }
 
     private static String getAuthHeaderValue(String username, String password) {
-        byte[] credentials = Base64.encodeBase64((username + ":" + password).getBytes(StandardCharsets.UTF_8));
+        byte[] credentials = Base64.getEncoder().encode((username + ":" + password).getBytes(StandardCharsets.UTF_8));
         return "Basic " + new String(credentials, StandardCharsets.UTF_8);
     }
 
