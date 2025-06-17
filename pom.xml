@@ -31,7 +31,7 @@
     <groupId>org.onap.sdc.sdc-be-common</groupId>
     <artifactId>sdc-be-common-parent</artifactId>
     <name>sdc-be-common</name>
-    <version>1.11.0-SNAPSHOT</version>
+    <version>1.11.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -111,6 +111,11 @@
                 <version>2.3.12.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.8.9</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
