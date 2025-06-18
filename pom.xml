@@ -31,7 +31,7 @@
     <groupId>org.onap.sdc.sdc-be-common</groupId>
     <artifactId>sdc-be-common-parent</artifactId>
     <name>sdc-be-common</name>
-    <version>1.11.1-SNAPSHOT</version>
+    <version>1.12.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -45,8 +45,8 @@
         <junit-jupiter.version>5.7.2</junit-jupiter.version>
         <logging-slf4j.version>1.6.9</logging-slf4j.version>
         <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
         <snapshots.path>snapshots</snapshots.path>
         <releases.path>releases</releases.path>
         <sitePath>/content/sites/site/org/onap/sdc/sdc-be-common/${project.version}</sitePath>
@@ -108,7 +108,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.3.12.RELEASE</version>
+                <version>2.4.13</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
