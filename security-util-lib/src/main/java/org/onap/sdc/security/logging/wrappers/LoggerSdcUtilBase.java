@@ -25,7 +25,7 @@ import org.onap.sdc.security.logging.enums.EcompLoggerErrorCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.container.ContainerRequestContext;
 import java.util.List;
 import java.util.StringTokenizer;
 

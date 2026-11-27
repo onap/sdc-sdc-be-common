@@ -32,8 +32,8 @@ import org.onap.sdc.security.logging.enums.Severity;
 import org.slf4j.MDC;
 import org.slf4j.Marker;
 
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.core.Response;
 import java.util.UUID;
 
 public class LoggerSdcAudit extends LoggerSdcUtilBase {

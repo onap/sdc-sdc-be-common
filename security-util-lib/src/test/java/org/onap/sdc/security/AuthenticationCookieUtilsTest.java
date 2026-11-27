@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-import javax.servlet.http.Cookie;
+import jakarta.servlet.http.Cookie;
 import org.junit.jupiter.api.Test;
 import org.onap.sdc.security.filters.SampleFilter;
 

@@ -22,7 +22,7 @@ package org.onap.sdc.security;
 import org.onap.sdc.security.filters.SessionValidationFilter;
 import org.onap.sdc.security.logging.wrappers.Logger;
 
-import javax.servlet.http.Cookie;
+import jakarta.servlet.http.Cookie;
 import java.io.IOException;
 
 public class AuthenticationCookieUtils {
