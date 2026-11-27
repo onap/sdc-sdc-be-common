@@ -16,8 +16,6 @@
 
 package org.onap.sdc.common.zusammen.config;
 
-import com.datastax.oss.driver.api.core.ConsistencyLevel;
-
 import javax.annotation.PostConstruct;
 import org.springframework.context.annotation.Configuration;
 
@@ -35,7 +33,7 @@ public class ZusammenConfig {
 
     @PostConstruct
     public void init() {
-        System.setProperty("cassandra.consistency.level", ConsistencyLevel.LOCAL_QUORUM.name());
+        System.setProperty("cassandra.consistency.level", "LOCAL_QUORUM");
         System.setProperty("cassandra.nodes", provider.getCassandraAddresses());
         System.setProperty("cassandra.port", provider.getCassandraPort());
         System.setProperty("cassandra.keyspace", KEYSPACE);

@@ -42,8 +42,8 @@
         <mockito.version>2.26.0</mockito.version>
         <lombok.version>1.18.26</lombok.version>
         <guava.version>32.1.2-jre</guava.version>
+        <zusammen.version>1.0.2</zusammen.version>
         <junit-jupiter.version>5.7.2</junit-jupiter.version>
-        <logging-slf4j.version>1.6.9</logging-slf4j.version>
         <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
@@ -83,7 +83,7 @@
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>1.18.8</version>
+                <version>${lombok.version}</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
@@ -92,12 +92,6 @@
                 <version>${junit-jupiter.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <scope>test</scope>
-                <version>${junit-jupiter.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
@@ -121,27 +115,6 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>org.onap.logging-analytics</groupId>
-            <artifactId>logging-slf4j</artifactId>
-            <version>${logging-slf4j.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.powermock</groupId>
-                    <artifactId>powermock-module-junit4</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.yaml</groupId>
-                    <artifactId>snakeyaml</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>

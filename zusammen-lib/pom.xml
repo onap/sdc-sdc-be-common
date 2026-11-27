@@ -30,29 +30,27 @@
   </parent>
 
   <properties>
-    <zusammen.version>1.0.2</zusammen.version>
     <zusammen-collaboration-store.version>1.0.3</zusammen-collaboration-store.version>
     <zusammen-index-store.version>1.0.0</zusammen-index-store.version>
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-cassandra</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>io.netty</groupId>
-          <artifactId>netty-codec</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.google.guava</groupId>
-          <artifactId>guava</artifactId>
-        </exclusion>
-      </exclusions>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
     </dependency>
     <dependency>
       <groupId>com.amdocs.zusammen</groupId>
       <artifactId>zusammen-datatypes</artifactId>
+      <version>${zusammen.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.amdocs.zusammen</groupId>
+      <artifactId>zusammen-commons-health</artifactId>
       <version>${zusammen.version}</version>
     </dependency>
     <dependency>
@@ -70,7 +68,7 @@
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>${guava.version}</version>
-      <scope>compile</scope>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>com.amdocs.zusammen.plugin</groupId>

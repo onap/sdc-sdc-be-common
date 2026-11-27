@@ -20,6 +20,7 @@
         <jakarta.ws.rs-api.version>3.1.0</jakarta.ws.rs-api.version>
         <functionaljava.version>4.7</functionaljava.version>
         <jackson.version>2.15.2</jackson.version>
+        <logging-slf4j.version>1.6.9</logging-slf4j.version>
 
         <!-- Sonar properties -->
         <sonar.sourceEncoding>${project.build.sourceEncoding}</sonar.sourceEncoding>
@@ -87,6 +88,22 @@
             <artifactId>jakarta.ws.rs-api</artifactId>
             <version>${jakarta.ws.rs-api.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.onap.logging-analytics</groupId>
+            <artifactId>logging-slf4j</artifactId>
+            <version>${logging-slf4j.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.powermock</groupId>
+                    <artifactId>powermock-module-junit4</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
